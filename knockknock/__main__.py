@@ -6,9 +6,9 @@ import random
 from .jokes import JOKES, get_joke
 from .sequence import tell
 
-TITLE = r"""+----------------------+
-|  Knock Knock Jokes   |
-+----------------------+
+TITLE = r"""+-----------------------+
+|   Knock Knock Jokes   |
++-----------------------+
 """
 
 
