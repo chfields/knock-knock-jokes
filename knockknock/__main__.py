@@ -44,7 +44,8 @@ def main() -> int:
             parser.error(str(error).strip("'"))
 
     print_title()
-    print("\n".join(tell(joke)))
+    for line in tell(joke):
+        print(line)
     return 0
 
 
