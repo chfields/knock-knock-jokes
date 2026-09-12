@@ -4,6 +4,7 @@ import sys
 from knockknock.__main__ import TITLE_LINES
 from knockknock.jokes import JOKES
 
+# The joke output is still the 5-line sequence from the core sequence builder.
 JOKE_LINE_COUNT = 5
 
 

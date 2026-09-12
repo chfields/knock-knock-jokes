@@ -11,11 +11,10 @@ TITLE_LINES = [
     "|   Knock Knock Jokes   |",
     "+-----------------------+",
 ]
-TITLE = "\n".join(TITLE_LINES) + "\n"
 
 
 def print_title() -> None:
-    print(TITLE, end="")
+    print("\n".join(TITLE_LINES))
 
 
 def main() -> int:
