@@ -14,7 +14,8 @@ TITLE_LINES = [
 
 
 def print_title() -> None:
-    print("\n".join(TITLE_LINES))
+    for line in TITLE_LINES:
+        print(line)
 
 
 def main() -> int:
