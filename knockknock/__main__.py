@@ -6,6 +6,17 @@ import random
 from .jokes import JOKES, get_joke
 from .sequence import tell
 
+TITLE = r""" _   __             __    __      __
+| | / /___  ____ _/ /_  / /___  / /_
+| |/ / __ \/ __ `/ __ \/ / __ \/ __/
+|   / /_/ / /_/ / / / / / /_/ / /_
+|_/_/\____/\__,_/_/ /_/_/\____/\__/
+"""
+
+
+def print_title() -> None:
+    print(TITLE, end="")
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Tell a knock-knock joke.")
@@ -13,6 +24,8 @@ def main() -> int:
     group.add_argument("--list", action="store_true", help="list all available jokes")
     group.add_argument("--joke", metavar="INDEX_OR_NAME", help="tell a joke by index or name")
     args = parser.parse_args()
+
+    print_title()
 
     if args.list:
         for index, joke in enumerate(JOKES):
