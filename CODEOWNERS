@@ -1,0 +1,5 @@
+# Human approval is required for repository-wide, release, and automation controls.
+* @chfields
+/.github/ @chfields
+/pyproject.toml @chfields
+/CODEOWNERS @chfields
