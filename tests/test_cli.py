@@ -53,3 +53,10 @@ def test_cli_reports_invalid_joke():
 
     assert result.returncode != 0
     assert "Unknown joke" in result.stderr
+
+
+def test_cli_reports_negative_index():
+    result = run_cli("--joke", "-1")
+
+    assert result.returncode != 0
+    assert "No joke at index -1" in result.stderr

@@ -23,7 +23,10 @@ def main() -> int:
         joke = random.choice(JOKES)
     else:
         try:
-            selector = int(args.joke) if args.joke.isdigit() else args.joke
+            try:
+                selector = int(args.joke)
+            except ValueError:
+                selector = args.joke
             joke = get_joke(selector)
         except (IndexError, KeyError) as error:
             parser.error(str(error).strip("'"))
