@@ -1,10 +1,9 @@
 import subprocess
 import sys
 
-from knockknock.__main__ import TITLE
+from knockknock.__main__ import TITLE_LINES
 from knockknock.jokes import JOKES
 
-TITLE_LINES = TITLE.strip("\n").splitlines()
 JOKE_LINE_COUNT = 5
 
 
