@@ -21,6 +21,7 @@ JOKES = (
     Joke("Atch", "Bless you!"),
     Joke("Nobel", "Nobel, that's why I knocked!"),
     Joke("Olive", "Olive you and I miss you!"),
+    Joke("Wooden shoe", "Wooden shoe like to hear another joke?"),
 )
 
 
