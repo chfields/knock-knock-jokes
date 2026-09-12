@@ -58,6 +58,7 @@ def test_cli_reports_invalid_joke():
     result = run_cli("--joke", "does-not-exist")
 
     assert result.returncode != 0
+    assert result.stdout == ""
     assert "Unknown joke" in result.stderr
 
 

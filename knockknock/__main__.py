@@ -6,11 +6,9 @@ import random
 from .jokes import JOKES, get_joke
 from .sequence import tell
 
-TITLE = r""" _   __             __    __      __
-| | / /___  ____ _/ /_  / /___  / /_
-| |/ / __ \/ __ `/ __ \/ / __ \/ __/
-|   / /_/ / /_/ / / / / / /_/ / /_
-|_/_/\____/\__,_/_/ /_/_/\____/\__/
+TITLE = r"""+----------------------+
+|  Knock Knock Jokes  |
++----------------------+
 """
 
 
@@ -25,9 +23,8 @@ def main() -> int:
     group.add_argument("--joke", metavar="INDEX_OR_NAME", help="tell a joke by index or name")
     args = parser.parse_args()
 
-    print_title()
-
     if args.list:
+        print_title()
         for index, joke in enumerate(JOKES):
             print(f"{index}: {joke.name}")
         return 0
@@ -44,6 +41,7 @@ def main() -> int:
         except (IndexError, KeyError) as error:
             parser.error(str(error).strip("'"))
 
+    print_title()
     print("\n".join(tell(joke)))
     return 0
 
