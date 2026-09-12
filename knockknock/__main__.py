@@ -6,10 +6,12 @@ import random
 from .jokes import JOKES, get_joke
 from .sequence import tell
 
-TITLE = r"""+-----------------------+
-|   Knock Knock Jokes   |
-+-----------------------+
-"""
+TITLE_LINES = [
+    "+-----------------------+",
+    "|   Knock Knock Jokes   |",
+    "+-----------------------+",
+]
+TITLE = "\n".join(TITLE_LINES) + "\n"
 
 
 def print_title() -> None:
