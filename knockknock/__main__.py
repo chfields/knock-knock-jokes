@@ -7,7 +7,7 @@ from .jokes import JOKES, get_joke
 from .sequence import tell
 
 TITLE = r"""+----------------------+
-|  Knock Knock Jokes  |
+|  Knock Knock Jokes   |
 +----------------------+
 """
 
