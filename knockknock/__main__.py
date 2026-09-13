@@ -6,10 +6,14 @@ import random
 from .jokes import JOKES, get_joke
 from .sequence import tell
 
+# Generated in a fixed-width font so the title remains stable across terminals.
 TITLE_LINES = [
-    "+-----------------------+",
-    "|   Knock Knock Jokes   |",
-    "+-----------------------+",
+    r" ____  __.                     __      ____  __.                     __    ",
+    r"|    |/ _| ____   ____   ____ |  | __ |    |/ _| ____   ____   ____ |  | __",
+    "|      <  /    \\ /  _ \\_/ ___\\|  |/ / |      <  /    \\ /  _ \\_/ ___\\|  |/ /",
+    "|    |  \\|   |  (  <_> )  \\___|    <  |    |  \\|   |  (  <_> )  \\___|    < ",
+    "|____|__ \\___|  /\\____/ \\___  >__|_ \\ |____|__ \\___|  /\\____/ \\___  >__|_ \\",
+    "        \\/    \\/            \\/     \\/         \\/    \\/            \\/     \\/",
 ]
 
 
