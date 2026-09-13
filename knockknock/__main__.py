@@ -6,6 +6,17 @@ import random
 from .jokes import JOKES, get_joke
 from .sequence import tell
 
+TITLE_LINES = [
+    "+-----------------------+",
+    "|   Knock Knock Jokes   |",
+    "+-----------------------+",
+]
+
+
+def print_title() -> None:
+    for line in TITLE_LINES:
+        print(line)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Tell a knock-knock joke.")
@@ -15,6 +26,7 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.list:
+        print_title()
         for index, joke in enumerate(JOKES):
             print(f"{index}: {joke.name}")
         return 0
@@ -31,7 +43,9 @@ def main() -> int:
         except (IndexError, KeyError) as error:
             parser.error(str(error).strip("'"))
 
-    print("\n".join(tell(joke)))
+    print_title()
+    for line in tell(joke):
+        print(line)
     return 0
 
 
