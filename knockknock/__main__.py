@@ -16,9 +16,38 @@ TITLE_LINES = [
     "        \\/    \\/            \\/     \\/         \\/    \\/            \\/     \\/",
 ]
 
+# Each style is a complete set of lines so it can be selected independently.
+ASCII_ART_FORMATS = (
+    TITLE_LINES,
+    [
+        r" _  __                 _                _    _            _",
+        r"| |/ /___  _ __   ___  | | __  _ __     | |  | | ___   ___| | __",
+        r"| ' // _ \\| '_ \\ / _ \\ | |/ / | '_ \\    | |  | |/ _ \\ / __| |/ /",
+        r"| . \\ (_) | | | |  __/ |   <  | | | |   | |__| | (_) | (__|   < ",
+        r"|_|\\_\\___/|_| |_|\\___| |_|\\_\\ |_| |_|    \\____/ \\___/ \\___|_|\\_\\",
+        r"                 knock knock!",
+    ],
+    [
+        "╔══════════════════════════════╗",
+        "╔╦╗╔═╗╔╗╔╔═╗╔═╗╦╔═╔═╗╔╗╔╔═╗",
+        " ║ ║ ║║║║║ ╦║ ║╠╩╗║╣ ║║║║ ╦",
+        " ╩ ╚═╝╝╚╝╚═╝╚═╝╩ ╩╚═╝╝╚╝╚═╝",
+        "╚══════════════════════════════╝",
+        "            * * *",
+    ],
+    [
+        "+----------------------------------+",
+        "|          KNOCK KNOCK!             |",
+        "|      +--------------------+       |",
+        "|      |   ASCII surprise!  |       |",
+        "|      +--------------------+       |",
+        "+----------------------------------+",
+    ],
+)
 
-def print_title() -> None:
-    for line in TITLE_LINES:
+
+def print_title(lines: list[str] = TITLE_LINES) -> None:
+    for line in lines:
         print(line)
 
 
@@ -47,7 +76,9 @@ def main() -> int:
         except (IndexError, KeyError) as error:
             parser.error(str(error).strip("'"))
 
-    print_title()
+    # Keep explicit joke requests stable; the default mode gets a random style.
+    title_lines = random.choice(ASCII_ART_FORMATS) if args.joke is None else TITLE_LINES
+    print_title(title_lines)
     for line in tell(joke):
         print(line)
     return 0
