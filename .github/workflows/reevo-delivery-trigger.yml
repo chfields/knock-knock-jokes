@@ -2,20 +2,23 @@ name: Trigger reevo delivery agent
 
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened]
   issue_comment:
+    types: [created]
+  pull_request_review_comment:
     types: [created]
 
 jobs:
   dispatch:
     if: |
-      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'ai-plan')) ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@knock-knock-delivery'))
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@knock-knock-delivery') || contains(github.event.issue.title, '@knock-knock-delivery'))) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@knock-knock-delivery')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@knock-knock-delivery'))
     runs-on: ubuntu-latest
     steps:
       - name: Send task to reevo
         env:
-          TASK: ${{ github.event_name == 'issue_comment' && github.event.comment.body || github.event.issue.body }}
+          TASK: ${{ github.event_name == 'issues' && github.event.issue.body || github.event.comment.body }}
         run: |
           curl -sf -X POST "https://pwm.ngrok.app/webhooks/${{ vars.REEVO_WEBHOOK_ID }}" \
             -H "x-webhook-secret: ${{ secrets.REEVO_WEBHOOK_SECRET }}" \
