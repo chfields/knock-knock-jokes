@@ -1,10 +1,10 @@
 """Rating validation and append-only local storage."""
 
-from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
 import json
 import logging
 import stat
+from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Protocol, Union
 
