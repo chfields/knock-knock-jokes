@@ -14,6 +14,7 @@ the user explicitly enables rating.
    one retry for invalid input, then continue without recording a rating.
 4. Associate the submitted rating with the served joke's stable identifier and
    timestamp, not its display text.
+5. Cap ratings at one submission per joke per session.
 
 ## Implementation slices
 
