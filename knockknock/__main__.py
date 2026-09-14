@@ -9,6 +9,7 @@ import random
 import select
 import sys
 from pathlib import Path
+from typing import Optional
 
 from .jokes import JOKES, get_joke
 from .ratings import JsonlRatingStore, Rating, RatingStore
@@ -70,8 +71,10 @@ def _safe_diagnostic(value: str) -> str:
     return "".join(character if character.isprintable() else f"\\x{ord(character):02x}" for character in value)
 
 
-def _rating_input_timeout() -> float:
+def _rating_input_timeout(skip_seconds: Optional[float] = None) -> float:
     """Return the rating prompt timeout configured by the environment."""
+    if skip_seconds is not None:
+        return skip_seconds
     configured_timeout = os.environ.get(RATING_SKIP_ENV_VAR)
     if configured_timeout is None:
         return RATING_INPUT_TIMEOUT_SECONDS
@@ -83,6 +86,17 @@ def _rating_input_timeout() -> float:
     if not math.isfinite(timeout) or timeout < 0:
         LOGGER.warning("Ignoring negative %s value: %s", RATING_SKIP_ENV_VAR, configured_timeout)
         return RATING_INPUT_TIMEOUT_SECONDS
+    return timeout
+
+
+def _parse_skip_seconds(value: str) -> float:
+    """Parse a finite, non-negative rating prompt timeout for argparse."""
+    try:
+        timeout = float(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError("must be a number of seconds") from error
+    if not math.isfinite(timeout) or timeout < 0:
+        raise argparse.ArgumentTypeError("must be a finite, non-negative number of seconds")
     return timeout
 
 
@@ -102,7 +116,12 @@ def _load_config(path: Path) -> dict:
     return config
 
 
-def _collect_rating(joke_id: str, store: RatingStore, input_stream=sys.stdin) -> None:
+def _collect_rating(
+    joke_id: str,
+    store: RatingStore,
+    input_stream=sys.stdin,
+    skip_seconds: Optional[float] = None,
+) -> None:
     """Prompt for a rating, allowing an empty answer or one retry."""
     if not input_stream.isatty():
         return
@@ -111,7 +130,7 @@ def _collect_rating(joke_id: str, store: RatingStore, input_stream=sys.stdin) ->
             print("Rate this joke (1-5, or Enter to skip): ", end="", flush=True)
             try:
                 ready, _, _ = select.select(
-                    [input_stream], [], [], _rating_input_timeout()
+                    [input_stream], [], [], _rating_input_timeout(skip_seconds)
                 )
             except (OSError, ValueError):
                 # Some test doubles and non-Unix streams do not expose a
@@ -149,6 +168,12 @@ def main() -> int:
     group.add_argument("--list", action="store_true", help="list all available jokes")
     group.add_argument("--joke", metavar="INDEX_OR_NAME", help="tell a joke by index or name")
     parser.add_argument("--rate", action="store_true", help="optionally rate the joke interactively")
+    parser.add_argument(
+        "--skip-seconds",
+        type=_parse_skip_seconds,
+        metavar="SECONDS",
+        help="seconds before the interactive rating prompt is skipped (overrides the environment)",
+    )
     parser.add_argument(CONFIG_OPTION, type=Path, metavar="PATH", help="JSON configuration file")
     parser.add_argument("--rating-store", metavar="PATH", help="JSONL file for ratings (used with --rate)")
     args = parser.parse_args()
@@ -189,7 +214,11 @@ def main() -> int:
         configured_store = config.get("rating_store")
         if configured_store is not None and not isinstance(configured_store, str):
             parser.error("Config value 'rating_store' must be a path string")
-        _collect_rating(joke.id, JsonlRatingStore(args.rating_store or configured_store or default_path))
+        _collect_rating(
+            joke.id,
+            JsonlRatingStore(args.rating_store or configured_store or default_path),
+            skip_seconds=args.skip_seconds,
+        )
     return 0
 
 

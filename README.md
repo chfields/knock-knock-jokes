@@ -46,6 +46,8 @@ skips automatically after 10 seconds with no input. In a non-interactive CLI,
 rating collection is skipped by default without prompting. Invalid input gets
 one retry and is then skipped.
 Set `KNOCK_KNOCK_RATING_SKIP_SECONDS` to change the interactive prompt timeout.
+You can override it for one invocation with `--skip-seconds`, for example
+`python -m knockknock --rate --skip-seconds 3`.
 To persist this setting across sessions, add it to your shell's configuration
 file, such as `~/.profile`.
 Ratings are appended to
