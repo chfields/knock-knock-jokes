@@ -10,6 +10,7 @@ class Joke:
 
     name: str
     punchline: str
+    id: str = ""
 
     def __post_init__(self) -> None:
         """Reject malformed catalogue values at the boundary."""
@@ -17,17 +18,21 @@ class Joke:
             raise ValueError("Joke name must be a non-empty string")
         if not isinstance(self.punchline, str) or not self.punchline.strip():
             raise ValueError("Joke punchline must be a non-empty string")
+        if self.id == "":
+            object.__setattr__(self, "id", self.name.casefold().replace(" ", "-"))
+        elif not isinstance(self.id, str) or not self.id.strip():
+            raise ValueError("Joke ID must be a non-empty string")
 
 
 JOKES: tuple[Joke, ...] = (
-    Joke("Cow says", "No, a cow says moo!"),
-    Joke("Lettuce", "Lettuce in, it's cold out here!"),
-    Joke("Boo", "Don't cry, it's only a joke!"),
-    Joke("Tank", "You're welcome!"),
-    Joke("Dwayne", "Dwayne the bathtub, I'm dwowning!"),
-    Joke("Atch", "Bless you!"),
-    Joke("Nobel", "Nobel, that's why I knocked!"),
-    Joke("Olive", "Olive you and I miss you!"),
+    Joke("Cow says", "No, a cow says moo!", "cow-says"),
+    Joke("Lettuce", "Lettuce in, it's cold out here!", "lettuce"),
+    Joke("Boo", "Don't cry, it's only a joke!", "boo"),
+    Joke("Tank", "You're welcome!", "tank"),
+    Joke("Dwayne", "Dwayne the bathtub, I'm dwowning!", "dwayne"),
+    Joke("Atch", "Bless you!", "atch"),
+    Joke("Nobel", "Nobel, that's why I knocked!", "nobel"),
+    Joke("Olive", "Olive you and I miss you!", "olive"),
 )
 
 
