@@ -11,8 +11,15 @@ class Joke:
     name: str
     punchline: str
 
+    def __post_init__(self) -> None:
+        """Reject malformed catalogue values at the boundary."""
+        if not isinstance(self.name, str) or not self.name.strip():
+            raise ValueError("Joke name must be a non-empty string")
+        if not isinstance(self.punchline, str) or not self.punchline.strip():
+            raise ValueError("Joke punchline must be a non-empty string")
 
-JOKES = (
+
+JOKES: tuple[Joke, ...] = (
     Joke("Cow says", "No, a cow says moo!"),
     Joke("Lettuce", "Lettuce in, it's cold out here!"),
     Joke("Boo", "Don't cry, it's only a joke!"),
@@ -26,6 +33,8 @@ JOKES = (
 
 def get_joke(selector: Union[int, str]) -> Joke:
     """Return a joke by zero-based index or case-insensitive name."""
+    if isinstance(selector, bool):
+        raise TypeError("Joke selector must be an integer or string")
     if isinstance(selector, int):
         if selector < 0:
             raise IndexError(f"No joke at index {selector}")
@@ -33,6 +42,9 @@ def get_joke(selector: Union[int, str]) -> Joke:
             return JOKES[selector]
         except IndexError as error:
             raise IndexError(f"No joke at index {selector}") from error
+
+    if not isinstance(selector, str):
+        raise TypeError("Joke selector must be an integer or string")
 
     normalized = selector.casefold()
     for joke in JOKES:

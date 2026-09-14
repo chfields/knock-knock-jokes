@@ -1,10 +1,13 @@
 """Command-line interface for the knock-knock joke system."""
 
 import argparse
+import logging
 import random
 
 from .jokes import JOKES, get_joke
 from .sequence import tell
+
+LOGGER = logging.getLogger(__name__)
 
 # Generated in a fixed-width font so the title remains stable across terminals.
 TITLE_LINES = [
@@ -51,6 +54,11 @@ def print_title(lines: list[str] = TITLE_LINES) -> None:
         print(line)
 
 
+def _safe_diagnostic(value: str) -> str:
+    """Keep user-controlled parser diagnostics free of terminal controls."""
+    return "".join(character if character.isprintable() else f"\\x{ord(character):02x}" for character in value)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Tell a knock-knock joke.")
     group = parser.add_mutually_exclusive_group()
@@ -74,10 +82,11 @@ def main() -> int:
                 selector = args.joke
             joke = get_joke(selector)
         except (IndexError, KeyError) as error:
-            parser.error(str(error).strip("'"))
+            parser.error(_safe_diagnostic(str(error).strip("'")))
 
     # Keep explicit joke requests stable; the default mode gets a random style.
     title_lines = random.choice(ASCII_ART_FORMATS) if args.joke is None else TITLE_LINES
+    LOGGER.info("Served joke: %s", joke.name)
     print_title(title_lines)
     for line in tell(joke):
         print(line)
