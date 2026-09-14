@@ -129,6 +129,8 @@ treatment and the same five-line sequence as default mode.
    from user input.
 5. The CLI must not require network access, a writable filesystem, or runtime
    configuration.
+6. Each successfully served joke must be recorded in the application log with
+   the joke identity and a timestamp.
 
 ## 5. Public interfaces
 
@@ -175,6 +177,8 @@ Delivery is accepted when all of the following are true:
   starting at zero.
 - A valid index, valid name, and case-variant name each select the expected
   joke.
+- Each successfully served joke is recorded in the application log with a
+  timestamp.
 - Negative indexes, out-of-range indexes, unknown names, conflicting options,
   and malformed options fail cleanly with non-zero status.
 - The package API returns immutable catalogue values and the expected sequence.
@@ -199,6 +203,8 @@ Delivery is accepted when all of the following are true:
 - Run default, list, index, and name modes as subprocesses.
 - Assert stdout/stderr separation and exit status.
 - Assert invalid selections do not emit partial stdout.
+- Assert each successfully served joke creates a log entry containing its
+  identity and a timestamp.
 - Assert conflicting flags and malformed options use parser error behavior.
 - Stub randomness where deterministic output is required by a test.
 
