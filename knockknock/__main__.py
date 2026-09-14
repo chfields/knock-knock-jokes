@@ -15,6 +15,7 @@ from .sequence import tell
 from .ratings import JsonlRatingStore, Rating, RatingStore
 
 LOGGER = logging.getLogger(__name__)
+# Ten seconds gives users time to respond without leaving the CLI waiting too long.
 RATING_INPUT_TIMEOUT_SECONDS = 10
 RATING_SKIP_ENV_VAR = "KNOCK_KNOCK_RATING_SKIP_SECONDS"
 CONFIG_OPTION = "--config"
