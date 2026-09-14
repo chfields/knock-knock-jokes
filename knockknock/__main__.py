@@ -11,8 +11,8 @@ import sys
 from pathlib import Path
 
 from .jokes import JOKES, get_joke
-from .sequence import tell
 from .ratings import JsonlRatingStore, Rating, RatingStore
+from .sequence import tell
 
 LOGGER = logging.getLogger(__name__)
 # Ten seconds gives users time to respond without leaving the CLI waiting too long.
