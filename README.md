@@ -31,6 +31,15 @@ python -m knockknock --joke 0
 python -m knockknock --joke Lettuce
 ```
 
+An optional JSON configuration file can be supplied at startup:
+
+```bash
+python -m knockknock --config config.json --rate
+```
+
+The supported setting is `rating_store`, which is overridden by an explicit
+`--rating-store` argument. The config path must exist and refer to a file.
+
 Ratings are optional. Enable the interactive prompt with `--rate`; press Enter
 to skip, or enter a number from 1 to 5. In an interactive CLI, the prompt also
 skips automatically after 10 seconds with no input. In a non-interactive CLI,

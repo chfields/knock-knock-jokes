@@ -1,6 +1,7 @@
 """Command-line interface for the knock-knock joke system."""
 
 import argparse
+import json
 import logging
 import math
 import os
@@ -16,6 +17,7 @@ from .ratings import JsonlRatingStore, Rating, RatingStore
 LOGGER = logging.getLogger(__name__)
 RATING_INPUT_TIMEOUT_SECONDS = 10
 RATING_SKIP_ENV_VAR = "KNOCK_KNOCK_RATING_SKIP_SECONDS"
+CONFIG_OPTION = "--config"
 
 # Generated in a fixed-width font so the title remains stable across terminals.
 TITLE_LINES = [
@@ -83,6 +85,22 @@ def _rating_input_timeout() -> float:
     return timeout
 
 
+def _load_config(path: Path) -> dict:
+    """Load the optional JSON configuration after validating its path."""
+    if not path.exists():
+        raise ValueError(f"Config file does not exist: {path}")
+    if not path.is_file():
+        raise ValueError(f"Config path is not a file: {path}")
+    try:
+        with path.open(encoding="utf-8") as stream:
+            config = json.load(stream)
+    except (OSError, json.JSONDecodeError) as error:
+        raise ValueError(f"Could not read config file {path}: {error}") from error
+    if not isinstance(config, dict):
+        raise ValueError(f"Config file must contain a JSON object: {path}")
+    return config
+
+
 def _collect_rating(joke_id: str, store: RatingStore, input_stream=sys.stdin) -> None:
     """Prompt for a rating, allowing an empty answer or one retry."""
     if not input_stream.isatty():
@@ -130,8 +148,16 @@ def main() -> int:
     group.add_argument("--list", action="store_true", help="list all available jokes")
     group.add_argument("--joke", metavar="INDEX_OR_NAME", help="tell a joke by index or name")
     parser.add_argument("--rate", action="store_true", help="optionally rate the joke interactively")
+    parser.add_argument(CONFIG_OPTION, type=Path, metavar="PATH", help="JSON configuration file")
     parser.add_argument("--rating-store", metavar="PATH", help="JSONL file for ratings (used with --rate)")
     args = parser.parse_args()
+
+    config = {}
+    if args.config is not None:
+        try:
+            config = _load_config(args.config)
+        except ValueError as error:
+            parser.error(str(error))
 
     if args.list:
         print_title()
@@ -159,7 +185,10 @@ def main() -> int:
         print(line)
     if args.rate:
         default_path = Path.home() / ".local" / "share" / "knockknock" / "ratings.jsonl"
-        _collect_rating(joke.id, JsonlRatingStore(args.rating_store or default_path))
+        configured_store = config.get("rating_store")
+        if configured_store is not None and not isinstance(configured_store, str):
+            parser.error("Config value 'rating_store' must be a path string")
+        _collect_rating(joke.id, JsonlRatingStore(args.rating_store or configured_store or default_path))
     return 0
 
 

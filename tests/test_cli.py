@@ -67,3 +67,11 @@ def test_cli_reports_negative_index():
 
     assert result.returncode != 0
     assert "No joke at index -1" in result.stderr
+
+
+def test_cli_reports_missing_config_path(tmp_path):
+    result = run_cli("--config", str(tmp_path / "missing.json"))
+
+    assert result.returncode != 0
+    assert result.stdout == ""
+    assert "Config file does not exist" in result.stderr
