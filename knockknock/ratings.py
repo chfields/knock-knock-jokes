@@ -3,8 +3,13 @@
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import json
+import logging
+import stat
 from pathlib import Path
 from typing import Protocol, Union
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -41,5 +46,9 @@ class JsonlRatingStore:
 
     def save(self, rating: Rating) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        if self.path.exists() and not self.path.stat().st_mode & (
+            stat.S_IWUSR | stat.S_IWGRP | stat.S_IWOTH
+        ):
+            LOGGER.warning("Rating store %s is missing write permission", self.path)
         with self.path.open("a", encoding="utf-8") as stream:
             stream.write(json.dumps(asdict(rating), sort_keys=True) + "\n")
