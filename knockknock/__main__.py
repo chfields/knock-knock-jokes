@@ -3,6 +3,7 @@
 import argparse
 import logging
 import random
+import select
 import sys
 from pathlib import Path
 
@@ -11,6 +12,7 @@ from .sequence import tell
 from .ratings import JsonlRatingStore, Rating, RatingStore
 
 LOGGER = logging.getLogger(__name__)
+RATING_INPUT_TIMEOUT_SECONDS = 10
 
 # Generated in a fixed-width font so the title remains stable across terminals.
 TITLE_LINES = [
@@ -69,6 +71,17 @@ def _collect_rating(joke_id: str, store: RatingStore, input_stream=sys.stdin) ->
     for attempt in range(2):
         try:
             print("Rate this joke (1-5, or Enter to skip): ", end="", flush=True)
+            try:
+                ready, _, _ = select.select(
+                    [input_stream], [], [], RATING_INPUT_TIMEOUT_SECONDS
+                )
+            except (OSError, ValueError):
+                # Some test doubles and non-Unix streams do not expose a
+                # selectable file descriptor; preserve their prior behavior.
+                ready = [input_stream]
+            if not ready:
+                print()
+                return
             answer = input_stream.readline()
             if answer == "":
                 return

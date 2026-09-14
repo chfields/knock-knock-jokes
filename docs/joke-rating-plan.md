@@ -11,7 +11,8 @@ the user explicitly enables rating.
 1. Add an opt-in `--rate` CLI flag for an interactive session.
 2. Print `Rate this joke (1-5, or Enter to skip): ` after the punchline.
 3. Accept only a single integer from 1 through 5; show a short error and allow
-   one retry for invalid input, then continue without recording a rating.
+   one retry for invalid input, then continue without recording a rating. Skip
+   automatically after 10 seconds with no input.
 4. Associate the submitted rating with the served joke's stable identifier and
    timestamp, not its display text.
 5. Cap ratings at one submission per joke per session.
