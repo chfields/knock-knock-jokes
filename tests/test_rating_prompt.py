@@ -39,7 +39,7 @@ def test_rating_prompt_skips_after_timeout(monkeypatch):
 def test_rating_prompt_uses_configured_timeout(monkeypatch):
     store = Store()
     calls = []
-    monkeypatch.setenv("KNOCKKNOCK_RATING_TIMEOUT_SECONDS", "2.5")
+    monkeypatch.setenv("KNOCK_KNOCK_RATING_SKIP_SECONDS", "2.5")
 
     def no_input(streams, writable, exceptional, timeout):
         calls.append(timeout)
@@ -56,7 +56,7 @@ def test_rating_prompt_uses_configured_timeout(monkeypatch):
 def test_rating_prompt_ignores_invalid_configured_timeout(monkeypatch):
     store = Store()
     calls = []
-    monkeypatch.setenv("KNOCKKNOCK_RATING_TIMEOUT_SECONDS", "not-a-number")
+    monkeypatch.setenv("KNOCK_KNOCK_RATING_SKIP_SECONDS", "not-a-number")
 
     def no_input(streams, writable, exceptional, timeout):
         calls.append(timeout)
