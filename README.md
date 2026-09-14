@@ -37,6 +37,8 @@ skips automatically after 10 seconds with no input. In a non-interactive CLI,
 rating collection is skipped by default without prompting. Invalid input gets
 one retry and is then skipped.
 Set `KNOCK_KNOCK_RATING_SKIP_SECONDS` to change the interactive prompt timeout.
+To persist this setting across sessions, add it to your shell's configuration
+file, such as `~/.profile`.
 Ratings are appended to
 `~/.local/share/knockknock/ratings.jsonl` (or a path supplied with
 `--rating-store`) and are never requested by default or by `--list`. The file
