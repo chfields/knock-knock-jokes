@@ -32,8 +32,10 @@ python -m knockknock --joke Lettuce
 ```
 
 Ratings are optional. Enable the interactive prompt with `--rate`; press Enter
-to skip, or enter a number from 1 to 5. The prompt skips automatically after
-10 seconds with no input. Invalid input gets one retry and is then skipped.
+to skip, or enter a number from 1 to 5. In an interactive CLI, the prompt also
+skips automatically after 10 seconds with no input. In a non-interactive CLI,
+rating collection is skipped by default without prompting. Invalid input gets
+one retry and is then skipped.
 Ratings are appended to
 `~/.local/share/knockknock/ratings.jsonl` (or a path supplied with
 `--rating-store`) and are never requested by default or by `--list`. The file
