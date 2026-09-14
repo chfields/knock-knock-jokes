@@ -8,7 +8,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Protocol, Union
 
-
 LOGGER = logging.getLogger(__name__)
 
 
