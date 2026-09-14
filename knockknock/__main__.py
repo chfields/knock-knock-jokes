@@ -2,6 +2,8 @@
 
 import argparse
 import logging
+import math
+import os
 import random
 import select
 import sys
@@ -13,6 +15,7 @@ from .ratings import JsonlRatingStore, Rating, RatingStore
 
 LOGGER = logging.getLogger(__name__)
 RATING_INPUT_TIMEOUT_SECONDS = 10
+RATING_TIMEOUT_ENV_VAR = "KNOCKKNOCK_RATING_TIMEOUT_SECONDS"
 
 # Generated in a fixed-width font so the title remains stable across terminals.
 TITLE_LINES = [
@@ -64,6 +67,22 @@ def _safe_diagnostic(value: str) -> str:
     return "".join(character if character.isprintable() else f"\\x{ord(character):02x}" for character in value)
 
 
+def _rating_input_timeout() -> float:
+    """Return the rating prompt timeout configured by the environment."""
+    configured_timeout = os.environ.get(RATING_TIMEOUT_ENV_VAR)
+    if configured_timeout is None:
+        return RATING_INPUT_TIMEOUT_SECONDS
+    try:
+        timeout = float(configured_timeout)
+    except ValueError:
+        LOGGER.warning("Ignoring invalid %s value: %s", RATING_TIMEOUT_ENV_VAR, configured_timeout)
+        return RATING_INPUT_TIMEOUT_SECONDS
+    if not math.isfinite(timeout) or timeout < 0:
+        LOGGER.warning("Ignoring negative %s value: %s", RATING_TIMEOUT_ENV_VAR, configured_timeout)
+        return RATING_INPUT_TIMEOUT_SECONDS
+    return timeout
+
+
 def _collect_rating(joke_id: str, store: RatingStore, input_stream=sys.stdin) -> None:
     """Prompt for a rating, allowing an empty answer or one retry."""
     if not input_stream.isatty():
@@ -73,7 +92,7 @@ def _collect_rating(joke_id: str, store: RatingStore, input_stream=sys.stdin) ->
             print("Rate this joke (1-5, or Enter to skip): ", end="", flush=True)
             try:
                 ready, _, _ = select.select(
-                    [input_stream], [], [], RATING_INPUT_TIMEOUT_SECONDS
+                    [input_stream], [], [], _rating_input_timeout()
                 )
             except (OSError, ValueError):
                 # Some test doubles and non-Unix streams do not expose a

@@ -36,6 +36,40 @@ def test_rating_prompt_skips_after_timeout(monkeypatch):
     assert store.ratings == []
 
 
+def test_rating_prompt_uses_configured_timeout(monkeypatch):
+    store = Store()
+    calls = []
+    monkeypatch.setenv("KNOCKKNOCK_RATING_TIMEOUT_SECONDS", "2.5")
+
+    def no_input(streams, writable, exceptional, timeout):
+        calls.append(timeout)
+        return [], [], []
+
+    monkeypatch.setattr(cli.select, "select", no_input)
+
+    cli._collect_rating("joke", store, TTYInput("5\n"))
+
+    assert calls == [2.5]
+    assert store.ratings == []
+
+
+def test_rating_prompt_ignores_invalid_configured_timeout(monkeypatch):
+    store = Store()
+    calls = []
+    monkeypatch.setenv("KNOCKKNOCK_RATING_TIMEOUT_SECONDS", "not-a-number")
+
+    def no_input(streams, writable, exceptional, timeout):
+        calls.append(timeout)
+        return [], [], []
+
+    monkeypatch.setattr(cli.select, "select", no_input)
+
+    cli._collect_rating("joke", store, TTYInput("5\n"))
+
+    assert calls == [10]
+    assert store.ratings == []
+
+
 def test_rating_prompt_still_saves_available_input(monkeypatch):
     store = Store()
     monkeypatch.setattr(cli.select, "select", lambda *args: ([args[0][0]], [], []))
