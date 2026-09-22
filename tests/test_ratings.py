@@ -2,7 +2,31 @@ import json
 
 import pytest
 
-from knockknock.ratings import JsonlRatingStore, Rating
+from knockknock.ratings import JsonlRatingStore, Rating, average_rating
+
+
+def test_average_rating_returns_none_for_empty_or_non_matching_ratings():
+    assert average_rating([], "joke") is None
+    assert average_rating([Rating("other", 4, "now")], "joke") is None
+
+
+def test_average_rating_returns_single_matching_value_as_float():
+    result = average_rating([Rating("joke", 4, "now")], "joke")
+
+    assert result == 4.0
+    assert isinstance(result, float)
+
+
+def test_average_rating_returns_mean_of_matching_ratings():
+    ratings = [Rating("joke", 2, "now"), Rating("joke", 5, "later")]
+
+    assert average_rating(ratings, "joke") == 3.5
+
+
+def test_average_rating_excludes_ratings_for_different_jokes():
+    ratings = [Rating("joke", 2, "now"), Rating("other", 5, "later")]
+
+    assert average_rating(ratings, "joke") == 2.0
 
 
 def test_rating_rejects_values_outside_one_to_five():
