@@ -6,7 +6,7 @@ import stat
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Protocol, Union
+from typing import Iterable, Optional, Protocol, Union
 
 LOGGER = logging.getLogger(__name__)
 
@@ -30,6 +30,14 @@ class Rating:
     @classmethod
     def now(cls, joke_id: str, value: int) -> "Rating":
         return cls(joke_id, value, datetime.now(timezone.utc).isoformat())
+
+
+def average_rating(ratings: Iterable[Rating], joke_id: str) -> Optional[float]:
+    """Return the average rating for a joke, or None if it has no ratings."""
+    matching_values = [rating.value for rating in ratings if rating.joke_id == joke_id]
+    if not matching_values:
+        return None
+    return float(sum(matching_values)) / len(matching_values)
 
 
 class RatingStore(Protocol):
