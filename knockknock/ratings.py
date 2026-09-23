@@ -40,6 +40,11 @@ def average_rating(ratings: Iterable[Rating], joke_id: str) -> Optional[float]:
     return float(sum(matching_values)) / len(matching_values)
 
 
+def rating_count(ratings: Iterable[Rating], joke_id: str) -> int:
+    """Return the number of ratings for a joke."""
+    return sum(1 for rating in ratings if rating.joke_id == joke_id)
+
+
 class RatingStore(Protocol):
     def save(self, rating: Rating) -> None:
         """Persist one rating."""
