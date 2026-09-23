@@ -59,7 +59,7 @@ jobs:
             HINT=""
           fi
           FULL_TASK="${HINT}${TASK}"
-          curl -sf -X POST "https://app.wardby.com/webhooks/${{ vars.REEVO_WEBHOOK_ID }}" \
-            -H "x-webhook-secret: ${{ secrets.REEVO_WEBHOOK_SECRET }}" \
+          curl -sf -X POST "https://app.wardby.com/webhooks/${{ vars.WARDBY_WEBHOOK_ID }}" \
+            -H "x-webhook-secret: ${{ secrets.WARDBY_WEBHOOK_SECRET }}" \
             -H "Content-Type: application/json" \
             -d "$(jq -n --arg t "$FULL_TASK" '{task:$t}')"
