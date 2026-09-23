@@ -1,7 +1,7 @@
 """The joke catalogue and lookup helpers."""
 
 from dataclasses import dataclass
-from typing import Union
+from typing import Iterable, Union
 
 
 @dataclass(frozen=True)
@@ -34,6 +34,11 @@ JOKES: tuple[Joke, ...] = (
     Joke("Nobel", "Nobel, that's why I knocked!", "nobel"),
     Joke("Olive", "Olive you and I miss you!", "olive"),
 )
+
+
+def joke_count(jokes: Iterable[object]) -> int:
+    """Return the number of jokes in an iterable."""
+    return sum(1 for _ in jokes)
 
 
 def get_joke(selector: Union[int, str]) -> Joke:
