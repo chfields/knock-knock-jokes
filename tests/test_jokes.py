@@ -1,6 +1,6 @@
 import pytest
 
-from knockknock.jokes import JOKES, Joke, get_joke
+from knockknock.jokes import JOKES, Joke, get_joke, joke_count
 
 
 def test_joke_bank_has_eight_unique_well_formed_jokes():
@@ -8,6 +8,18 @@ def test_joke_bank_has_eight_unique_well_formed_jokes():
     assert all(isinstance(joke, Joke) for joke in JOKES)
     assert all(joke.name.strip() and joke.punchline.strip() for joke in JOKES)
     assert len({joke.name.casefold() for joke in JOKES}) == len(JOKES)
+
+
+def test_joke_count_returns_zero_for_empty_iterable():
+    assert joke_count([]) == 0
+
+
+def test_joke_count_returns_one_for_single_joke():
+    assert joke_count([Joke("Knock", "Who's there?")]) == 1
+
+
+def test_joke_count_returns_number_of_several_jokes():
+    assert joke_count(JOKES) == len(JOKES)
 
 
 def test_get_joke_supports_zero_based_index_and_name():

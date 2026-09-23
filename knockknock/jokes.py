@@ -36,6 +36,11 @@ JOKES: tuple[Joke, ...] = (
 )
 
 
+def joke_count(jokes) -> int:
+    """Return the number of jokes in an iterable."""
+    return sum(1 for _ in jokes)
+
+
 def get_joke(selector: Union[int, str]) -> Joke:
     """Return a joke by zero-based index or case-insensitive name."""
     if isinstance(selector, bool):
