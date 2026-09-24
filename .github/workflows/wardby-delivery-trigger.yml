@@ -10,14 +10,37 @@ on:
 
 jobs:
   dispatch:
+    # The repository is public: only the owner, org members, and collaborators
+    # may start a delivery run, since every run spends model budget.
     if: |
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@knock-knock-delivery') || contains(github.event.issue.title, '@knock-knock-delivery'))) ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@knock-knock-delivery')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@knock-knock-delivery'))
+      (
+        (github.event_name == 'issues' && (contains(github.event.issue.body, '@knock-knock-delivery') || contains(github.event.issue.title, '@knock-knock-delivery'))) ||
+        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@knock-knock-delivery')) ||
+        (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@knock-knock-delivery'))
+      ) &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event_name == 'issues' && github.event.issue.author_association || github.event.comment.author_association)
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: read
+      # Write access is only used to react to the request and to post the
+      # wardby run id back on the issue or pull request.
+      issues: write
+      pull-requests: write
     steps:
+      - name: Acknowledge the request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+        run: |
+          set -euo pipefail
+          case "$EVENT_NAME" in
+            issues) ENDPOINT="repos/${{ github.repository }}/issues/$ISSUE_NUMBER/reactions" ;;
+            issue_comment) ENDPOINT="repos/${{ github.repository }}/issues/comments/$COMMENT_ID/reactions" ;;
+            pull_request_review_comment) ENDPOINT="repos/${{ github.repository }}/pulls/comments/$COMMENT_ID/reactions" ;;
+          esac
+          gh api -X POST "$ENDPOINT" -f content=eyes >/dev/null || echo "::warning::could not add the reaction"
+
       # Revision-in-place: if this comment landed on an existing PR, resolve
       # the wardby run that originally opened it (via the hidden
       # <!-- wardby:<runId> --> marker (legacy: <!-- reevo-run:<runId> -->) wardby writes into every PR
@@ -47,10 +70,18 @@ jobs:
           echo "pr_number=$NUMBER" >> "$GITHUB_OUTPUT"
 
       - name: Send task to wardby
+        id: send
         env:
+          EVENT_NAME: ${{ github.event_name }}
           TASK: ${{ github.event_name == 'issues' && github.event.issue.body || github.event.comment.body }}
           PRIOR_RUN_ID: ${{ steps.continuation.outputs.run_id }}
           PR_NUMBER: ${{ steps.continuation.outputs.pr_number }}
+          # Issue context, so a bare "@knock-knock-delivery" comment on an issue
+          # still tells the agent what to build. Empty for pull requests, which
+          # carry their context through the prior-run hint instead.
+          ISSUE_NUMBER: ${{ github.event.issue.pull_request == null && github.event.issue.number || '' }}
+          ISSUE_TITLE: ${{ github.event.issue.pull_request == null && github.event.issue.title || '' }}
+          ISSUE_BODY: ${{ github.event.issue.pull_request == null && github.event.issue.body || '' }}
         run: |
           set -euo pipefail
           if [ -n "$PRIOR_RUN_ID" ]; then
@@ -58,8 +89,26 @@ jobs:
           else
             HINT=""
           fi
-          FULL_TASK="${HINT}${TASK}"
-          curl -sf -X POST "https://app.wardby.com/webhooks/${{ vars.WARDBY_WEBHOOK_ID }}" \
+          CONTEXT=""
+          if [ -n "$ISSUE_NUMBER" ] && [ "$EVENT_NAME" = "issue_comment" ]; then
+            CONTEXT="[GitHub issue #$ISSUE_NUMBER: $ISSUE_TITLE]"$'\n\n'"Issue description:"$'\n'"$ISSUE_BODY"$'\n\n'"Request comment:"$'\n'
+          elif [ -n "$ISSUE_NUMBER" ]; then
+            CONTEXT="[GitHub issue #$ISSUE_NUMBER: $ISSUE_TITLE]"$'\n\n'
+          fi
+          FULL_TASK="${HINT}${CONTEXT}${TASK}"
+          RESPONSE="$(curl -sf -X POST "https://app.wardby.com/webhooks/${{ vars.WARDBY_WEBHOOK_ID }}" \
             -H "x-webhook-secret: ${{ secrets.WARDBY_WEBHOOK_SECRET }}" \
             -H "Content-Type: application/json" \
-            -d "$(jq -n --arg t "$FULL_TASK" '{task:$t}')"
+            -d "$(jq -n --arg t "$FULL_TASK" '{task:$t}')")"
+          echo "run_id=$(printf '%s' "$RESPONSE" | jq -r '.runId // empty')" >> "$GITHUB_OUTPUT"
+
+      - name: Report the wardby run
+        if: steps.send.outputs.run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+          RUN_ID: ${{ steps.send.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          gh issue comment "$NUMBER" --repo "${{ github.repository }}" \
+            --body "👀 Picked up by wardby (run \`$RUN_ID\`). A draft pull request will follow if the request is actionable."
