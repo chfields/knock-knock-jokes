@@ -1,4 +1,4 @@
-name: Trigger reevo delivery agent
+name: Trigger wardby delivery agent
 
 on:
   issues:
@@ -19,11 +19,11 @@ jobs:
       pull-requests: read
     steps:
       # Revision-in-place: if this comment landed on an existing PR, resolve
-      # the reevo run that originally opened it (via the hidden
-      # <!-- reevo-run:<runId> --> marker reevo itself writes into every PR
+      # the wardby run that originally opened it (via the hidden
+      # <!-- wardby:<runId> --> marker (legacy: <!-- reevo-run:<runId> -->) wardby writes into every PR
       # body it creates) so the task text can ask the delivery agent to
       # continue that PR/branch instead of always opening a new one.
-      - name: Resolve prior reevo run for revision-in-place (if this is a PR comment)
+      - name: Resolve prior wardby run for revision-in-place (if this is a PR comment)
         id: continuation
         env:
           GH_TOKEN: ${{ github.token }}
@@ -41,12 +41,12 @@ jobs:
           RUN_ID=""
           if [ -n "$NUMBER" ]; then
             BODY="$(gh pr view "$NUMBER" --repo "${{ github.repository }}" --json body -q .body || true)"
-            RUN_ID="$(printf '%s' "$BODY" | grep -oP '(?<=<!-- reevo-run:)[A-Za-z0-9_-]+(?= -->)' | head -n1 || true)"
+            RUN_ID="$(printf '%s' "$BODY" | grep -oP '<!-- (?:wardby|reevo-run):\K[A-Za-z0-9_-]+(?= -->)' | head -n1 || true)"
           fi
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
           echo "pr_number=$NUMBER" >> "$GITHUB_OUTPUT"
 
-      - name: Send task to reevo
+      - name: Send task to wardby
         env:
           TASK: ${{ github.event_name == 'issues' && github.event.issue.body || github.event.comment.body }}
           PRIOR_RUN_ID: ${{ steps.continuation.outputs.run_id }}
@@ -54,12 +54,12 @@ jobs:
         run: |
           set -euo pipefail
           if [ -n "$PRIOR_RUN_ID" ]; then
-            HINT="[This request is a follow-up on PR #$PR_NUMBER, originally opened by reevo run $PRIOR_RUN_ID. If you delegate, pass continuePriorRun set to exactly \"$PRIOR_RUN_ID\" so the same PR/branch is continued instead of opening a new one.]"$'\n\n'
+            HINT="[This request is a follow-up on PR #$PR_NUMBER, originally opened by wardby run $PRIOR_RUN_ID. If you delegate, pass continuePriorRun set to exactly \"$PRIOR_RUN_ID\" so the same PR/branch is continued instead of opening a new one.]"$'\n\n'
           else
             HINT=""
           fi
           FULL_TASK="${HINT}${TASK}"
-          curl -sf -X POST "https://pwm.ngrok.app/webhooks/${{ vars.REEVO_WEBHOOK_ID }}" \
-            -H "x-webhook-secret: ${{ secrets.REEVO_WEBHOOK_SECRET }}" \
+          curl -sf -X POST "https://app.wardby.com/webhooks/${{ vars.WARDBY_WEBHOOK_ID }}" \
+            -H "x-webhook-secret: ${{ secrets.WARDBY_WEBHOOK_SECRET }}" \
             -H "Content-Type: application/json" \
             -d "$(jq -n --arg t "$FULL_TASK" '{task:$t}')"
