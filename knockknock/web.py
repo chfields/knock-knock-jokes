@@ -4,7 +4,18 @@ import random
 from pathlib import Path
 from typing import Mapping, Optional
 
-from flask import Flask, abort, flash, redirect, render_template, request, session, url_for
+from flask import (
+    Flask,
+    abort,
+    flash,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+    session,
+    url_for,
+)
 
 from .jokes import JOKES, Joke
 from .ratings import JsonlRatingStore, Rating
@@ -33,18 +44,67 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
         configured_store = JsonlRatingStore(app.config["RATING_STORE_PATH"])
     app.extensions["knockknock_rating_store"] = configured_store
 
-    @app.get("/")
-    def random_joke():
+    def joke_json(joke: Joke) -> dict[str, object]:
+        return {"id": joke.id, "name": joke.name}
+
+    @app.get("/api/jokes")
+    def api_jokes():
+        return jsonify([joke_json(joke) for joke in JOKES])
+
+    @app.get("/api/jokes/random")
+    def api_random_joke():
         joke = random.choice(JOKES)
-        return render_template("joke.html", joke=joke, lines=tell(joke), random_page=True)
+        return jsonify({**joke_json(joke), "lines": tell(joke)})
+
+    @app.get("/api/jokes/<joke_id>")
+    def api_joke_detail(joke_id: str):
+        joke = _joke_by_id(joke_id)
+        return jsonify({**joke_json(joke), "lines": tell(joke)})
+
+    @app.post("/api/jokes/<joke_id>/ratings")
+    def api_rate_joke(joke_id: str):
+        joke = _joke_by_id(joke_id)
+        payload = request.get_json(silent=True)
+        submitted_value = payload.get("rating") if isinstance(payload, dict) else None
+        try:
+            rating = Rating.now(joke.id, submitted_value)
+        except (TypeError, ValueError):
+            return jsonify({"message": "Please choose a whole-number rating from 1 to 5."}), 400
+        try:
+            app.extensions["knockknock_rating_store"].save(rating)
+        except OSError:
+            return jsonify({"message": "Your rating could not be saved. Please try again later."}), 500
+        return jsonify({"message": "Thanks for rating this joke!"}), 201
+
+    static_root = Path(app.root_path).parent / "web" / "dist"
+
+    def built_app_available() -> bool:
+        return (static_root / "index.html").is_file()
+
+    @app.get("/assets/<path:filename>")
+    def built_asset(filename: str):
+        if not built_app_available():
+            abort(404)
+        return send_from_directory(static_root / "assets", filename)
 
     @app.get("/jokes")
     def catalogue():
+        if built_app_available():
+            return send_from_directory(static_root, "index.html")
         return render_template("catalogue.html", jokes=JOKES)
+
+    @app.get("/")
+    def random_joke():
+        if built_app_available():
+            return send_from_directory(static_root, "index.html")
+        joke = random.choice(JOKES)
+        return render_template("joke.html", joke=joke, lines=tell(joke), random_page=True)
 
     @app.get("/jokes/<joke_id>")
     def joke_detail(joke_id: str):
         joke = _joke_by_id(joke_id)
+        if built_app_available():
+            return send_from_directory(static_root, "index.html")
         return render_template(
             "joke.html",
             joke=joke,

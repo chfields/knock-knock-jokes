@@ -24,6 +24,12 @@ lint = ["bandit[toml]>=1.8,<2", "pip-audit>=2.8,<3", "ruff>=0.11,<1"]
 [project.scripts]
 knockknock = "knockknock.__main__:main"
 
+[tool.setuptools]
+packages = ["knockknock"]
+
+[tool.setuptools.package-data]
+knockknock = ["templates/*.html"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
