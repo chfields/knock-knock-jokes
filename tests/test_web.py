@@ -134,3 +134,54 @@ def test_rating_store_oserror_is_controlled(client, monkeypatch):
 
     assert response.status_code == 500
     assert "could not be saved" in response.get_data(as_text=True)
+
+
+def test_api_catalogue_is_ordered_and_contains_ids_and_names(client):
+    response = client.get("/api/jokes")
+
+    assert response.status_code == 200
+    assert response.get_json() == [{"id": joke.id, "name": joke.name} for joke in JOKES]
+
+
+def test_api_detail_and_random_contain_tell_lines(client, monkeypatch):
+    joke = JOKES[1]
+    detail = client.get(f"/api/jokes/{joke.id}")
+    assert detail.status_code == 200
+    assert detail.get_json() == {"id": joke.id, "name": joke.name, "lines": tell(joke)}
+
+    monkeypatch.setattr("knockknock.web.random.choice", lambda jokes: joke)
+    random_response = client.get("/api/jokes/random")
+    assert random_response.status_code == 200
+    assert random_response.get_json() == detail.get_json()
+
+
+def test_api_unknown_joke_returns_404(client):
+    response = client.get("/api/jokes/not-a-real-joke")
+    assert response.status_code == 404
+
+
+@pytest.mark.parametrize("value", [None, "", True, 0, 6, 1.0])
+def test_api_invalid_rating_is_not_saved(client, store, value):
+    payload = {} if value is None else {"rating": value}
+    response = client.post("/api/jokes/cow-says/ratings", json=payload)
+    assert response.status_code == 400
+    assert "whole-number rating from 1 to 5" in response.get_json()["message"]
+    assert store.ratings == []
+
+
+def test_api_rating_is_saved(client, store):
+    response = client.post("/api/jokes/cow-says/ratings", json={"rating": 5})
+    assert response.status_code == 201
+    assert response.get_json()["message"]
+    assert store.ratings[0].joke_id == "cow-says"
+    assert store.ratings[0].value == 5
+
+
+def test_api_rating_store_failure_is_controlled(client, monkeypatch):
+    def fail(_rating):
+        raise OSError("read-only")
+
+    monkeypatch.setattr(client.application.extensions["knockknock_rating_store"], "save", fail)
+    response = client.post("/api/jokes/cow-says/ratings", json={"rating": 3})
+    assert response.status_code == 500
+    assert "could not be saved" in response.get_json()["message"]

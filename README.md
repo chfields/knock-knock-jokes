@@ -71,6 +71,14 @@ append-only rating history; it is intended for a trusted local environment,
 and concurrent web workers need an operationally appropriate store before
 production use.
 
+Build the React frontend from `web/` with:
+
+```bash
+npm ci && npm run build
+```
+
+The build is written to `web/dist`, which the Flask application serves.
+
 ## Development
 
 Run the test suite with `pytest`:
