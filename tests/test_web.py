@@ -58,6 +58,21 @@ def test_detail_page_contains_joke_and_domain_sequence(client):
     assert all(line in body for line in tell(joke))
 
 
+def test_detail_page_uses_sequence_lines_for_reveal_buttons_and_rating_form(client):
+    joke = JOKES[1]
+    lines = tell(joke)
+
+    response = client.get(f"/jokes/{joke.id}")
+    body = unescape(response.get_data(as_text=True))
+
+    assert response.status_code == 200
+    assert body.index(lines[0]) < body.index(lines[1]) < body.index(lines[2])
+    assert body.index(lines[2]) < body.index(lines[3]) < body.index(lines[4])
+    assert '<button id="reveal-setup" type="button">' + lines[1] + "</button>" in body
+    assert '<button id="reveal-punchline" type="button">' + lines[3] + "</button>" in body
+    assert '<form method="post"' in body or '<form data-hidden method="post"' in body
+
+
 def test_unknown_joke_returns_404(client):
     response = client.get("/jokes/not-a-real-joke")
 
@@ -77,6 +92,11 @@ def test_rating_is_saved_and_redirects(client, store, value):
     assert store.ratings[0].joke_id == joke.id
     assert store.ratings[0].value == int(value)
     assert isinstance(store.ratings[0], Rating)
+
+    redirected = client.get(response.location)
+    body = unescape(redirected.get_data(as_text=True))
+    assert all(line in body for line in tell(joke))
+    assert "Thanks for rating this joke!" in body
 
 
 @pytest.mark.parametrize("value", [None, "", "True", "1.0", "0", "6"])
