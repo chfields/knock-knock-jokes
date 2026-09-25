@@ -4,7 +4,7 @@ import random
 from pathlib import Path
 from typing import Mapping, Optional
 
-from flask import Flask, abort, flash, redirect, render_template, request, url_for
+from flask import Flask, abort, flash, redirect, render_template, request, session, url_for
 
 from .jokes import JOKES, Joke
 from .ratings import JsonlRatingStore, Rating
@@ -45,7 +45,12 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     @app.get("/jokes/<joke_id>")
     def joke_detail(joke_id: str):
         joke = _joke_by_id(joke_id)
-        return render_template("joke.html", joke=joke, lines=tell(joke))
+        return render_template(
+            "joke.html",
+            joke=joke,
+            lines=tell(joke),
+            reveal_full=session.pop("reveal_full_joke", None) == joke.id,
+        )
 
     @app.post("/jokes/<joke_id>/ratings")
     def rate_joke(joke_id: str):
@@ -61,6 +66,7 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
                 joke=joke,
                 lines=tell(joke),
                 rating_error="Please choose a whole-number rating from 1 to 5.",
+                reveal_full=True,
             ), 400
         try:
             app.extensions["knockknock_rating_store"].save(rating)
@@ -70,8 +76,10 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
                 joke=joke,
                 lines=tell(joke),
                 rating_error="Your rating could not be saved. Please try again later.",
+                reveal_full=True,
             ), 500
         flash("Thanks for rating this joke!")
+        session["reveal_full_joke"] = joke.id
         return redirect(url_for("joke_detail", joke_id=joke.id))
 
     return app
