@@ -167,6 +167,7 @@ def main() -> int:
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--list", action="store_true", help="list all available jokes")
     group.add_argument("--joke", metavar="INDEX_OR_NAME", help="tell a joke by index or name")
+    group.add_argument("--search", metavar="TEXT", help="list jokes matching text in the setup or punchline")
     parser.add_argument("--rate", action="store_true", help="optionally rate the joke interactively")
     parser.add_argument(
         "--skip-seconds",
@@ -188,6 +189,21 @@ def main() -> int:
     if args.list:
         print_title()
         for index, joke in enumerate(JOKES):
+            print(f"{index}: {joke.name}")
+        return 0
+
+    if args.search is not None:
+        search_text = args.search.casefold()
+        matches = [
+            (index, joke)
+            for index, joke in enumerate(JOKES)
+            if search_text in joke.name.casefold() or search_text in joke.punchline.casefold()
+        ]
+        if not matches:
+            print("No jokes match.")
+            return 1
+        print_title()
+        for index, joke in matches:
             print(f"{index}: {joke.name}")
         return 0
 
