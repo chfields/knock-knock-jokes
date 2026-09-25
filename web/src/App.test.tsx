@@ -30,6 +30,16 @@ describe("joke reveal", () => {
   });
 });
 
+describe("random joke", () => {
+  it("transitions from loading to the fetched joke", async () => {
+    renderApp("/");
+
+    expect(screen.getByText("Loading…")).toBeInTheDocument();
+    expect(await screen.findByText(joke.lines[0])).toBeInTheDocument();
+    expect(fetch).toHaveBeenCalledWith("/api/jokes/random");
+  });
+});
+
 describe("rating form", () => {
   it("shows success after submitting", async () => {
     renderApp();

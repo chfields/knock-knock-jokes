@@ -51,10 +51,23 @@ function Teller({ joke }: { joke: FullJoke }) {
 }
 
 function JokePage({ random = false }: { random?: boolean }) {
-  const { id } = useParams(); const [joke, setJoke] = useState<FullJoke>(); const [error, setError] = useState("");
-  useEffect(() => { getJoke(random ? "random" : id ?? "").then(setJoke).catch(reason => setError(reason.message)); }, [id, random]);
+  const { id } = useParams(); const [joke, setJoke] = useState<FullJoke>(); const [error, setError] = useState(""); const [request, setRequest] = useState(0);
+  useEffect(() => {
+    let cancelled = false;
+    const loadJoke = async () => {
+      setJoke(undefined); setError("");
+      try {
+        const loadedJoke = await getJoke(random ? "random" : id ?? "");
+        if (!cancelled) setJoke(loadedJoke);
+      } catch (reason) {
+        if (!cancelled) setError(reason instanceof Error ? reason.message : "Could not load that joke.");
+      }
+    };
+    void loadJoke();
+    return () => { cancelled = true; };
+  }, [id, random, request]);
   if (error) return <ErrorMessage message={error} />; if (!joke) return <p>Loading…</p>;
-  return <><Teller joke={joke} />{random && <Button className="mt-4" variant="tertiary" onPress={() => { setJoke(undefined); getJoke("random").then(setJoke); }}>Another random joke</Button>}</>;
+  return <><Teller joke={joke} />{random && <Button className="mt-4" variant="tertiary" onPress={() => setRequest(value => value + 1)}>Another random joke</Button>}</>;
 }
 
 function Catalogue() {
