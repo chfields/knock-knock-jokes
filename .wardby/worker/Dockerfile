@@ -1,6 +1,7 @@
 # Coding-worker image for wardby agents working on this repository: wardby's
 # published driver plus the Python toolchain this project tests with, so an
-# agent can run the full suite -- including the Flask web tests -- inside its
+# agent can run the full suite -- including the Flask web tests and the React
+# front end's build and tests -- inside its
 # sandbox, which has no pip and no network at run time.
 #
 # Build for linux/amd64, push, and pin the resulting digest as the agent's
@@ -15,6 +16,19 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     # Projects (and this one's CI) say `python`, not `python3`.
     && ln -s /usr/bin/python3 /usr/bin/python
+# The web front end's JavaScript dependencies, pinned by web/package-lock.json
+# and installed here because the sandbox cannot reach the npm registry. The
+# root filesystem is read-only at run time: an agent copies web/package*.json
+# into the repo's web/ and symlinks web/node_modules to /opt/web/node_modules.
+COPY web/package.json web/package-lock.json /opt/web/
+RUN cd /opt/web \
+    && npm ci --no-audit --no-fund \
+    && npm cache clean --force \
+    # Vite and Vitest write a config bundle and caches under node_modules, which
+    # is read-only at run time; send them to the writable /tmp instead.
+    && ln -s /tmp /opt/web/node_modules/.vite-temp \
+    && ln -s /tmp /opt/web/node_modules/.vite \
+    && node -e "require.resolve('@heroui/react'); require.resolve('vite'); require.resolve('vitest')"
 # The sandbox must not contain these; pip is removed so nothing is installed at run time.
 RUN test ! -e /usr/bin/docker \
     && test ! -e /usr/bin/ssh \
