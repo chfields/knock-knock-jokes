@@ -26,6 +26,30 @@ def test_cli_lists_all_jokes():
     assert all(f"{index}: {joke.name}" in result.stdout for index, joke in enumerate(JOKES))
 
 
+def test_cli_searches_jokes():
+    result = run_cli("--search", "bathtub")
+
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert result.stdout.splitlines()[: len(TITLE_LINES)] == TITLE_LINES
+    assert result.stdout.splitlines()[-1] == "4: Dwayne"
+
+
+def test_cli_search_is_case_insensitive():
+    result = run_cli("--search", "MOO")
+
+    assert result.returncode == 0
+    assert result.stdout.splitlines()[-2:] == ["0: Cow says", "15: Interrupting cow"]
+
+
+def test_cli_search_reports_no_match():
+    result = run_cli("--search", "not in the catalogue")
+
+    assert result.returncode == 1
+    assert result.stdout == "No jokes match.\n"
+    assert result.stderr == ""
+
+
 def test_cli_tells_joke_by_index():
     result = run_cli("--joke", "0")
 
