@@ -55,7 +55,7 @@ function JokePage({ random = false }: { random?: boolean }) {
   useEffect(() => {
     let cancelled = false;
     const loadJoke = async () => {
-      setJoke(undefined); setError("");
+      setError("");
       try {
         const loadedJoke = await getJoke(random ? "random" : id ?? "");
         if (!cancelled) setJoke(loadedJoke);
