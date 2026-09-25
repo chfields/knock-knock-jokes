@@ -19,7 +19,7 @@ RUN apt-get update \
 # The web front end's JavaScript dependencies, pinned by web/package-lock.json
 # and installed here because the sandbox cannot reach the npm registry. The
 # root filesystem is read-only at run time: an agent copies web/package*.json
-# into the repo's web/ and symlinks web/node_modules to /opt/web/node_modules.
+# into the repo's web/; packages resolve from /node_modules.
 COPY web/package.json web/package-lock.json /opt/web/
 RUN cd /opt/web \
     && npm ci --no-audit --no-fund \
@@ -28,6 +28,10 @@ RUN cd /opt/web \
     # is read-only at run time; send them to the writable /tmp instead.
     && ln -s /tmp /opt/web/node_modules/.vite-temp \
     && ln -s /tmp /opt/web/node_modules/.vite \
+    # Node, npm and Vite resolve packages by walking up to /node_modules, so a
+    # repo's web/ needs no node_modules of its own (a symlink out of the
+    # workspace would be rejected when wardby collects the result).
+    && ln -s /opt/web/node_modules /node_modules \
     && node -e "require.resolve('@heroui/react'); require.resolve('vite'); require.resolve('vitest')"
 # The sandbox must not contain these; pip is removed so nothing is installed at run time.
 RUN test ! -e /usr/bin/docker \
