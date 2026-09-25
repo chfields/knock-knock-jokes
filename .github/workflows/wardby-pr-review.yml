@@ -1,0 +1,56 @@
+name: wardby PR review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: wardby-pr-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  request-review:
+    # Pull requests from forks get no secrets and would spend model budget on
+    # untrusted code, so only same-repository branches are reviewed.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      # Only used to mark the wardby/code-review status pending (or errored);
+      # the wardby agent sets the final status with its own token.
+      statuses: write
+    steps:
+      - name: Mark the review pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          gh api -X POST "repos/${{ github.repository }}/statuses/$HEAD_SHA" \
+            -f state=pending -f context=wardby/code-review \
+            -f description="Review requested from wardby" >/dev/null
+
+      - name: Send the pull request to the wardby reviewer
+        id: send
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          TASK="Review pull request #$PR_NUMBER (head $HEAD_SHA)."
+          RESPONSE="$(curl -sf -X POST "https://app.wardby.com/webhooks/${{ vars.WARDBY_REVIEW_WEBHOOK_ID }}" \
+            -H "x-webhook-secret: ${{ secrets.WARDBY_REVIEW_WEBHOOK_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -d "$(jq -n --arg t "$TASK" '{task:$t}')")"
+          RUN_ID="$(printf '%s' "$RESPONSE" | jq -r '.runId // empty')"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "Started wardby run $RUN_ID"
+
+      - name: Mark the review errored if wardby could not be reached
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          gh api -X POST "repos/${{ github.repository }}/statuses/$HEAD_SHA" \
+            -f state=error -f context=wardby/code-review \
+            -f description="Could not start the wardby review" >/dev/null
