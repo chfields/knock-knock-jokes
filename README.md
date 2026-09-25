@@ -57,6 +57,20 @@ is local append-only history; remove it when ratings should be discarded.
 
 The same functionality is available through the installed `knockknock` command.
 
+## Optional web front end
+
+Install the web extra to use the Flask application:
+
+```bash
+python -m pip install -e '.[web]'
+```
+
+Build it with `knockknock.web.create_app()`. Set `RATING_STORE_PATH` to an
+explicit writable path when deploying it. The default JSONL file is local,
+append-only rating history; it is intended for a trusted local environment,
+and concurrent web workers need an operationally appropriate store before
+production use.
+
 ## Development
 
 Run the test suite with `pytest`:

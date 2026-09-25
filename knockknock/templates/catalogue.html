@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Joke catalogue</h1>
+  <ul>
+    {% for joke in jokes %}
+      <li><a href="{{ url_for('joke_detail', joke_id=joke.id) }}">{{ joke.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
