@@ -9,3 +9,5 @@ dist/
 htmlcov/
 .venv/
 venv/
+web/node_modules/
+web/dist/
