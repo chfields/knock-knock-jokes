@@ -2,7 +2,7 @@
 
 ## Goal and boundaries
 
-Add a small server-rendered web UI for browsing and telling the jokes already
+Add a React single-page web UI for browsing and telling the jokes already
 provided by this package. A visitor should be able to open a page, receive a
 random joke, choose a joke from the catalogue, see the same five-line
 call-and-response sequence as the CLI, and optionally submit a 1–5 rating.
@@ -34,11 +34,9 @@ test-client APIs, and fits this repository's existing synchronous,
 standard-library-sized design. It also allows the front end to be added as a
 separate module without changing `main()` or the package exports.
 
-Reject FastAPI for the first version. Its typed JSON/OpenAPI and asynchronous
-stack are valuable for an API, but this feature is primarily a few
-server-rendered HTML pages; adding that stack would increase dependencies and
-deployment concepts without a requirement for async work or a public API.
-The same decision rules out a client-heavy JavaScript application for v1.
+Flask remains the small server boundary, while React and HeroUI provide the
+client-side application. Flask exposes the small JSON API and serves the Vite
+build, keeping deployment simple without adding a second server.
 
 ## Proposed implementation shape
 
@@ -138,7 +136,7 @@ Leave these out of the first implementation:
 - user accounts, login, moderation, admin screens, and per-user rating
   history;
 - editing, deleting, or remotely synchronizing the built-in catalogue;
-- a JSON/REST API, WebSockets, async processing, or a client-side SPA;
+- WebSockets, async processing, or a second backend service;
 - average-rating displays until the append-only JSONL file has a supported
   reader and concurrency behavior;
 - rating deduplication, analytics, pagination, search, and localization;

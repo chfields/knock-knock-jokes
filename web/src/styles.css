@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+body { background: #f8fafc; color: #172033; }
+a { color: #2563eb; }
