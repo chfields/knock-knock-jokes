@@ -14,6 +14,7 @@ jobs:
     # untrusted code, so only same-repository branches are reviewed.
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       # Only used to mark the wardby/code-review status pending (or errored);
       # the wardby agent sets the final status with its own token.
@@ -37,11 +38,15 @@ jobs:
         run: |
           set -euo pipefail
           TASK="Review pull request #$PR_NUMBER (head $HEAD_SHA)."
-          RESPONSE="$(curl -sf -X POST "https://app.wardby.com/webhooks/${{ vars.WARDBY_REVIEW_WEBHOOK_ID }}" \
+          RESPONSE="$(curl -sSf --max-time 30 -X POST "https://app.wardby.com/webhooks/${{ vars.WARDBY_REVIEW_WEBHOOK_ID }}" \
             -H "x-webhook-secret: ${{ secrets.WARDBY_REVIEW_WEBHOOK_SECRET }}" \
             -H "Content-Type: application/json" \
             -d "$(jq -n --arg t "$TASK" '{task:$t}')")"
           RUN_ID="$(printf '%s' "$RESPONSE" | jq -r '.runId // empty')"
+          if [ -z "$RUN_ID" ]; then
+            echo "::error::wardby accepted the request but returned no run id"
+            exit 1
+          fi
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
           echo "Started wardby run $RUN_ID"
 
