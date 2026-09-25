@@ -67,7 +67,7 @@ function JokePage({ random = false }: { random?: boolean }) {
     return () => { cancelled = true; };
   }, [id, random, request]);
   if (error) return <ErrorMessage message={error} />; if (!joke) return <p>Loading…</p>;
-  return <><Teller joke={joke} />{random && <Button className="mt-4" variant="tertiary" onPress={() => setRequest(value => value + 1)}>Another random joke</Button>}</>;
+  return <><Teller key={joke.id} joke={joke} />{random && <Button className="mt-4" variant="tertiary" onPress={() => setRequest(value => value + 1)}>Another random joke</Button>}</>;
 }
 
 function Catalogue() {

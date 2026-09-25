@@ -86,6 +86,31 @@ describe("random joke", () => {
 
     expect(await screen.findByText("Random jokes are unavailable.")).toBeInTheDocument();
   });
+
+  it("resets the reveal and rating state for another random joke", async () => {
+    const nextJoke = { ...joke, id: "new-joke", name: "New joke", lines: ["New knock", "New who's there?", "New says", "New says who?", "New punchline"] };
+    vi.stubGlobal("fetch", vi.fn()
+      .mockResolvedValueOnce(jokeResponse(joke))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ message: "Thanks for rating this joke!" }), { status: 201 }))
+      .mockResolvedValueOnce(jokeResponse(nextJoke)));
+    renderApp("/");
+    await screen.findByText(joke.lines[0]);
+
+    fireEvent.click(screen.getByRole("button", { name: joke.lines[1] }));
+    fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
+    fireEvent.click(screen.getByRole("radio", { name: "5" }));
+    fireEvent.click(screen.getByRole("button", { name: "Submit rating" }));
+    expect(await screen.findByText("Thanks for rating this joke!")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Another random joke" }));
+    await screen.findByText(nextJoke.lines[0]);
+
+    expect(screen.getByRole("button", { name: nextJoke.lines[1] })).toBeInTheDocument();
+    expect(screen.queryByText(nextJoke.lines[4])).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Submit rating" })).not.toBeInTheDocument();
+    expect(screen.queryByText("Thanks for rating this joke!")).not.toBeInTheDocument();
+    expect(screen.queryByRole("radio", { name: "5", checked: true })).not.toBeInTheDocument();
+  });
 });
 
 describe("rating form", () => {
