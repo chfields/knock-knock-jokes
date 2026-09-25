@@ -8,9 +8,9 @@
   {% else %}
     <ol class="interactive-joke">
       <li>{{ lines[0] }}</li>
-      <li><button id="reveal-setup" type="button">{{ lines[1] }}</button></li>
+      <li aria-live="polite"><button id="reveal-setup" type="button">{{ lines[1] }}</button></li>
       <li data-hidden data-reveal-step="setup" aria-live="polite">{{ lines[2] }}</li>
-      <li data-hidden data-reveal-step="prompt"><button id="reveal-punchline" type="button">{{ lines[3] }}</button></li>
+      <li data-hidden data-reveal-step="prompt" aria-live="polite"><button id="reveal-punchline" type="button">{{ lines[3] }}</button></li>
       <li data-hidden data-reveal-step="punchline" aria-live="polite">{{ lines[4] }}</li>
     </ol>
   {% endif %}
@@ -20,7 +20,7 @@
     <input id="rating" name="rating" type="number" min="1" max="5" required>
     <button type="submit">Submit rating</button>
   </form>
-  {% if random_page %}<p{% if not reveal_full %} data-hidden{% endif %}><a href="{{ url_for('random_joke') }}">Another random joke</a></p>{% endif %}
+  {% if random_page %}<p{% if not reveal_full %} data-hidden data-reveal-step="random-joke"{% endif %}><a href="{{ url_for('random_joke') }}">Another random joke</a></p>{% endif %}
   {% if not reveal_full %}
     <script>
       const setupButton = document.getElementById("reveal-setup");
@@ -29,27 +29,27 @@
       const prompt = document.querySelector('[data-reveal-step="prompt"]');
       const punchline = document.querySelector('[data-reveal-step="punchline"]');
       const ratingForm = document.querySelector("form");
+      const randomJokeLink = document.querySelector('[data-reveal-step="random-joke"]');
 
       function reveal(element) {
         element.removeAttribute("data-hidden");
         element.removeAttribute("aria-hidden");
       }
 
-      [setup, prompt, punchline, ratingForm].forEach((element) => {
+      [setup, prompt, punchline, ratingForm, randomJokeLink].filter(Boolean).forEach((element) => {
         if (element.hasAttribute("data-hidden")) element.setAttribute("aria-hidden", "true");
       });
       setupButton.addEventListener("click", () => {
-        setupButton.setAttribute("aria-hidden", "true");
-        setupButton.hidden = true;
+        setupButton.replaceWith(document.createTextNode(setupButton.textContent));
         reveal(setup);
         reveal(prompt);
         punchlineButton.focus();
       });
       punchlineButton.addEventListener("click", () => {
-        punchlineButton.setAttribute("aria-hidden", "true");
-        punchlineButton.hidden = true;
+        punchlineButton.replaceWith(document.createTextNode(punchlineButton.textContent));
         reveal(punchline);
         reveal(ratingForm);
+        reveal(randomJokeLink);
         document.getElementById("rating").focus();
       });
     </script>

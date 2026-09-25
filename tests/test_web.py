@@ -70,7 +70,21 @@ def test_detail_page_uses_sequence_lines_for_reveal_buttons_and_rating_form(clie
     assert body.index(lines[2]) < body.index(lines[3]) < body.index(lines[4])
     assert '<button id="reveal-setup" type="button">' + lines[1] + "</button>" in body
     assert '<button id="reveal-punchline" type="button">' + lines[3] + "</button>" in body
+    assert "setupButton.replaceWith(document.createTextNode(setupButton.textContent))" in body
+    assert "punchlineButton.replaceWith(document.createTextNode(punchlineButton.textContent))" in body
     assert '<form method="post"' in body or '<form data-hidden method="post"' in body
+
+
+def test_random_page_reveals_link_with_rating_form(client, monkeypatch):
+    monkeypatch.setattr("knockknock.web.random.choice", lambda jokes: jokes[0])
+
+    response = client.get("/")
+    body = unescape(response.get_data(as_text=True))
+
+    assert response.status_code == 200
+    assert '<p data-hidden data-reveal-step="random-joke">' in body
+    assert "const randomJokeLink = document.querySelector('[data-reveal-step=\"random-joke\"]');" in body
+    assert "reveal(randomJokeLink);" in body
 
 
 def test_unknown_joke_returns_404(client):
