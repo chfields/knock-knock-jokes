@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Knock-knock jokes</title>
+  </head>
+  <body>
+    <header>
+      <a href="{{ url_for('random_joke') }}">Random joke</a>
+      <a href="{{ url_for('catalogue') }}">Catalogue</a>
+    </header>
+    {% with messages = get_flashed_messages() %}
+      {% for message in messages %}<p role="status">{{ message }}</p>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </body>
+</html>
