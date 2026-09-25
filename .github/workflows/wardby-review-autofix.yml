@@ -1,0 +1,136 @@
+name: wardby review autofix
+
+# When the wardby reviewer requests changes on a pull request that a wardby run
+# opened, send the review back to the delivery agent so the builder fixes it on
+# the same branch. The fix is a new push, which gets a fresh review. Capped at
+# two automatic rounds per pull request (tracked with labels); after that a
+# person has to step in.
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+concurrency:
+  group: wardby-review-autofix-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+env:
+  MAX_ROUNDS: "2"
+
+jobs:
+  autofix:
+    # Only the reviewer's CHANGES REQUESTED reviews (posted with the owner's
+    # token, marked with <!-- wardby-review:<sha> -->), only on same-repository
+    # branches that a wardby run opened.
+    if: |
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      startsWith(github.event.pull_request.head.ref, 'wardby/run-') &&
+      github.event.pull_request.state == 'open' &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.review.author_association) &&
+      startsWith(github.event.review.body, '<!-- wardby-review:') &&
+      contains(github.event.review.body, 'wardby review: CHANGES REQUESTED')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      # Labels count the rounds; comments report the run or the cap.
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Check the review is for the current head and count rounds
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          REVIEW_BODY: ${{ github.event.review.body }}
+        run: |
+          set -euo pipefail
+          REVIEWED_SHA="$(printf '%s' "$REVIEW_BODY" | head -n1 | sed -n 's/^<!-- wardby-review:\([0-9a-f]\{40\}\) -->.*/\1/p')"
+          if [ "$REVIEWED_SHA" != "$HEAD_SHA" ]; then
+            echo "Review is for $REVIEWED_SHA but the head is $HEAD_SHA; a newer push has its own review."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          LABELS="$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --json labels -q '.labels[].name')"
+          DONE="$(printf '%s\n' "$LABELS" | grep -c '^wardby-autofix-[0-9]\+$' || true)"
+          ROUND=$((DONE + 1))
+          echo "round=$ROUND" >> "$GITHUB_OUTPUT"
+          if [ "$ROUND" -gt "$MAX_ROUNDS" ]; then
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "capped=true" >> "$GITHUB_OUTPUT"
+            if printf '%s\n' "$LABELS" | grep -qx 'wardby-autofix-limit'; then
+              echo "already_reported=true" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Report the cap
+        if: steps.gate.outputs.capped == 'true' && steps.gate.outputs.already_reported != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          gh label create wardby-autofix-limit --repo "${{ github.repository }}" --color B60205 \
+            --description "wardby stopped fixing review findings automatically" 2>/dev/null || true
+          gh pr edit "$PR_NUMBER" --repo "${{ github.repository }}" --add-label wardby-autofix-limit
+          gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body \
+            "🛑 The wardby review still requests changes after $MAX_ROUNDS automatic fix rounds, so wardby has stopped fixing this pull request by itself. Review the findings, then fix them by hand or comment \`@knock-knock-delivery <what to change>\` to ask for another round."
+
+      - name: Resolve the wardby run that opened this pull request
+        id: prior
+        if: steps.gate.outputs.proceed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          BODY="$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --json body -q .body)"
+          RUN_ID="$(printf '%s' "$BODY" | grep -oP '<!-- (?:wardby|reevo-run):\K[A-Za-z0-9_-]+(?= -->)' | head -n1 || true)"
+          if [ -z "$RUN_ID" ]; then
+            echo "::warning::no wardby run marker in the PR body; not starting an automatic fix"
+          fi
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Send the review to the delivery agent
+        id: send
+        if: steps.gate.outputs.proceed == 'true' && steps.prior.outputs.run_id != ''
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          ROUND: ${{ steps.gate.outputs.round }}
+          PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
+          REVIEW_BODY: ${{ github.event.review.body }}
+        run: |
+          set -euo pipefail
+          # Drop the marker line; cap the length so a huge review can't blow the task size.
+          FINDINGS="$(printf '%s' "$REVIEW_BODY" | tail -n +2 | head -c 20000)"
+          HINT="[This request is a follow-up on PR #$PR_NUMBER, originally opened by wardby run $PRIOR_RUN_ID. If you delegate, pass continuePriorRun set to exactly \"$PRIOR_RUN_ID\" so the same PR/branch is continued instead of opening a new one.]"
+          REQUEST="Request comment:"$'\n'"Automatic fix round $ROUND of $MAX_ROUNDS for PR #$PR_NUMBER: the wardby code review of ${HEAD_SHA:0:7} requested changes. Fix every CRITICAL and MAJOR finding and every MUST_FIX recommendation in the review below, with tests where the review asks for them. Do not change anything the review does not ask for. Leave MINOR findings and SUGGESTED/FUTURE recommendations alone."$'\n\n'"Review:"$'\n'"$FINDINGS"
+          FULL_TASK="${HINT}"$'\n\n'"${REQUEST}"
+          RESPONSE="$(curl -sSf --max-time 30 -X POST "https://app.wardby.com/webhooks/${{ vars.WARDBY_WEBHOOK_ID }}" \
+            -H "x-webhook-secret: ${{ secrets.WARDBY_WEBHOOK_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -d "$(jq -n --arg t "$FULL_TASK" '{task:$t}')")"
+          RUN_ID="$(printf '%s' "$RESPONSE" | jq -r '.runId // empty')"
+          if [ -z "$RUN_ID" ]; then
+            echo "::error::wardby accepted the request but returned no run id"
+            exit 1
+          fi
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Record the round
+        if: steps.send.outputs.run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          ROUND: ${{ steps.gate.outputs.round }}
+          RUN_ID: ${{ steps.send.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          gh label create "wardby-autofix-$ROUND" --repo "${{ github.repository }}" --color FBCA04 \
+            --description "wardby automatic review-fix round $ROUND" 2>/dev/null || true
+          gh pr edit "$PR_NUMBER" --repo "${{ github.repository }}" --add-label "wardby-autofix-$ROUND"
+          gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body \
+            "🔁 The wardby review requested changes. Automatic fix round $ROUND of $MAX_ROUNDS started (wardby run \`$RUN_ID\`); the fix will be pushed to this branch and reviewed again."
