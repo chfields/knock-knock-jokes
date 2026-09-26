@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { Link, Route, Routes, useNavigate, useParams } from "react-router";
 import { Alert, AlertTitle, Button, Card, CardContent, CardHeader, ListBox, ListBoxItem, Radio, RadioGroup } from "@heroui/react";
+import { announce } from "@react-aria/live-announcer";
 import { FullJoke, getJoke, getJokes, Joke, rateJoke } from "./api";
 
 function Layout({ children }: { children: ReactNode }) {
@@ -37,7 +38,11 @@ function RatingForm({ jokeId }: { jokeId: string }) {
 function Teller({ joke }: { joke: FullJoke }) {
   const [step, setStep] = useState(0);
   const nextRef = useRef<HTMLButtonElement>(null);
-  const reveal = () => { setStep(value => value + 1); window.setTimeout(() => nextRef.current?.focus(), 0); };
+  const reveal = () => {
+    if (step === 1) announce(joke.lines[4], "polite");
+    setStep(value => value + 1);
+    window.setTimeout(() => nextRef.current?.focus(), 0);
+  };
   const lines = joke.lines;
   return <Card>
     <CardHeader><h1 className="text-xl font-semibold">{joke.name}</h1></CardHeader>
