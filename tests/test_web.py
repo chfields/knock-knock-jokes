@@ -159,16 +159,25 @@ def test_count_text(count, expected):
     assert _count_text(count) == expected
 
 
-def test_api_detail_and_random_contain_tell_lines(client, monkeypatch):
+def test_api_detail_contains_tell_lines(client):
     joke = JOKES[1]
     detail = client.get(f"/api/jokes/{joke.id}")
     assert detail.status_code == 200
     assert detail.get_json() == {"id": joke.id, "name": joke.name, "lines": tell(joke)}
 
-    monkeypatch.setattr("knockknock.web.random.choice", lambda jokes: joke)
+
+def test_api_random_joke_returns_selected_joke_data(client, monkeypatch):
+    selector = 1
+    joke = JOKES[selector]
+    monkeypatch.setattr("knockknock.web.random.choice", lambda selectors: selector)
+
     random_response = client.get("/api/jokes/random")
     assert random_response.status_code == 200
-    assert random_response.get_json() == detail.get_json()
+    assert random_response.get_json() == {
+        "name": joke.name,
+        "punchline": joke.punchline,
+        "selector": selector,
+    }
 
 
 def test_api_unknown_joke_returns_404(client):
