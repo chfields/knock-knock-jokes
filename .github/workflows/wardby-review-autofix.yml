@@ -1,17 +1,17 @@
 name: wardby review autofix
 
-# When the wardby reviewer requests changes on a pull request that a wardby run
+# When the wardby review check fails on a pull request that a wardby run
 # opened, send the review back to the delivery agent so the builder fixes it on
 # the same branch. The fix is a new push, which gets a fresh review. Capped at
 # two automatic rounds per pull request (tracked with labels); after that a
 # person has to step in.
 
 on:
-  pull_request_review:
-    types: [submitted]
+  check_run:
+    types: [completed]
 
 concurrency:
-  group: wardby-review-autofix-${{ github.event.pull_request.number }}
+  group: wardby-review-autofix-${{ github.event.check_run.head_sha }}
   cancel-in-progress: false
 
 env:
@@ -19,16 +19,13 @@ env:
 
 jobs:
   autofix:
-    # Only the reviewer's CHANGES REQUESTED reviews (posted with the owner's
-    # token, marked with <!-- wardby-review:<sha> -->), only on same-repository
-    # branches that a wardby run opened.
+    # Only the wardby GitHub App's "wardby review" check, only when it failed
+    # (CHANGES_REQUESTED), only for a pull request in this repository.
     if: |
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      startsWith(github.event.pull_request.head.ref, 'wardby/run-') &&
-      github.event.pull_request.state == 'open' &&
-      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.review.author_association) &&
-      startsWith(github.event.review.body, '<!-- wardby-review:') &&
-      contains(github.event.review.body, 'wardby review: CHANGES REQUESTED')
+      github.event.check_run.app.slug == 'wardby' &&
+      github.event.check_run.name == 'wardby review' &&
+      github.event.check_run.conclusion == 'failure' &&
+      github.event.check_run.pull_requests[0] != null
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -40,12 +37,18 @@ jobs:
         id: gate
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          REVIEW_BODY: ${{ github.event.review.body }}
+          PR_NUMBER: ${{ github.event.check_run.pull_requests[0].number }}
+          REVIEWED_SHA: ${{ github.event.check_run.head_sha }}
         run: |
           set -euo pipefail
-          REVIEWED_SHA="$(printf '%s' "$REVIEW_BODY" | head -n1 | sed -n 's/^<!-- wardby-review:\([0-9a-f]\{40\}\) -->.*/\1/p')"
+          PR="$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --json headRefName,headRefOid,state,isCrossRepository)"
+          if [ "$(jq -r .state <<<"$PR")" != "OPEN" ] || [ "$(jq -r .isCrossRepository <<<"$PR")" = "true" ] \
+            || [[ "$(jq -r .headRefName <<<"$PR")" != wardby/run-* ]]; then
+            echo "Not an open wardby-run pull request in this repository; nothing to do."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          HEAD_SHA="$(jq -r .headRefOid <<<"$PR")"
           if [ "$REVIEWED_SHA" != "$HEAD_SHA" ]; then
             echo "Review is for $REVIEWED_SHA but the head is $HEAD_SHA; a newer push has its own review."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
@@ -69,7 +72,7 @@ jobs:
         if: steps.gate.outputs.capped == 'true' && steps.gate.outputs.already_reported != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_NUMBER: ${{ github.event.check_run.pull_requests[0].number }}
         run: |
           set -euo pipefail
           gh label create wardby-autofix-limit --repo "${{ github.repository }}" --color B60205 \
@@ -83,7 +86,7 @@ jobs:
         if: steps.gate.outputs.proceed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_NUMBER: ${{ github.event.check_run.pull_requests[0].number }}
         run: |
           set -euo pipefail
           BODY="$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --json body -q .body)"
@@ -97,15 +100,16 @@ jobs:
         id: send
         if: steps.gate.outputs.proceed == 'true' && steps.prior.outputs.run_id != ''
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.check_run.pull_requests[0].number }}
+          HEAD_SHA: ${{ github.event.check_run.head_sha }}
           ROUND: ${{ steps.gate.outputs.round }}
           PRIOR_RUN_ID: ${{ steps.prior.outputs.run_id }}
-          REVIEW_BODY: ${{ github.event.review.body }}
+          REVIEW_TEXT: ${{ github.event.check_run.output.text }}
         run: |
           set -euo pipefail
-          # Drop the marker line; cap the length so a huge review can't blow the task size.
-          FINDINGS="$(printf '%s' "$REVIEW_BODY" | tail -n +2 | head -c 20000)"
+          # The check's text is the full review summary; drop its hidden marker
+          # line and cap the length so a huge review can't blow the task size.
+          FINDINGS="$(printf '%s' "$REVIEW_TEXT" | grep -v '^<!-- wardby:review:' | head -c 20000)"
           HINT="[This request is a follow-up on PR #$PR_NUMBER, originally opened by wardby run $PRIOR_RUN_ID. If you delegate, pass continuePriorRun set to exactly \"$PRIOR_RUN_ID\" so the same PR/branch is continued instead of opening a new one.]"
           REQUEST="Request comment:"$'\n'"Automatic fix round $ROUND of $MAX_ROUNDS for PR #$PR_NUMBER: the wardby code review of ${HEAD_SHA:0:7} requested changes. Fix every CRITICAL and MAJOR finding and every MUST_FIX recommendation in the review below, with tests where the review asks for them. Do not change anything the review does not ask for. Leave MINOR findings and SUGGESTED/FUTURE recommendations alone."$'\n\n'"Review:"$'\n'"$FINDINGS"
           FULL_TASK="${HINT}"$'\n\n'"${REQUEST}"
@@ -124,7 +128,7 @@ jobs:
         if: steps.send.outputs.run_id != ''
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_NUMBER: ${{ github.event.check_run.pull_requests[0].number }}
           ROUND: ${{ steps.gate.outputs.round }}
           RUN_ID: ${{ steps.send.outputs.run_id }}
         run: |
