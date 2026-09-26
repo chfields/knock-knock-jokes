@@ -21,13 +21,15 @@ jobs:
   autofix:
     # Only the wardby GitHub App's "wardby review" check, only when it failed
     # (CHANGES_REQUESTED), only for a pull request in this repository.
-    # pull_requests[0] is the PR the check ran for: wardby starts one review per
-    # PR head, and the gate below re-checks that PR's branch and current head.
+    # Exactly one associated pull request: if a head commit is ever shared by
+    # two open PRs, skip rather than guess which one the review was for. The
+    # gate below also re-checks that PR's branch and current head.
     if: |
       github.event.check_run.app.slug == 'wardby' &&
       github.event.check_run.name == 'wardby review' &&
       github.event.check_run.conclusion == 'failure' &&
-      github.event.check_run.pull_requests[0] != null
+      github.event.check_run.pull_requests[0] != null &&
+      github.event.check_run.pull_requests[1] == null
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
