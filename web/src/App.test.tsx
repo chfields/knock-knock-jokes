@@ -31,6 +31,26 @@ beforeEach(() => {
 });
 afterEach(cleanup);
 
+describe("theme selector", () => {
+  it("applies the selected light or dark theme", async () => {
+    renderApp();
+
+    const light = screen.getByRole("button", { name: "Light mode" });
+    const dark = screen.getByRole("button", { name: "Dark mode" });
+    expect(screen.getByRole("button", { name: "System mode" })).toHaveAttribute("aria-pressed", "true");
+
+    fireEvent.click(dark);
+    expect(dark).toHaveAttribute("aria-pressed", "true");
+    expect(document.documentElement.dataset.theme).toBe("dark");
+    expect(document.documentElement.classList).toContain("dark");
+
+    fireEvent.click(light);
+    expect(light).toHaveAttribute("aria-pressed", "true");
+    expect(document.documentElement.dataset.theme).toBe("light");
+    expect(document.documentElement.classList).not.toContain("dark");
+  });
+});
+
 describe("joke reveal", () => {
   it("reveals each line in order and shows rating last", async () => {
     renderApp();
