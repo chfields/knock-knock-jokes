@@ -4,6 +4,7 @@ import random
 from pathlib import Path
 from typing import Mapping, Optional
 
+import humanize
 from flask import (
     Flask,
     abort,
@@ -53,7 +54,8 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
 
     @app.get("/api/jokes/count")
     def api_joke_count():
-        return jsonify({"count": len(JOKES)})
+        count = len(JOKES)
+        return jsonify({"count": count, "text": humanize.apnumber(count)})
 
     @app.get("/api/jokes/random")
     def api_random_joke():

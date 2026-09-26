@@ -148,7 +148,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": len(JOKES)}
+    assert response.get_json() == {"count": len(JOKES), "text": "five"}
 
 
 def test_api_detail_and_random_contain_tell_lines(client, monkeypatch):

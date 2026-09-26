@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [{name = "Knock Knock Jokes contributors"}]
-dependencies = []
+dependencies = ["humanize>=4.0,<5"]
 
 [project.optional-dependencies]
 test = [
