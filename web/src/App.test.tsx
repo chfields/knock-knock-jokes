@@ -1,6 +1,11 @@
 import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { MemoryRouter } from "react-router";
+
+const { announce } = vi.hoisted(() => ({ announce: vi.fn() }));
+
+vi.mock("@react-aria/live-announcer", () => ({ announce }));
+
 import App from "./App";
 
 const joke = { id: "cow-says", name: "Cow says", lines: ["Knock, knock.", "Who's there?", "Cow says.", "Cow says who?", "No, a cow says moo!"] };
@@ -18,12 +23,58 @@ function jokeResponse(loadedJoke: typeof joke) { return new Response(JSON.string
 
 beforeEach(() => {
   vi.restoreAllMocks();
+  announce.mockClear();
   vi.stubGlobal("fetch", vi.fn((url: string, init?: RequestInit) => {
     if (init?.method === "POST") return Promise.resolve(new Response(JSON.stringify({ message: "Thanks for rating this joke!" }), { status: 201 }));
     return Promise.resolve(new Response(JSON.stringify(url.includes("/api/jokes/") ? joke : [joke])));
   }));
 });
 afterEach(cleanup);
+
+describe("theme selector", () => {
+  it("applies the selected light or dark theme", async () => {
+    renderApp();
+
+    const light = screen.getByRole("button", { name: "Light mode" });
+    const dark = screen.getByRole("button", { name: "Dark mode" });
+    expect(screen.getByRole("button", { name: "System mode" })).toHaveAttribute("aria-pressed", "true");
+
+    fireEvent.click(dark);
+    expect(dark).toHaveAttribute("aria-pressed", "true");
+    expect(document.documentElement.dataset.theme).toBe("dark");
+
+    fireEvent.click(light);
+    expect(light).toHaveAttribute("aria-pressed", "true");
+    expect(document.documentElement.dataset.theme).toBe("light");
+  });
+
+  it("uses and updates the system theme preference", () => {
+    let matches = true;
+    let changeListener: (() => void) | undefined;
+    const addEventListener = vi.fn((_event: string, listener: EventListenerOrEventListenerObject) => {
+      if (typeof listener === "function") changeListener = listener as () => void;
+    });
+    const removeEventListener = vi.fn();
+    const query = {
+      get matches() { return matches; },
+      addEventListener,
+      removeEventListener,
+    } as unknown as MediaQueryList;
+    vi.stubGlobal("matchMedia", vi.fn(() => query));
+
+    const { unmount } = renderApp();
+
+    expect(document.documentElement.dataset.theme).toBe("dark");
+    expect(addEventListener).toHaveBeenCalledWith("change", expect.any(Function));
+
+    matches = false;
+    act(() => changeListener?.());
+    expect(document.documentElement.dataset.theme).toBe("light");
+
+    unmount();
+    expect(removeEventListener).toHaveBeenCalledWith("change", expect.any(Function));
+  });
+});
 
 describe("joke reveal", () => {
   it("reveals each line in order and shows rating last", async () => {
@@ -36,6 +87,16 @@ describe("joke reveal", () => {
     fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
     expect(screen.getByText(joke.lines[4])).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Submit rating" })).toBeInTheDocument();
+  });
+
+  it("announces the punchline when it is revealed", async () => {
+    renderApp();
+    await screen.findByText(joke.lines[0]);
+
+    fireEvent.click(screen.getByRole("button", { name: joke.lines[1] }));
+    fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
+
+    expect(announce).toHaveBeenCalledWith(joke.lines[4], "polite");
   });
 });
 

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 @import "@heroui/styles";
 
-body { background: #f8fafc; color: #172033; }
+html { background: #f8fafc; color: #172033; }
+body { background: inherit; color: inherit; }
 a { color: #2563eb; }
+
+html[data-theme="dark"] { background: #172033; color: #f8fafc; }
+html[data-theme="dark"] a { color: #93c5fd; }
