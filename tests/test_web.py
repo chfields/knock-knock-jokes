@@ -73,6 +73,9 @@ def test_detail_page_uses_sequence_lines_for_reveal_buttons_and_rating_form(clie
     assert "setupButton.replaceWith(document.createTextNode(setupButton.textContent))" in body
     assert "punchlineButton.replaceWith(document.createTextNode(punchlineButton.textContent))" in body
     assert '<form method="post"' in body or '<form data-hidden method="post"' in body
+    assert 'aria-label="1 star" name="rating" type="submit" value="1">★</button>' in body
+    assert 'aria-label="5 stars" name="rating" type="submit" value="5">★</button>' in body
+    assert "Submit rating" not in body
 
 
 def test_random_page_reveals_link_with_rating_form(client, monkeypatch):

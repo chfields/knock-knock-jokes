@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { FormEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Link, Route, Routes, useNavigate, useParams } from "react-router";
 import { Alert, AlertTitle, Button, Card, CardContent, CardHeader, ListBox, ListBoxItem, Radio, RadioGroup } from "@heroui/react";
 import { announce } from "@react-aria/live-announcer";
@@ -58,19 +58,17 @@ function RatingForm({ jokeId }: { jokeId: string }) {
   const [rating, setRating] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const submit = async (event: FormEvent) => {
-    event.preventDefault(); setError(""); setMessage("");
-    if (!rating) { setError("Please choose a rating from 1 to 5."); return; }
-    try { setMessage((await rateJoke(jokeId, Number(rating))).message); }
+  const submit = async (value: string) => {
+    setRating(value); setError(""); setMessage("");
+    try { setMessage((await rateJoke(jokeId, Number(value))).message); }
     catch (reason) { setError(reason instanceof Error ? reason.message : "Your rating could not be saved."); }
   };
-  return <form className="mt-6 space-y-4" onSubmit={submit} aria-label="Rate this joke">
-    <RadioGroup aria-label="How funny was it?" value={rating} onChange={setRating}>
-      {[1, 2, 3, 4, 5].map(value => <Radio.Root key={value} value={String(value)}><Radio.Content>{value}</Radio.Content></Radio.Root>)}
+  return <section className="mt-6 space-y-4" aria-label="Rate this joke">
+    <RadioGroup aria-label="How funny was it?" value={rating} onChange={value => void submit(value)}>
+      {[1, 2, 3, 4, 5].map(value => <Radio.Root aria-label={`${value} star${value === 1 ? "" : "s"}`} className={rating === String(value) ? "text-amber-400" : "text-slate-400"} key={value} value={String(value)}><Radio.Content aria-hidden="true">★</Radio.Content></Radio.Root>)}
     </RadioGroup>
-    <Button variant="primary" type="submit">Submit rating</Button>
     {message && <Alert status="success"><AlertTitle>{message}</AlertTitle></Alert>}{error && <ErrorMessage message={error} />}
-  </form>;
+  </section>;
 }
 
 function Teller({ joke }: { joke: FullJoke }) {

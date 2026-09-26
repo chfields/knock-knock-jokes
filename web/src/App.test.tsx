@@ -88,7 +88,8 @@ describe("joke reveal", () => {
     expect(screen.getByRole("button", { name: joke.lines[3] })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
     expect(screen.getByText(joke.lines[4])).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Submit rating" })).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: "5 stars" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Submit rating" })).not.toBeInTheDocument();
   });
 
   it("announces the punchline when it is revealed", async () => {
@@ -113,8 +114,7 @@ describe("random joke", () => {
     fireEvent.click(screen.getByRole("button", { name: randomJoke.lines[1] }));
     fireEvent.click(screen.getByRole("button", { name: randomJoke.lines[3] }));
     expect(screen.getByText(randomJoke.lines[4])).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("radio", { name: "5" }));
-    fireEvent.click(screen.getByRole("button", { name: "Submit rating" }));
+    fireEvent.click(screen.getByRole("radio", { name: "5 stars" }));
 
     await waitFor(() => expect(fetch).toHaveBeenCalledWith(
       "/api/jokes/lettuce/ratings",
@@ -172,8 +172,7 @@ describe("random joke", () => {
 
     fireEvent.click(screen.getByRole("button", { name: joke.lines[1] }));
     fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
-    fireEvent.click(screen.getByRole("radio", { name: "5" }));
-    fireEvent.click(screen.getByRole("button", { name: "Submit rating" }));
+    fireEvent.click(screen.getByRole("radio", { name: "5 stars" }));
     expect(await screen.findByText("Thanks for rating this joke!")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Another random joke" }));
@@ -183,18 +182,17 @@ describe("random joke", () => {
     expect(screen.queryByText(nextJoke.lines[4])).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Submit rating" })).not.toBeInTheDocument();
     expect(screen.queryByText("Thanks for rating this joke!")).not.toBeInTheDocument();
-    expect(screen.queryByRole("radio", { name: "5", checked: true })).not.toBeInTheDocument();
+    expect(screen.queryByRole("radio", { name: "5 stars", checked: true })).not.toBeInTheDocument();
   });
 });
 
 describe("rating form", () => {
-  it("shows success after submitting", async () => {
+  it("submits immediately when a star is selected", async () => {
     renderApp();
     await screen.findByText(joke.lines[0]);
     fireEvent.click(screen.getByRole("button", { name: joke.lines[1] }));
     fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
-    fireEvent.click(screen.getByRole("radio", { name: "5" }));
-    fireEvent.click(screen.getByRole("button", { name: "Submit rating" }));
+    fireEvent.click(screen.getByRole("radio", { name: "5 stars" }));
     expect(await screen.findByText("Thanks for rating this joke!")).toBeInTheDocument();
   });
 
@@ -207,8 +205,7 @@ describe("rating form", () => {
     await screen.findByText(joke.lines[0]);
     fireEvent.click(screen.getByRole("button", { name: joke.lines[1] }));
     fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
-    fireEvent.click(screen.getByRole("radio", { name: "1" }));
-    fireEvent.click(screen.getByRole("button", { name: "Submit rating" }));
+    fireEvent.click(screen.getByRole("radio", { name: "1 star" }));
     await waitFor(() => expect(screen.getByText("No storage")).toBeInTheDocument());
   });
 });
