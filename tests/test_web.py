@@ -173,11 +173,7 @@ def test_api_random_joke_returns_selected_joke_data(client, monkeypatch):
 
     random_response = client.get("/api/jokes/random")
     assert random_response.status_code == 200
-    assert random_response.get_json() == {
-        "name": joke.name,
-        "punchline": joke.punchline,
-        "selector": selector,
-    }
+    assert random_response.get_json() == {"id": joke.id, "name": joke.name, "lines": tell(joke)}
 
 
 def test_api_unknown_joke_returns_404(client):

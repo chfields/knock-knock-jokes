@@ -9,6 +9,7 @@ vi.mock("@react-aria/live-announcer", () => ({ announce }));
 import App from "./App";
 
 const joke = { id: "cow-says", name: "Cow says", lines: ["Knock, knock.", "Who's there?", "Cow says.", "Cow says who?", "No, a cow says moo!"] };
+const randomJoke = { id: "lettuce", name: "Lettuce", lines: ["Knock, knock.", "Who's there?", "Lettuce.", "Lettuce who?", "Lettuce in, it's cold out here!"] };
 
 function renderApp(path = "/jokes/cow-says") { return render(<MemoryRouter initialEntries={[path]}><App /></MemoryRouter>); }
 
@@ -26,7 +27,8 @@ beforeEach(() => {
   announce.mockClear();
   vi.stubGlobal("fetch", vi.fn((url: string, init?: RequestInit) => {
     if (init?.method === "POST") return Promise.resolve(new Response(JSON.stringify({ message: "Thanks for rating this joke!" }), { status: 201 }));
-    return Promise.resolve(new Response(JSON.stringify(url.includes("/api/jokes/") ? joke : [joke])));
+    if (url === "/api/jokes/random") return Promise.resolve(new Response(JSON.stringify(randomJoke)));
+    return Promise.resolve(new Response(JSON.stringify(url.startsWith("/api/jokes/") ? joke : [joke])));
   }));
 });
 afterEach(cleanup);
@@ -101,12 +103,23 @@ describe("joke reveal", () => {
 });
 
 describe("random joke", () => {
-  it("transitions from loading to the fetched joke", async () => {
+  it("renders the backend response and rates the returned joke", async () => {
     renderApp("/");
 
     expect(screen.getByText("Loading…")).toBeInTheDocument();
-    expect(await screen.findByText(joke.lines[0])).toBeInTheDocument();
+    expect(await screen.findByText(randomJoke.lines[0])).toBeInTheDocument();
     expect(fetch).toHaveBeenCalledWith("/api/jokes/random");
+
+    fireEvent.click(screen.getByRole("button", { name: randomJoke.lines[1] }));
+    fireEvent.click(screen.getByRole("button", { name: randomJoke.lines[3] }));
+    expect(screen.getByText(randomJoke.lines[4])).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("radio", { name: "5" }));
+    fireEvent.click(screen.getByRole("button", { name: "Submit rating" }));
+
+    await waitFor(() => expect(fetch).toHaveBeenCalledWith(
+      "/api/jokes/lettuce/ratings",
+      expect.objectContaining({ method: "POST" }),
+    ));
   });
 
   it("keeps the most recently requested joke when random responses resolve out of order", async () => {
