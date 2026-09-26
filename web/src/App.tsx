@@ -20,7 +20,6 @@ function ThemeSelector() {
     const query = window.matchMedia?.("(prefers-color-scheme: dark)");
     const applyTheme = () => {
       const dark = mode === "dark" || (mode === "system" && Boolean(query?.matches));
-      document.documentElement.classList.toggle("dark", dark);
       document.documentElement.dataset.theme = dark ? "dark" : "light";
       document.documentElement.style.colorScheme = dark ? "dark" : "light";
     };

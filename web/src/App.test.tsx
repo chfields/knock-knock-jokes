@@ -42,12 +42,37 @@ describe("theme selector", () => {
     fireEvent.click(dark);
     expect(dark).toHaveAttribute("aria-pressed", "true");
     expect(document.documentElement.dataset.theme).toBe("dark");
-    expect(document.documentElement.classList).toContain("dark");
 
     fireEvent.click(light);
     expect(light).toHaveAttribute("aria-pressed", "true");
     expect(document.documentElement.dataset.theme).toBe("light");
-    expect(document.documentElement.classList).not.toContain("dark");
+  });
+
+  it("uses and updates the system theme preference", () => {
+    let matches = true;
+    let changeListener: (() => void) | undefined;
+    const addEventListener = vi.fn((_event: string, listener: EventListenerOrEventListenerObject) => {
+      if (typeof listener === "function") changeListener = listener as () => void;
+    });
+    const removeEventListener = vi.fn();
+    const query = {
+      get matches() { return matches; },
+      addEventListener,
+      removeEventListener,
+    } as unknown as MediaQueryList;
+    vi.stubGlobal("matchMedia", vi.fn(() => query));
+
+    const { unmount } = renderApp();
+
+    expect(document.documentElement.dataset.theme).toBe("dark");
+    expect(addEventListener).toHaveBeenCalledWith("change", expect.any(Function));
+
+    matches = false;
+    act(() => changeListener?.());
+    expect(document.documentElement.dataset.theme).toBe("light");
+
+    unmount();
+    expect(removeEventListener).toHaveBeenCalledWith("change", expect.any(Function));
   });
 });
 
