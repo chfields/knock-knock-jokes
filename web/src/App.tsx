@@ -50,7 +50,7 @@ function Teller({ joke }: { joke: FullJoke }) {
       <p>{lines[0]}</p>
       {step === 0 ? <Button ref={nextRef} onPress={reveal}>{lines[1]}</Button> : <p aria-live="polite">{lines[1]}</p>}
       {step >= 1 && (step === 1 ? <Button ref={nextRef} onPress={reveal}>{lines[3]}</Button> : <p aria-live="polite">{lines[3]}</p>)}
-      {step >= 2 && <><p aria-live="polite">{lines[4]}</p><RatingForm jokeId={joke.id} /></>}
+      {step >= 2 && <><p>{lines[4]}</p><RatingForm jokeId={joke.id} /></>}
     </CardContent>
   </Card>;
 }
