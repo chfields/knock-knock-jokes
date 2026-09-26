@@ -39,7 +39,11 @@ def test_cli_search_is_case_insensitive():
     result = run_cli("--search", "MOO")
 
     assert result.returncode == 0
-    assert result.stdout.splitlines()[-2:] == ["0: Cow says", "15: Interrupting cow"]
+    assert result.stdout.splitlines()[-3:] == [
+        "0: Cow says",
+        "15: Interrupting cow",
+        "31: Cows",
+    ]
 
 
 def test_cli_search_reports_no_match():
