@@ -153,7 +153,7 @@ def test_api_joke_count_matches_catalogue(client):
 
 @pytest.mark.parametrize(
     ("count", "expected"),
-    [(1, "one"), (5, "five"), (9, "nine"), (10, "10"), (33, "33")],
+    [(-1, "-1"), (0, "zero"), (1, "one"), (5, "five"), (9, "nine"), (10, "10"), (33, "33")],
 )
 def test_count_text(count, expected):
     assert _count_text(count) == expected

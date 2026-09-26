@@ -4,7 +4,6 @@ import random
 from pathlib import Path
 from typing import Mapping, Optional
 
-import humanize
 from flask import (
     Flask,
     abort,
@@ -31,7 +30,21 @@ def _joke_by_id(joke_id: str) -> Joke:
 
 
 def _count_text(count: int) -> str:
-    return humanize.apnumber(count)
+    number_words = (
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+    )
+    if 0 <= count <= 9:
+        return number_words[count]
+    return str(count)
 
 
 def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
