@@ -29,7 +29,7 @@ def test_get_joke_includes_duck_joke():
 
 
 def test_get_joke_includes_cow_joke():
-    assert get_joke("cows") == Joke("Cows", "Bless you!", "cows")
+    assert get_joke("cows") == Joke("Cows", "Cows go moo, that's why I knocked!", "cows")
 
 
 @pytest.mark.parametrize("selector", [-1, len(JOKES), "not-a-joke"])
