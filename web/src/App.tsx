@@ -5,11 +5,49 @@ import { Alert, AlertTitle, Button, Card, CardContent, CardHeader, ListBox, List
 import { announce } from "@react-aria/live-announcer";
 import { FullJoke, getJoke, getJokes, Joke, rateJoke } from "./api";
 
+type ThemeMode = "system" | "light" | "dark";
+
+function ThemeIcon({ mode }: { mode: ThemeMode }) {
+  if (mode === "light") return <svg aria-hidden="true" fill="none" height="20" viewBox="0 0 24 24" width="20"><circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" /><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" strokeLinecap="round" strokeWidth="2" /></svg>;
+  if (mode === "dark") return <svg aria-hidden="true" fill="none" height="20" viewBox="0 0 24 24" width="20"><path d="M20.2 15.6A8.5 8.5 0 0 1 8.4 3.8 8.5 8.5 0 1 0 20.2 15.6Z" stroke="currentColor" strokeLinejoin="round" strokeWidth="2" /></svg>;
+  return <svg aria-hidden="true" fill="none" height="20" viewBox="0 0 24 24" width="20"><rect height="14" rx="1" stroke="currentColor" strokeWidth="2" width="18" x="3" y="3" /><path d="M8 21h8m-4-4v4" stroke="currentColor" strokeLinecap="round" strokeWidth="2" /></svg>;
+}
+
+function ThemeSelector() {
+  const [mode, setMode] = useState<ThemeMode>("system");
+
+  useEffect(() => {
+    const query = window.matchMedia?.("(prefers-color-scheme: dark)");
+    const applyTheme = () => {
+      const dark = mode === "dark" || (mode === "system" && Boolean(query?.matches));
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+      document.documentElement.style.colorScheme = dark ? "dark" : "light";
+    };
+    applyTheme();
+    if (mode === "system") {
+      query?.addEventListener("change", applyTheme);
+      return () => query?.removeEventListener("change", applyTheme);
+    }
+  }, [mode]);
+
+  return <div aria-label="Theme mode" className="flex gap-1" role="group">
+    {(["system", "light", "dark"] as const).map(option => <Button
+      aria-label={`${option[0].toUpperCase()}${option.slice(1)} mode`}
+      aria-pressed={mode === option}
+      isIconOnly
+      key={option}
+      onPress={() => setMode(option)}
+      title={`${option[0].toUpperCase()}${option.slice(1)} mode`}
+      variant={mode === option ? "secondary" : "ghost"}
+    ><ThemeIcon mode={option} /></Button>)}
+  </div>;
+}
+
 function Layout({ children }: { children: ReactNode }) {
   return <main className="mx-auto min-h-screen max-w-3xl px-4 py-8">
     <header className="mb-8 flex items-center justify-between">
       <Link className="text-2xl font-bold" to="/">Knock-knock jokes</Link>
-      <nav className="flex gap-4"><Link to="/">Random joke</Link><Link to="/jokes">Catalogue</Link></nav>
+      <div className="flex items-center gap-4"><nav className="flex gap-4"><Link to="/">Random joke</Link><Link to="/jokes">Catalogue</Link></nav><ThemeSelector /></div>
     </header>{children}
   </main>;
 }
