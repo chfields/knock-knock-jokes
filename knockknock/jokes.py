@@ -57,6 +57,7 @@ JOKES: tuple[Joke, ...] = (
     Joke("Orange", "Orange you glad I didn't say banana?", "orange"),
     Joke("Duck", "Duck you want to hear another joke?", "duck"),
     Joke("Cows", "Cows go moo, that's why I knocked!", "cows"),
+    Joke("Quack", "Quack the door open, it's cold out here!", "quack"),
 )
 
 

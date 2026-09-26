@@ -3,8 +3,8 @@ import pytest
 from knockknock.jokes import JOKES, Joke, get_joke
 
 
-def test_joke_bank_has_32_unique_well_formed_jokes():
-    assert len(JOKES) == 32
+def test_joke_bank_has_33_unique_well_formed_jokes():
+    assert len(JOKES) == 33
     assert all(isinstance(joke, Joke) for joke in JOKES)
     assert all(joke.name.strip() and joke.punchline.strip() for joke in JOKES)
     assert len({joke.name.casefold() for joke in JOKES}) == len(JOKES)
@@ -30,6 +30,12 @@ def test_get_joke_includes_duck_joke():
 
 def test_get_joke_includes_cow_joke():
     assert get_joke("cows") == Joke("Cows", "Cows go moo, that's why I knocked!", "cows")
+
+
+def test_get_joke_includes_quack_joke():
+    assert get_joke("quack") == Joke(
+        "Quack", "Quack the door open, it's cold out here!", "quack"
+    )
 
 
 @pytest.mark.parametrize("selector", [-1, len(JOKES), "not-a-joke"])
