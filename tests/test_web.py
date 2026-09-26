@@ -5,7 +5,7 @@ import pytest
 from knockknock.jokes import JOKES
 from knockknock.ratings import Rating
 from knockknock.sequence import tell
-from knockknock.web import create_app
+from knockknock.web import _count_text, create_app
 
 
 class MemoryRatingStore:
@@ -148,7 +148,15 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 33, "text": "33"}
+    assert response.get_json() == {"count": 33, "count_label": "33"}
+
+
+@pytest.mark.parametrize(
+    ("count", "expected"),
+    [(1, "one"), (5, "five"), (9, "nine"), (10, "10"), (33, "33")],
+)
+def test_count_text(count, expected):
+    assert _count_text(count) == expected
 
 
 def test_api_detail_and_random_contain_tell_lines(client, monkeypatch):

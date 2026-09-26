@@ -30,6 +30,10 @@ def _joke_by_id(joke_id: str) -> Joke:
     abort(404)
 
 
+def _count_text(count: int) -> str:
+    return humanize.apnumber(count)
+
+
 def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     """Create a web application with an optional injected rating store."""
     app = Flask(__name__)
@@ -55,7 +59,7 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     @app.get("/api/jokes/count")
     def api_joke_count():
         count = len(JOKES)
-        return jsonify({"count": count, "text": humanize.apnumber(count)})
+        return jsonify({"count": count, "count_label": _count_text(count)})
 
     @app.get("/api/jokes/random")
     def api_random_joke():
