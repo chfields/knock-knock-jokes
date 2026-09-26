@@ -143,6 +143,14 @@ def test_api_catalogue_is_ordered_and_contains_ids_and_names(client):
     assert response.get_json() == [{"id": joke.id, "name": joke.name} for joke in JOKES]
 
 
+def test_api_joke_count_matches_catalogue(client):
+    response = client.get("/api/jokes/count")
+
+    assert response.status_code == 200
+    assert response.headers["Content-Type"] == "application/json"
+    assert response.get_json() == {"count": len(JOKES)}
+
+
 def test_api_detail_and_random_contain_tell_lines(client, monkeypatch):
     joke = JOKES[1]
     detail = client.get(f"/api/jokes/{joke.id}")
