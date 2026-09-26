@@ -78,3 +78,9 @@ def get_joke(selector: Union[int, str]) -> Joke:
         if joke.name.casefold() == normalized:
             return joke
     raise KeyError(f"Unknown joke: {selector}")
+
+
+def jokes_page(page: int, per_page: int = 5) -> list[Joke]:
+    """Return one page of jokes; pages are numbered from 1."""
+    start = page * per_page
+    return list(JOKES[start : start + per_page])
