@@ -76,7 +76,8 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
 
     @app.get("/api/jokes/random")
     def api_random_joke():
-        joke = random.choice(JOKES)
+        selector = random.choice(range(len(JOKES)))
+        joke = JOKES[selector]
         return jsonify({**joke_json(joke), "lines": tell(joke)})
 
     @app.get("/api/jokes/<joke_id>")
