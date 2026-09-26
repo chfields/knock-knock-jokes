@@ -21,6 +21,8 @@ jobs:
   autofix:
     # Only the wardby GitHub App's "wardby review" check, only when it failed
     # (CHANGES_REQUESTED), only for a pull request in this repository.
+    # pull_requests[0] is the PR the check ran for: wardby starts one review per
+    # PR head, and the gate below re-checks that PR's branch and current head.
     if: |
       github.event.check_run.app.slug == 'wardby' &&
       github.event.check_run.name == 'wardby review' &&
@@ -107,8 +109,9 @@ jobs:
           REVIEW_TEXT: ${{ github.event.check_run.output.text }}
         run: |
           set -euo pipefail
-          # The check's text is the full review summary; drop its hidden marker
-          # line and cap the length so a huge review can't blow the task size.
+          # The check's text is the full review summary, which starts with the
+          # App's hidden marker line <!-- wardby:review:<agent> sha=<sha> -->;
+          # drop it and cap the length so a huge review can't blow the task size.
           FINDINGS="$(printf '%s' "$REVIEW_TEXT" | grep -v '^<!-- wardby:review:' | head -c 20000)"
           HINT="[This request is a follow-up on PR #$PR_NUMBER, originally opened by wardby run $PRIOR_RUN_ID. If you delegate, pass continuePriorRun set to exactly \"$PRIOR_RUN_ID\" so the same PR/branch is continued instead of opening a new one.]"
           REQUEST="Request comment:"$'\n'"Automatic fix round $ROUND of $MAX_ROUNDS for PR #$PR_NUMBER: the wardby code review of ${HEAD_SHA:0:7} requested changes. Fix every CRITICAL and MAJOR finding and every MUST_FIX recommendation in the review below, with tests where the review asks for them. Do not change anything the review does not ask for. Leave MINOR findings and SUGGESTED/FUTURE recommendations alone."$'\n\n'"Review:"$'\n'"$FINDINGS"
