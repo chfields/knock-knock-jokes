@@ -83,7 +83,7 @@ jobs:
             --description "wardby stopped fixing review findings automatically" 2>/dev/null || true
           gh pr edit "$PR_NUMBER" --repo "${{ github.repository }}" --add-label wardby-autofix-limit
           gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body \
-            "🛑 The wardby review still requests changes after $MAX_ROUNDS automatic fix rounds, so wardby has stopped fixing this pull request by itself. Review the findings, then fix them by hand or comment \`@knock-knock-delivery <what to change>\` to ask for another round."
+            "🛑 The wardby review still requests changes after $MAX_ROUNDS automatic fix rounds, so wardby has stopped fixing this pull request by itself. Review the findings, then fix them by hand or comment \`@wardby <what to change>\` to ask for another round."
 
       - name: Resolve the wardby run that opened this pull request
         id: prior
