@@ -63,8 +63,8 @@ function RatingForm({ jokeId }: { jokeId: string }) {
     catch (reason) { setError(reason instanceof Error ? reason.message : "Your rating could not be saved."); }
   };
   return <section className="mt-6 space-y-4" aria-label="Rate this joke">
-    <RadioGroup aria-label="How funny was it?" value={rating} onChange={value => void submit(value)}>
-      {[1, 2, 3, 4, 5].map(value => <Radio.Root aria-label={`${value} star${value === 1 ? "" : "s"}`} className={rating === String(value) ? "text-amber-400" : "text-slate-400"} key={value} value={String(value)}><Radio.Content aria-hidden="true">★</Radio.Content></Radio.Root>)}
+    <RadioGroup aria-label="How funny was it?" className="flex flex-row gap-1" value={rating} onChange={value => void submit(value)}>
+      {[1, 2, 3, 4, 5].map(value => <Radio.Root aria-label={`${value} star${value === 1 ? "" : "s"}`} className={Number(rating) >= value ? "text-amber-400" : "text-slate-400"} key={value} value={String(value)}><Radio.Content aria-hidden="true" data-testid={`rating-star-${value}`}>{Number(rating) >= value ? "★" : "☆"}</Radio.Content></Radio.Root>)}
     </RadioGroup>
     {message && <Alert status="success"><AlertTitle>{message}</AlertTitle></Alert>}{error && <ErrorMessage message={error} />}
   </section>;
