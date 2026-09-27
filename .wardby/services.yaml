@@ -1,3 +1,4 @@
 # Services wardby starts next to coding runs for this repository.
 services:
   postgres: "16"
+  redis: "7"
