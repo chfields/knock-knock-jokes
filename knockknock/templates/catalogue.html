@@ -2,8 +2,10 @@
 {% block content %}
   <h1>Joke catalogue</h1>
   <ul>
-    {% for joke in jokes %}
-      <li><a href="{{ url_for('joke_detail', joke_id=joke.id) }}">{{ joke.name }}</a></li>
+    {% for joke, rating in jokes %}
+      <li><a href="{{ url_for('joke_detail', joke_id=joke.id) }}">{{ joke.name }}</a>
+        {% if rating.count %} — {{ "%.1f"|format(rating.average) }} stars ({{ rating.count }} vote{{ "s" if rating.count != 1 else "" }}){% else %} — No ratings yet{% endif %}
+      </li>
     {% endfor %}
   </ul>
 {% endblock %}

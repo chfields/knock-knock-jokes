@@ -15,12 +15,16 @@
     </ol>
   {% endif %}
   {% if rating_error %}<p role="alert">{{ rating_error }}</p>{% endif %}
+  {% if voter_rating %}
+    <p>You rated this joke {{ voter_rating }} stars.</p>
+  {% else %}
   <form{% if not reveal_full %} data-hidden{% endif %} method="post" action="{{ url_for('rate_joke', joke_id=joke.id) }}">
     <fieldset>
       <legend>Rate this joke</legend>
       {% for value in range(1, 6) %}<button aria-label="{{ value }} {{ 'star' if value == 1 else 'stars' }}" name="rating" type="submit" value="{{ value }}">★</button>{% endfor %}
     </fieldset>
   </form>
+  {% endif %}
   {% if random_page %}<p{% if not reveal_full %} data-hidden data-reveal-step="random-joke"{% endif %}><a href="{{ url_for('random_joke') }}">Another random joke</a></p>{% endif %}
   {% if not reveal_full %}
     <script>
@@ -51,7 +55,7 @@
         reveal(punchline);
         reveal(ratingForm);
         reveal(randomJokeLink);
-        ratingForm.querySelector("button").focus();
+        ratingForm?.querySelector("button")?.focus();
       });
     </script>
   {% endif %}

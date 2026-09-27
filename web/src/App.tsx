@@ -58,17 +58,19 @@ function Layout({ children }: { children: ReactNode }) {
 
 function ErrorMessage({ message }: { message: string }) { return <Alert status="danger"><AlertTitle>{message}</AlertTitle></Alert>; }
 
-function RatingForm({ jokeId }: { jokeId: string }) {
-  const [rating, setRating] = useState("");
+function RatingForm({ jokeId, initialRating }: { jokeId: string; initialRating?: number | null }) {
+  const [rating, setRating] = useState(initialRating ? String(initialRating) : "");
+  const [rated, setRated] = useState(Boolean(initialRating));
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const submit = async (value: string) => {
     setRating(value); setError(""); setMessage("");
-    try { setMessage((await rateJoke(jokeId, Number(value))).message); }
+    try { const result = await rateJoke(jokeId, Number(value)); setRating(String(result.rating ?? value)); setRated(true); setMessage(result.message); }
     catch (reason) { setError(reason instanceof Error ? reason.message : "Your rating could not be saved."); }
   };
   return <section className="mt-6 space-y-4" aria-label="Rate this joke">
-    <RadioGroup aria-label="How funny was it?" className="flex flex-row gap-1" value={rating} onChange={value => void submit(value)}>
+    {rated && <p>You rated this joke {rating} stars.</p>}
+    <RadioGroup aria-label="How funny was it?" className="flex flex-row gap-1" isDisabled={rated} value={rating} onChange={value => void submit(value)}>
       {[1, 2, 3, 4, 5].map(value => <Radio.Root aria-label={`${value} star${value === 1 ? "" : "s"}`} className={Number(rating) >= value ? "text-amber-400" : "text-slate-400"} key={value} value={String(value)}><Radio.Content aria-hidden="true" data-testid={`rating-star-${value}`}>{Number(rating) >= value ? "★" : "☆"}</Radio.Content></Radio.Root>)}
     </RadioGroup>
     {message && <Alert status="success"><AlertTitle>{message}</AlertTitle></Alert>}{error && <ErrorMessage message={error} />}
@@ -90,7 +92,7 @@ function Teller({ joke }: { joke: FullJoke }) {
       <p>{lines[0]}</p>
       {step === 0 ? <Button ref={nextRef} onPress={reveal}>{lines[1]}</Button> : <p aria-live="polite">{lines[1]}</p>}
       {step >= 1 && (step === 1 ? <Button ref={nextRef} onPress={reveal}>{lines[3]}</Button> : <p aria-live="polite">{lines[3]}</p>)}
-      {step >= 2 && <><p>{lines[4]}</p><RatingForm jokeId={joke.id} /></>}
+      {step >= 2 && <><p>{lines[4]}</p><RatingForm initialRating={joke.myRating} jokeId={joke.id} /></>}
     </CardContent>
   </Card>;
 }
@@ -119,7 +121,7 @@ function Catalogue() {
   const [jokes, setJokes] = useState<Joke[]>([]); const [error, setError] = useState("");
   useEffect(() => { getJokes().then(setJokes).catch(reason => setError(reason.message)); }, []);
   if (error) return <ErrorMessage message={error} />;
-  return <Card><CardHeader><h1 className="text-xl font-semibold">Catalogue</h1></CardHeader><CardContent><ListBox aria-label="Jokes">{jokes.map(joke => <ListBoxItem key={joke.id} textValue={joke.name}><Link to={`/jokes/${joke.id}`}>{joke.name}</Link></ListBoxItem>)}</ListBox></CardContent></Card>;
+  return <Card><CardHeader><h1 className="text-xl font-semibold">Catalogue</h1></CardHeader><CardContent><ListBox aria-label="Jokes">{jokes.map(joke => <ListBoxItem key={joke.id} textValue={joke.name}><Link to={`/jokes/${joke.id}`}>{joke.name}</Link><span className="ml-2">{joke.ratingCount ? `${joke.averageRating?.toFixed(1)} ${"★".repeat(Math.round(joke.averageRating ?? 0))} (${joke.ratingCount} vote${joke.ratingCount === 1 ? "" : "s"})` : "No ratings yet"}</span></ListBoxItem>)}</ListBox></CardContent></Card>;
 }
 
 export default function App() { return <Layout><Routes><Route path="/" element={<JokePage random />} /><Route path="/jokes" element={<Catalogue />} /><Route path="/jokes/:id" element={<JokePage />} /></Routes></Layout>; }

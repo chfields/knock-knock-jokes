@@ -64,6 +64,22 @@ def test_store_writes_jsonl(tmp_path):
     assert json.loads(path.read_text()) == {"joke_id": "joke", "timestamp": "now", "value": 4}
 
 
+def test_store_summaries_returns_ratings_for_multiple_jokes(tmp_path):
+    store = JsonlRatingStore(tmp_path / "ratings.jsonl")
+    store.save(Rating("first", 2, "now"))
+    store.save(Rating("first", 4, "later"))
+    store.save(Rating("second", 5, "now"))
+
+    summaries = store.summaries(["first", "second", "unrated"])
+
+    assert summaries["first"].average == 3.0
+    assert summaries["first"].count == 2
+    assert summaries["second"].average == 5.0
+    assert summaries["second"].count == 1
+    assert summaries["unrated"].average is None
+    assert summaries["unrated"].count == 0
+
+
 def test_store_warns_when_file_has_no_write_permission(tmp_path, caplog):
     path = tmp_path / "ratings.jsonl"
     path.write_text("")

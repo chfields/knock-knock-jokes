@@ -1,12 +1,15 @@
-"""Rating validation and append-only local storage."""
+"""Rating validation and storage backends."""
 
 import json
 import logging
+import os
 import stat
+import weakref
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
+from importlib import import_module
 from pathlib import Path
-from typing import Iterable, Optional, Protocol, Union
+from typing import Iterable, Mapping, Optional, Protocol, Union
 
 LOGGER = logging.getLogger(__name__)
 
@@ -46,8 +49,33 @@ def rating_count(ratings: Iterable[Rating], joke_id: str) -> int:
 
 
 class RatingStore(Protocol):
-    def save(self, rating: Rating) -> None:
+    def save(self, rating: Rating, voter_key: Optional[str] = None) -> None:
         """Persist one rating."""
+
+    def summary(self, joke_id: str) -> "RatingSummary":
+        """Return the aggregate rating for a joke."""
+
+    def summaries(self, joke_ids: Iterable[str]) -> Mapping[str, "RatingSummary"]:
+        """Return aggregate ratings for multiple jokes."""
+
+    def rating_for(self, joke_id: str, voter_key: Optional[str]) -> Optional[int]:
+        """Return a voter's rating for a joke, if it exists."""
+
+
+@dataclass(frozen=True)
+class RatingSummary:
+    """The aggregate rating data displayed in the catalogue."""
+
+    average: Optional[float]
+    count: int
+
+
+class DuplicateVoteError(Exception):
+    """Raised when a visitor attempts to rate a joke more than once."""
+
+    def __init__(self, rating: Optional[int] = None) -> None:
+        super().__init__("This visitor has already rated this joke.")
+        self.rating = rating
 
 
 class JsonlRatingStore:
@@ -56,11 +84,163 @@ class JsonlRatingStore:
     def __init__(self, path: Union[Path, str]) -> None:
         self.path = Path(path)
 
-    def save(self, rating: Rating) -> None:
+    def save(self, rating: Rating, voter_key: Optional[str] = None) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         if self.path.exists() and not self.path.stat().st_mode & (
             stat.S_IWUSR | stat.S_IWGRP | stat.S_IWOTH
         ):
             LOGGER.warning("Rating store %s is missing write permission", self.path)
         with self.path.open("a", encoding="utf-8") as stream:
-            stream.write(json.dumps(asdict(rating), sort_keys=True) + "\n")
+            payload = asdict(rating)
+            if voter_key is not None:
+                existing_rating = self.rating_for(rating.joke_id, voter_key)
+                if existing_rating is not None:
+                    raise DuplicateVoteError(existing_rating)
+                payload["voter_key"] = voter_key
+            stream.write(json.dumps(payload, sort_keys=True) + "\n")
+
+    def _ratings(self) -> Iterable[dict[str, object]]:
+        if not self.path.exists():
+            return []
+        with self.path.open(encoding="utf-8") as stream:
+            return [json.loads(line) for line in stream if line.strip()]
+
+    def summary(self, joke_id: str) -> RatingSummary:
+        return self.summaries([joke_id])[joke_id]
+
+    def summaries(self, joke_ids: Iterable[str]) -> Mapping[str, RatingSummary]:
+        """Return aggregate ratings for multiple jokes in one file read."""
+        summaries = {joke_id: RatingSummary(None, 0) for joke_id in joke_ids}
+        values = {joke_id: [] for joke_id in summaries}
+        for entry in self._ratings():
+            joke_id = entry.get("joke_id")
+            if joke_id in values:
+                values[joke_id].append(entry["value"])
+        for joke_id, ratings in values.items():
+            if ratings:
+                summaries[joke_id] = RatingSummary(float(sum(ratings)) / len(ratings), len(ratings))
+        return summaries
+
+    def rating_for(self, joke_id: str, voter_key: Optional[str]) -> Optional[int]:
+        if voter_key is None:
+            return None
+        for entry in self._ratings():
+            if entry.get("joke_id") == joke_id and entry.get("voter_key") == voter_key:
+                return int(entry["value"])
+        return None
+
+
+class PostgresRatingStore:
+    """Persist ratings in PostgreSQL with one vote per joke and visitor."""
+
+    def __init__(self, database_url: Optional[str] = None) -> None:
+        self.database_url = database_url or os.environ.get("DATABASE_URL")
+        if not self.database_url:
+            raise ValueError("DATABASE_URL is required for PostgresRatingStore")
+        try:
+            import_module("psycopg")
+            connection_pool = import_module("psycopg_pool").ConnectionPool
+        except ImportError as error:
+            raise RuntimeError(
+                "PostgreSQL ratings require the postgres extra. "
+                "Install it with: pip install 'knock-knock-jokes[postgres]'"
+            ) from error
+        self._pool = connection_pool(
+            self.database_url,
+            kwargs={"autocommit": True},
+            open=False,
+        )
+        self._pool.open(wait=True)
+        self._pool_finalizer = weakref.finalize(self, self._pool.close)
+        self._create_schema()
+
+    def _connect(self):
+        """Check out a database connection for one operation."""
+        return self._pool.connection()
+
+    def close(self) -> None:
+        """Close the database connection pool."""
+        self._pool_finalizer()
+
+    def __enter__(self) -> "PostgresRatingStore":
+        return self
+
+    def __exit__(self, *args: object) -> None:
+        self.close()
+
+    def _create_schema(self) -> None:
+        with self._connect() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS joke_ratings (
+                        id BIGSERIAL PRIMARY KEY,
+                        joke_id TEXT NOT NULL,
+                        value SMALLINT NOT NULL CHECK (value BETWEEN 1 AND 5),
+                        rated_at TIMESTAMPTZ NOT NULL,
+                        voter_key TEXT,
+                        UNIQUE (joke_id, voter_key)
+                    )
+                    """
+                )
+
+    def save(self, rating: Rating, voter_key: Optional[str] = None) -> None:
+        with self._connect() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    WITH inserted AS (
+                        INSERT INTO joke_ratings (joke_id, value, rated_at, voter_key)
+                        VALUES (%s, %s, %s, %s)
+                        ON CONFLICT (joke_id, voter_key) DO NOTHING
+                        RETURNING value
+                    )
+                    SELECT value, TRUE AS inserted FROM inserted
+                    UNION ALL
+                    SELECT value, FALSE AS inserted FROM joke_ratings
+                    WHERE joke_id = %s AND voter_key = %s
+                      AND NOT EXISTS (SELECT 1 FROM inserted)
+                    """,
+                    (
+                        rating.joke_id,
+                        rating.value,
+                        rating.timestamp,
+                        voter_key,
+                        rating.joke_id,
+                        voter_key,
+                    ),
+                )
+                value, inserted = cursor.fetchone()
+        if not inserted:
+            raise DuplicateVoteError(value)
+
+    def summary(self, joke_id: str) -> RatingSummary:
+        return self.summaries([joke_id])[joke_id]
+
+    def summaries(self, joke_ids: Iterable[str]) -> Mapping[str, RatingSummary]:
+        """Return aggregate ratings for multiple jokes in one query."""
+        summaries = {joke_id: RatingSummary(None, 0) for joke_id in joke_ids}
+        if not summaries:
+            return summaries
+        with self._connect() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "SELECT joke_id, AVG(value), COUNT(*) FROM joke_ratings "
+                    "WHERE joke_id = ANY(%s) GROUP BY joke_id",
+                    (list(summaries),),
+                )
+                for joke_id, average, count in cursor.fetchall():
+                    summaries[joke_id] = RatingSummary(float(average), count)
+        return summaries
+
+    def rating_for(self, joke_id: str, voter_key: Optional[str]) -> Optional[int]:
+        if voter_key is None:
+            return None
+        with self._connect() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "SELECT value FROM joke_ratings WHERE joke_id = %s AND voter_key = %s",
+                    (joke_id, voter_key),
+                )
+                row = cursor.fetchone()
+        return row[0] if row is not None else None
