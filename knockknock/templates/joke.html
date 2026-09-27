@@ -16,9 +16,10 @@
   {% endif %}
   {% if rating_error %}<p role="alert">{{ rating_error }}</p>{% endif %}
   <form{% if not reveal_full %} data-hidden{% endif %} method="post" action="{{ url_for('rate_joke', joke_id=joke.id) }}">
-    <label for="rating">Rate this joke (1–5)</label>
-    <input id="rating" name="rating" type="number" min="1" max="5" required>
-    <button type="submit">Submit rating</button>
+    <fieldset>
+      <legend>Rate this joke</legend>
+      {% for value in range(1, 6) %}<button aria-label="{{ value }} {{ 'star' if value == 1 else 'stars' }}" name="rating" type="submit" value="{{ value }}">★</button>{% endfor %}
+    </fieldset>
   </form>
   {% if random_page %}<p{% if not reveal_full %} data-hidden data-reveal-step="random-joke"{% endif %}><a href="{{ url_for('random_joke') }}">Another random joke</a></p>{% endif %}
   {% if not reveal_full %}
@@ -50,7 +51,7 @@
         reveal(punchline);
         reveal(ratingForm);
         reveal(randomJokeLink);
-        document.getElementById("rating").focus();
+        ratingForm.querySelector("button").focus();
       });
     </script>
   {% endif %}
