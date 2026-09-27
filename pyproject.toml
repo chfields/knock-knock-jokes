@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [{name = "Knock Knock Jokes contributors"}]
-dependencies = ["psycopg[binary]>=3.3,<4"]
+dependencies = ["psycopg[binary]>=3.2,<4"]
 
 [project.optional-dependencies]
 test = [
