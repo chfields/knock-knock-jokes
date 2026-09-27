@@ -196,6 +196,26 @@ describe("random joke", () => {
 });
 
 describe("rating form", () => {
+  it("displays horizontal outlined stars and fills stars through the selected rating", async () => {
+    renderApp();
+    await screen.findByText(joke.lines[0]);
+    fireEvent.click(screen.getByRole("button", { name: joke.lines[1] }));
+    fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
+
+    const ratingGroup = screen.getByRole("radiogroup", { name: "How funny was it?" });
+    expect(ratingGroup).toHaveClass("flex", "flex-row");
+    expect(screen.getByTestId("rating-star-1")).toHaveTextContent("☆");
+    expect(screen.getByTestId("rating-star-5")).toHaveTextContent("☆");
+
+    fireEvent.click(screen.getByRole("radio", { name: "3 stars" }));
+
+    await waitFor(() => expect(screen.getByTestId("rating-star-1")).toHaveTextContent("★"));
+    expect(screen.getByTestId("rating-star-2")).toHaveTextContent("★");
+    expect(screen.getByTestId("rating-star-3")).toHaveTextContent("★");
+    expect(screen.getByTestId("rating-star-4")).toHaveTextContent("☆");
+    expect(screen.getByTestId("rating-star-5")).toHaveTextContent("☆");
+  });
+
   it("submits immediately when a star is selected", async () => {
     renderApp();
     await screen.findByText(joke.lines[0]);
