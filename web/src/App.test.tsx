@@ -50,6 +50,15 @@ describe("theme selector", () => {
     expect(document.documentElement.dataset.theme).toBe("light");
   });
 
+  it("shows the theme label in a tooltip on focus", async () => {
+    renderApp();
+
+    const light = screen.getByRole("button", { name: "Light mode" });
+    light.focus();
+
+    expect(await screen.findByRole("tooltip", { name: "Light mode" })).toBeInTheDocument();
+  });
+
   it("uses and updates the system theme preference", () => {
     let matches = true;
     let changeListener: (() => void) | undefined;

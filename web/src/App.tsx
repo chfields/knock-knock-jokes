@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Link, Route, Routes, useNavigate, useParams } from "react-router";
-import { Alert, AlertTitle, Button, Card, CardContent, CardHeader, ListBox, ListBoxItem, Radio, RadioGroup } from "@heroui/react";
+import { Alert, AlertTitle, Button, Card, CardContent, CardHeader, ListBox, ListBoxItem, Radio, RadioGroup, Tooltip } from "@heroui/react";
 import { announce } from "@react-aria/live-announcer";
 import { FullJoke, getJoke, getJokes, Joke, rateJoke } from "./api";
 
@@ -31,14 +31,19 @@ function ThemeSelector() {
   }, [mode]);
 
   return <div aria-label="Theme mode" className="flex gap-1" role="group">
-    {(["system", "light", "dark"] as const).map(option => <Button
-      aria-label={`${option[0].toUpperCase()}${option.slice(1)} mode`}
-      aria-pressed={mode === option}
-      isIconOnly
-      key={option}
-      onPress={() => setMode(option)}
-      variant={mode === option ? "secondary" : "ghost"}
-    ><ThemeIcon mode={option} /></Button>)}
+    {(["system", "light", "dark"] as const).map(option => {
+      const label = `${option[0].toUpperCase()}${option.slice(1)} mode`;
+      return <Tooltip key={option}>
+        <Button
+          aria-label={label}
+          aria-pressed={mode === option}
+          isIconOnly
+          onPress={() => setMode(option)}
+          variant={mode === option ? "secondary" : "ghost"}
+        ><ThemeIcon mode={option} /></Button>
+        <Tooltip.Content>{label}</Tooltip.Content>
+      </Tooltip>;
+    })}
   </div>;
 }
 
