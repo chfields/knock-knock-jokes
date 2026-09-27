@@ -73,6 +73,10 @@ append-only rating history; it is intended for a trusted local environment,
 and concurrent web workers need an operationally appropriate store before
 production use.
 
+Set `KNOCKKNOCK_SECRET_KEY` to a private, stable value in deployed web
+applications. Flask uses it for sessions and the application uses it to sign
+voter-identity cookies; changing it invalidates existing voter cookies.
+
 Set `DATABASE_URL` to use PostgreSQL for ratings. If the application is behind
 reverse proxies, set `KNOCKKNOCK_TRUSTED_PROXIES` to the number of trusted
 proxy hops so Flask uses `X-Forwarded-For` for the client address. It defaults

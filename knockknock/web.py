@@ -10,7 +10,9 @@ from typing import Mapping, Optional
 from flask import (
     Flask,
     abort,
+    current_app,
     flash,
+    g,
     jsonify,
     redirect,
     render_template,
@@ -19,6 +21,7 @@ from flask import (
     session,
     url_for,
 )
+from itsdangerous import BadData, URLSafeSerializer
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .jokes import JOKES, Joke
@@ -59,13 +62,46 @@ def _count_text(count: int) -> str:
 
 
 VOTER_COOKIE = "knockknock_voter"
+VOTER_COOKIE_SALT = "knockknock-voter"
+
+
+def _voter_serializer() -> URLSafeSerializer:
+    """Return the serializer used for the voter-identity cookie."""
+    return URLSafeSerializer(current_app.secret_key, salt=VOTER_COOKIE_SALT)
+
+
+def _voter_id() -> str:
+    """Return a verified voter identity, creating one when needed."""
+    voter_id = getattr(g, "voter_id", None)
+    if voter_id is not None:
+        return voter_id
+
+    signed_voter_id = request.cookies.get(VOTER_COOKIE)
+    if signed_voter_id:
+        try:
+            voter_id = _voter_serializer().loads(signed_voter_id)
+        except BadData:
+            voter_id = None
+        if isinstance(voter_id, str) and voter_id:
+            g.voter_id = voter_id
+            return voter_id
+
+    voter_id = secrets.token_urlsafe(32)
+    g.voter_id = voter_id
+    g.set_voter_cookie = True
+    return voter_id
 
 
 def _voter_key() -> str:
-    """Return the cookie identity, or a non-reversible client IP hash."""
-    voter_id = request.cookies.get(VOTER_COOKIE)
-    if voter_id:
-        return "cookie:" + voter_id
+    """Return the verified cookie identity, or a non-reversible client IP hash."""
+    signed_voter_id = request.cookies.get(VOTER_COOKIE)
+    if signed_voter_id:
+        try:
+            voter_id = _voter_serializer().loads(signed_voter_id)
+        except BadData:
+            voter_id = None
+        if isinstance(voter_id, str) and voter_id:
+            return "cookie:" + voter_id
     address = request.remote_addr or "unknown"
     return "ip:" + hashlib.sha256(address.encode("utf-8")).hexdigest()
 
@@ -74,7 +110,7 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     """Create a web application with an optional injected rating store."""
     app = Flask(__name__)
     app.config.from_mapping(
-        SECRET_KEY="knockknock-local-web",
+        SECRET_KEY=os.environ.get("KNOCKKNOCK_SECRET_KEY", "knockknock-local-web"),
         RATING_STORE_PATH=Path.home() / ".local" / "share" / "knockknock" / "ratings.jsonl",
         DATABASE_URL=os.environ.get("DATABASE_URL"),
         TRUSTED_PROXY_COUNT=int(os.environ.get("KNOCKKNOCK_TRUSTED_PROXIES", "0")),
@@ -98,10 +134,11 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
 
     @app.after_request
     def set_voter_cookie(response):
-        if not request.cookies.get(VOTER_COOKIE):
+        voter_id = _voter_id()
+        if getattr(g, "set_voter_cookie", False):
             response.set_cookie(
                 VOTER_COOKIE,
-                secrets.token_urlsafe(32),
+                _voter_serializer().dumps(voter_id),
                 max_age=60 * 60 * 24 * 365,
                 httponly=True,
                 samesite="Lax",

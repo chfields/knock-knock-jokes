@@ -2,13 +2,14 @@ import hashlib
 from html import unescape
 
 import pytest
+from itsdangerous import URLSafeSerializer
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from knockknock import ratings
 from knockknock.jokes import JOKES
 from knockknock.ratings import DuplicateVoteError, JsonlRatingStore, Rating, RatingSummary
 from knockknock.sequence import tell
-from knockknock.web import _count_text, create_app
+from knockknock.web import VOTER_COOKIE, VOTER_COOKIE_SALT, _count_text, create_app
 
 
 class MemoryRatingStore:
@@ -361,6 +362,32 @@ def test_api_repeat_rating_is_refused_and_cookie_is_set(client):
     assert "SameSite=Lax" in visit.headers["Set-Cookie"]
     assert second.status_code == 409
     assert second.get_json() == {"message": "You have already rated this joke.", "rating": 5}
+
+
+def test_api_rating_replaces_an_unsigned_voter_cookie(client, store):
+    client.set_cookie(VOTER_COOKIE, "forged-voter")
+
+    response = client.post("/api/jokes/cow-says/ratings", json={"rating": 5})
+
+    replacement = client.get_cookie(VOTER_COOKIE)
+    assert response.status_code == 201
+    assert store.ratings[0][1] != "cookie:forged-voter"
+    assert replacement is not None
+    serializer = URLSafeSerializer(client.application.secret_key, salt=VOTER_COOKIE_SALT)
+    assert serializer.loads(replacement.value) != "forged-voter"
+
+
+def test_api_rating_accepts_a_signed_voter_cookie_across_requests(client, store):
+    voter_id = "known-voter"
+    signed_voter_id = URLSafeSerializer(client.application.secret_key, salt=VOTER_COOKIE_SALT).dumps(voter_id)
+    client.set_cookie(VOTER_COOKIE, signed_voter_id)
+
+    rated = client.post("/api/jokes/cow-says/ratings", json={"rating": 4})
+    detail = client.get("/api/jokes/cow-says")
+
+    assert rated.status_code == 201
+    assert store.ratings[0][1] == "cookie:" + voter_id
+    assert detail.get_json()["myRating"] == 4
 
 
 def test_api_repeat_rating_uses_the_rating_from_the_save_error(client, store, monkeypatch):
