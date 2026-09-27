@@ -1,5 +1,5 @@
-export type Joke = { id: string; name: string };
-export type FullJoke = Joke & { lines: string[] };
+export type Joke = { id: string; name: string; averageRating: number | null; ratingCount: number };
+export type FullJoke = Joke & { lines: string[]; myRating?: number | null };
 
 export async function getJokes(): Promise<Joke[]> {
   const response = await fetch("/api/jokes");
@@ -13,7 +13,7 @@ export async function getJoke(id: string | "random"): Promise<FullJoke> {
   return response.json();
 }
 
-export async function rateJoke(id: string, rating: number): Promise<{ message: string }> {
+export async function rateJoke(id: string, rating: number): Promise<{ message: string; rating?: number }> {
   const response = await fetch(`/api/jokes/${id}/ratings`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

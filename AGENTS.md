@@ -6,7 +6,7 @@ how something is built or tested updates this file in the same pull request.
 
 ## Layout
 
-- `knockknock/` — the Python package (Python 3.9+, no runtime dependencies):
+- `knockknock/` — the Python package (Python 3.9+, with PostgreSQL support via psycopg):
   - `jokes.py` — the joke catalogue (`JOKES`) and lookup (`get_joke`)
   - `ratings.py` — joke ratings and their storage
   - `sequence.py` — the knock-knock exchange

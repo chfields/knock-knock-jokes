@@ -237,4 +237,27 @@ describe("rating form", () => {
     fireEvent.click(screen.getByRole("radio", { name: "1 star" }));
     await waitFor(() => expect(screen.getByText("No storage")).toBeInTheDocument());
   });
+
+  it("shows a previous rating without offering another vote", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify({ ...joke, myRating: 4 }))));
+    renderApp();
+    await screen.findByText(joke.lines[0]);
+    fireEvent.click(screen.getByRole("button", { name: joke.lines[1] }));
+    fireEvent.click(screen.getByRole("button", { name: joke.lines[3] }));
+
+    expect(screen.getByText("You rated this joke 4 stars.")).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: "4 stars" })).toBeDisabled();
+  });
+});
+
+describe("catalogue ratings", () => {
+  it("shows average stars, vote counts, and unrated jokes", async () => {
+    const rated = { ...joke, averageRating: 4.2, ratingCount: 3 };
+    const unrated = { ...randomJoke, averageRating: null, ratingCount: 0 };
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify([rated, unrated]))));
+    renderApp("/jokes");
+
+    expect(await screen.findByText(/4.2 ★★★★ \(3 votes\)/)).toBeInTheDocument();
+    expect(screen.getByText("No ratings yet")).toBeInTheDocument();
+  });
 });

@@ -3,7 +3,7 @@ from html import unescape
 import pytest
 
 from knockknock.jokes import JOKES
-from knockknock.ratings import Rating
+from knockknock.ratings import DuplicateVoteError, Rating, RatingSummary
 from knockknock.sequence import tell
 from knockknock.web import _count_text, create_app
 
@@ -12,8 +12,27 @@ class MemoryRatingStore:
     def __init__(self):
         self.ratings = []
 
-    def save(self, rating):
-        self.ratings.append(rating)
+    def save(self, rating, voter_key=None):
+        if voter_key and any(
+            saved.joke_id == rating.joke_id and identity == voter_key
+            for saved, identity in self.ratings
+        ):
+            raise DuplicateVoteError()
+        self.ratings.append((rating, voter_key))
+
+    def summary(self, joke_id):
+        values = [rating.value for rating, _ in self.ratings if rating.joke_id == joke_id]
+        return RatingSummary(float(sum(values)) / len(values) if values else None, len(values))
+
+    def rating_for(self, joke_id, voter_key):
+        for rating, identity in self.ratings:
+            if rating.joke_id == joke_id and identity == voter_key:
+                return rating.value
+        return None
+
+    @property
+    def saved_ratings(self):
+        return [rating for rating, _ in self.ratings]
 
 
 @pytest.fixture
@@ -106,9 +125,9 @@ def test_rating_is_saved_and_redirects(client, store, value):
     assert response.status_code == 302
     assert response.location.endswith(f"/jokes/{joke.id}")
     assert len(store.ratings) == 1
-    assert store.ratings[0].joke_id == joke.id
-    assert store.ratings[0].value == int(value)
-    assert isinstance(store.ratings[0], Rating)
+    assert store.saved_ratings[0].joke_id == joke.id
+    assert store.saved_ratings[0].value == int(value)
+    assert isinstance(store.saved_ratings[0], Rating)
 
     redirected = client.get(response.location)
     body = unescape(redirected.get_data(as_text=True))
@@ -128,7 +147,7 @@ def test_invalid_rating_is_not_saved(client, store, value):
 
 
 def test_rating_store_oserror_is_controlled(client, monkeypatch):
-    def fail(_rating):
+    def fail(_rating, _voter_key):
         raise OSError("read-only")
 
     monkeypatch.setattr(client.application.extensions["knockknock_rating_store"], "save", fail)
@@ -143,7 +162,9 @@ def test_api_catalogue_is_ordered_and_contains_ids_and_names(client):
     response = client.get("/api/jokes")
 
     assert response.status_code == 200
-    assert response.get_json() == [{"id": joke.id, "name": joke.name} for joke in JOKES]
+    assert response.get_json() == [
+        {"id": joke.id, "name": joke.name, "averageRating": None, "ratingCount": 0} for joke in JOKES
+    ]
 
 
 def test_api_joke_count_matches_catalogue(client):
@@ -166,7 +187,10 @@ def test_api_detail_contains_tell_lines(client):
     joke = JOKES[1]
     detail = client.get(f"/api/jokes/{joke.id}")
     assert detail.status_code == 200
-    assert detail.get_json() == {"id": joke.id, "name": joke.name, "lines": tell(joke)}
+    assert detail.get_json() == {
+        "id": joke.id, "name": joke.name, "lines": tell(joke), "averageRating": None,
+        "ratingCount": 0, "myRating": None,
+    }
 
 
 def test_api_random_joke_returns_selected_joke_data(client, monkeypatch):
@@ -176,7 +200,10 @@ def test_api_random_joke_returns_selected_joke_data(client, monkeypatch):
 
     random_response = client.get("/api/jokes/random")
     assert random_response.status_code == 200
-    assert random_response.get_json() == {"id": joke.id, "name": joke.name, "lines": tell(joke)}
+    assert random_response.get_json() == {
+        "id": joke.id, "name": joke.name, "lines": tell(joke), "averageRating": None,
+        "ratingCount": 0, "myRating": None,
+    }
 
 
 def test_api_unknown_joke_returns_404(client):
@@ -197,15 +224,40 @@ def test_api_rating_is_saved(client, store):
     response = client.post("/api/jokes/cow-says/ratings", json={"rating": 5})
     assert response.status_code == 201
     assert response.get_json()["message"]
-    assert store.ratings[0].joke_id == "cow-says"
-    assert store.ratings[0].value == 5
+    assert store.saved_ratings[0].joke_id == "cow-says"
+    assert store.saved_ratings[0].value == 5
 
 
 def test_api_rating_store_failure_is_controlled(client, monkeypatch):
-    def fail(_rating):
+    def fail(_rating, _voter_key):
         raise OSError("read-only")
 
     monkeypatch.setattr(client.application.extensions["knockknock_rating_store"], "save", fail)
     response = client.post("/api/jokes/cow-says/ratings", json={"rating": 3})
     assert response.status_code == 500
     assert "could not be saved" in response.get_json()["message"]
+
+
+def test_api_repeat_rating_is_refused_and_cookie_is_set(client):
+    visit = client.get("/api/jokes/cow-says")
+    first = client.post("/api/jokes/cow-says/ratings", json={"rating": 5})
+    second = client.post("/api/jokes/cow-says/ratings", json={"rating": 3})
+
+    assert first.status_code == 201
+    assert "HttpOnly" in visit.headers["Set-Cookie"]
+    assert "SameSite=Lax" in visit.headers["Set-Cookie"]
+    assert second.status_code == 409
+    assert second.get_json() == {"message": "You have already rated this joke.", "rating": 5}
+
+
+def test_api_repeat_rating_without_cookie_uses_ip(client):
+    first = client.post(
+        "/api/jokes/cow-says/ratings", json={"rating": 5}, environ_overrides={"REMOTE_ADDR": "10.0.0.1"}
+    )
+    client.delete_cookie("knockknock_voter")
+    second = client.post(
+        "/api/jokes/cow-says/ratings", json={"rating": 3}, environ_overrides={"REMOTE_ADDR": "10.0.0.1"}
+    )
+
+    assert first.status_code == 201
+    assert second.status_code == 409
