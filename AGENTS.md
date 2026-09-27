@@ -6,7 +6,8 @@ how something is built or tested updates this file in the same pull request.
 
 ## Layout
 
-- `knockknock/` — the Python package (Python 3.9+, with PostgreSQL support via psycopg):
+- `knockknock/` — the Python package (Python 3.9+; its core has no required
+  third-party dependencies, with optional PostgreSQL support via psycopg):
   - `jokes.py` — the joke catalogue (`JOKES`) and lookup (`get_joke`)
   - `ratings.py` — joke ratings and their storage
   - `sequence.py` — the knock-knock exchange
@@ -37,6 +38,16 @@ CI also runs bandit and pip-audit (`pip install ".[lint]"`), on Python 3.9
 and 3.12. Code must
 run on 3.9: no `match`, and no `X | Y` type unions at runtime without
 `from __future__ import annotations`.
+
+PostgreSQL-backed ratings need the optional extra:
+
+```bash
+python -m pip install 'knock-knock-jokes[postgres]'
+```
+
+Only the PostgreSQL store strictly guarantees one vote per voter. The JSONL
+fallback checks for duplicates but is not atomic across concurrent writers, so
+concurrent requests may record duplicate votes.
 
 ## Front end
 

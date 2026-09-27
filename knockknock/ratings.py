@@ -7,10 +7,9 @@ import stat
 import weakref
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
+from importlib import import_module
 from pathlib import Path
 from typing import Iterable, Mapping, Optional, Protocol, Union
-
-from psycopg_pool import ConnectionPool
 
 LOGGER = logging.getLogger(__name__)
 
@@ -138,7 +137,15 @@ class PostgresRatingStore:
         self.database_url = database_url or os.environ.get("DATABASE_URL")
         if not self.database_url:
             raise ValueError("DATABASE_URL is required for PostgresRatingStore")
-        self._pool = ConnectionPool(
+        try:
+            import_module("psycopg")
+            connection_pool = import_module("psycopg_pool").ConnectionPool
+        except ImportError as error:
+            raise RuntimeError(
+                "PostgreSQL ratings require the postgres extra. "
+                "Install it with: pip install 'knock-knock-jokes[postgres]'"
+            ) from error
+        self._pool = connection_pool(
             self.database_url,
             kwargs={"autocommit": True},
             open=False,

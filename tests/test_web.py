@@ -4,6 +4,7 @@ from html import unescape
 import pytest
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+from knockknock import ratings
 from knockknock.jokes import JOKES
 from knockknock.ratings import DuplicateVoteError, JsonlRatingStore, Rating, RatingSummary
 from knockknock.sequence import tell
@@ -65,14 +66,30 @@ def test_create_app_selects_postgres_store_when_database_url_is_set(monkeypatch)
     assert created_with == [database_url]
 
 
-def test_create_app_uses_jsonl_store_when_database_url_is_unset(tmp_path):
+def test_create_app_uses_jsonl_store_without_importing_postgres_when_database_url_is_unset(tmp_path, monkeypatch):
     rating_path = tmp_path / "ratings.jsonl"
+    monkeypatch.delenv("DATABASE_URL", raising=False)
 
-    app = create_app({"DATABASE_URL": None, "RATING_STORE_PATH": rating_path})
+    def fail_if_imported(_name):
+        pytest.fail("PostgreSQL dependencies should not be imported without DATABASE_URL")
+
+    monkeypatch.setattr(ratings, "import_module", fail_if_imported)
+
+    app = create_app({"RATING_STORE_PATH": rating_path})
 
     store = app.extensions["knockknock_rating_store"]
     assert isinstance(store, JsonlRatingStore)
     assert store.path == rating_path
+
+
+def test_create_app_explains_how_to_install_missing_postgres_extra(monkeypatch):
+    def missing_postgres(_name):
+        raise ImportError("No module named 'psycopg'")
+
+    monkeypatch.setattr(ratings, "import_module", missing_postgres)
+
+    with pytest.raises(RuntimeError, match=r"knock-knock-jokes\[postgres\]"):
+        create_app({"DATABASE_URL": "postgres://ratings.example/knockknock"})
 
 
 def test_create_app_does_not_trust_forwarded_addresses_by_default(store, monkeypatch):

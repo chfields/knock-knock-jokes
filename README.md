@@ -10,6 +10,8 @@ From this repository, install the package in editable mode:
 python -m pip install -e .
 ```
 
+The core command-line app has no required third-party dependencies.
+
 ## Usage
 
 Tell a random joke:
@@ -75,6 +77,16 @@ Set `DATABASE_URL` to use PostgreSQL for ratings. If the application is behind
 reverse proxies, set `KNOCKKNOCK_TRUSTED_PROXIES` to the number of trusted
 proxy hops so Flask uses `X-Forwarded-For` for the client address. It defaults
 to `0`, which leaves forwarded addresses untrusted.
+
+PostgreSQL-backed ratings also require the `postgres` extra:
+
+```bash
+python -m pip install 'knock-knock-jokes[postgres]'
+```
+
+PostgreSQL strictly guarantees one vote per voter. The JSONL fallback checks
+for duplicate votes, but that check is not atomic across concurrent writers,
+so concurrent requests may record duplicate votes.
 
 Build the React frontend from `web/` with:
 
