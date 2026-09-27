@@ -37,7 +37,6 @@ function ThemeSelector() {
       isIconOnly
       key={option}
       onPress={() => setMode(option)}
-      title={`${option[0].toUpperCase()}${option.slice(1)} mode`}
       variant={mode === option ? "secondary" : "ghost"}
     ><ThemeIcon mode={option} /></Button>)}
   </div>;
