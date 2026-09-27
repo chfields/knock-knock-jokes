@@ -68,6 +68,19 @@ def test_postgres_store_refuses_duplicate_cookie_and_ip_votes(postgres_store):
         store.save(Rating.now(ip_joke, 5), "ip:hashed-address")
 
 
+def test_postgres_duplicate_vote_uses_the_insert_query_result(postgres_store, monkeypatch):
+    store, prefix = postgres_store
+    joke_id = prefix + "-joke"
+    voter_key = "cookie:visitor"
+    store.save(Rating.now(joke_id, 4), voter_key)
+    monkeypatch.setattr(store, "rating_for", lambda *_args: pytest.fail("rating_for should not be called"))
+
+    with pytest.raises(DuplicateVoteError) as error:
+        store.save(Rating.now(joke_id, 5), voter_key)
+
+    assert error.value.rating == 4
+
+
 def test_postgres_store_closes_its_connection_pool(postgres_store):
     store, _ = postgres_store
 

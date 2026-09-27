@@ -19,6 +19,7 @@ from flask import (
     session,
     url_for,
 )
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .jokes import JOKES, Joke
 from .ratings import (
@@ -76,9 +77,14 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
         SECRET_KEY="knockknock-local-web",
         RATING_STORE_PATH=Path.home() / ".local" / "share" / "knockknock" / "ratings.jsonl",
         DATABASE_URL=os.environ.get("DATABASE_URL"),
+        TRUSTED_PROXY_COUNT=int(os.environ.get("KNOCKKNOCK_TRUSTED_PROXIES", "0")),
     )
     if config is not None:
         app.config.from_mapping(config)
+
+    trusted_proxy_count = app.config["TRUSTED_PROXY_COUNT"]
+    if trusted_proxy_count > 0:
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=trusted_proxy_count)
 
     configured_store = app.config.get("RATING_STORE")
     if configured_store is None:

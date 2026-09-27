@@ -1,6 +1,8 @@
+import hashlib
 from html import unescape
 
 import pytest
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from knockknock.jokes import JOKES
 from knockknock.ratings import DuplicateVoteError, JsonlRatingStore, Rating, RatingSummary
@@ -71,6 +73,40 @@ def test_create_app_uses_jsonl_store_when_database_url_is_unset(tmp_path):
     store = app.extensions["knockknock_rating_store"]
     assert isinstance(store, JsonlRatingStore)
     assert store.path == rating_path
+
+
+def test_create_app_does_not_trust_forwarded_addresses_by_default(store, monkeypatch):
+    monkeypatch.delenv("KNOCKKNOCK_TRUSTED_PROXIES", raising=False)
+    app = create_app({"TESTING": True, "RATING_STORE": store})
+    client = app.test_client()
+
+    response = client.post(
+        "/jokes/cow-says/ratings",
+        data={"rating": "5"},
+        environ_overrides={"REMOTE_ADDR": "192.0.2.2"},
+        headers={"X-Forwarded-For": "198.51.100.10, 192.0.2.1"},
+    )
+
+    assert not isinstance(app.wsgi_app, ProxyFix)
+    assert response.status_code == 302
+    assert store.ratings[0][1] == "ip:" + hashlib.sha256(b"192.0.2.2").hexdigest()
+
+
+def test_create_app_uses_trusted_proxy_count_for_forwarded_addresses(store, monkeypatch):
+    monkeypatch.setenv("KNOCKKNOCK_TRUSTED_PROXIES", "2")
+    app = create_app({"TESTING": True, "RATING_STORE": store})
+    client = app.test_client()
+
+    response = client.post(
+        "/jokes/cow-says/ratings",
+        data={"rating": "5"},
+        environ_overrides={"REMOTE_ADDR": "192.0.2.2"},
+        headers={"X-Forwarded-For": "198.51.100.10, 192.0.2.1"},
+    )
+
+    assert isinstance(app.wsgi_app, ProxyFix)
+    assert response.status_code == 302
+    assert store.ratings[0][1] == "ip:" + hashlib.sha256(b"198.51.100.10").hexdigest()
 
 
 def test_random_page_uses_selected_joke_and_domain_sequence(client, monkeypatch):
@@ -184,6 +220,19 @@ def test_rating_store_oserror_is_controlled(client, monkeypatch):
 
     assert response.status_code == 500
     assert "could not be saved" in response.get_data(as_text=True)
+
+
+def test_repeat_html_rating_is_refused(client):
+    visit = client.get("/jokes/cow-says")
+    first = client.post("/jokes/cow-says/ratings", data={"rating": "5"})
+    second = client.post("/jokes/cow-says/ratings", data={"rating": "3"})
+
+    assert first.status_code == 302
+    assert "HttpOnly" in visit.headers["Set-Cookie"]
+    assert second.status_code == 409
+    body = unescape(second.get_data(as_text=True))
+    assert "You have already rated this joke." in body
+    assert "You rated this joke 5 stars." in body
 
 
 def test_api_catalogue_is_ordered_and_contains_ids_and_names(client):

@@ -71,6 +71,11 @@ append-only rating history; it is intended for a trusted local environment,
 and concurrent web workers need an operationally appropriate store before
 production use.
 
+Set `DATABASE_URL` to use PostgreSQL for ratings. If the application is behind
+reverse proxies, set `KNOCKKNOCK_TRUSTED_PROXIES` to the number of trusted
+proxy hops so Flask uses `X-Forwarded-For` for the client address. It defaults
+to `0`, which leaves forwarded addresses untrusted.
+
 Build the React frontend from `web/` with:
 
 ```bash

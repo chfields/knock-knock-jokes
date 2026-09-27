@@ -10,7 +10,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable, Mapping, Optional, Protocol, Union
 
-from psycopg.errors import UniqueViolation
 from psycopg_pool import ConnectionPool
 
 LOGGER = logging.getLogger(__name__)
@@ -179,15 +178,34 @@ class PostgresRatingStore:
                 )
 
     def save(self, rating: Rating, voter_key: Optional[str] = None) -> None:
-        try:
-            with self._connect() as connection:
-                with connection.cursor() as cursor:
-                    cursor.execute(
-                        "INSERT INTO joke_ratings (joke_id, value, rated_at, voter_key) VALUES (%s, %s, %s, %s)",
-                        (rating.joke_id, rating.value, rating.timestamp, voter_key),
+        with self._connect() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    WITH inserted AS (
+                        INSERT INTO joke_ratings (joke_id, value, rated_at, voter_key)
+                        VALUES (%s, %s, %s, %s)
+                        ON CONFLICT (joke_id, voter_key) DO NOTHING
+                        RETURNING value
                     )
-        except UniqueViolation as error:
-            raise DuplicateVoteError(self.rating_for(rating.joke_id, voter_key)) from error
+                    SELECT value, TRUE AS inserted FROM inserted
+                    UNION ALL
+                    SELECT value, FALSE AS inserted FROM joke_ratings
+                    WHERE joke_id = %s AND voter_key = %s
+                      AND NOT EXISTS (SELECT 1 FROM inserted)
+                    """,
+                    (
+                        rating.joke_id,
+                        rating.value,
+                        rating.timestamp,
+                        voter_key,
+                        rating.joke_id,
+                        voter_key,
+                    ),
+                )
+                value, inserted = cursor.fetchone()
+        if not inserted:
+            raise DuplicateVoteError(value)
 
     def summary(self, joke_id: str) -> RatingSummary:
         return self.summaries([joke_id])[joke_id]
