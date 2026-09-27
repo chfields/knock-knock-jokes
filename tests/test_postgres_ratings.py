@@ -16,8 +16,10 @@ def postgres_store():
     store = PostgresRatingStore(database_url)
     prefix = "pytest-" + uuid.uuid4().hex
     yield store, prefix
-    with store._connect() as connection, connection.cursor() as cursor:
-        cursor.execute("DELETE FROM joke_ratings WHERE joke_id LIKE %s", (prefix + "%",))
+    if not store._pool.closed:
+        with store._connect() as connection, connection.cursor() as cursor:
+            cursor.execute("DELETE FROM joke_ratings WHERE joke_id LIKE %s", (prefix + "%",))
+        store.close()
 
 
 def test_postgres_store_saves_averages_and_counts(postgres_store):
@@ -64,3 +66,11 @@ def test_postgres_store_refuses_duplicate_cookie_and_ip_votes(postgres_store):
         store.save(Rating.now(cookie_joke, 5), "cookie:visitor")
     with pytest.raises(DuplicateVoteError):
         store.save(Rating.now(ip_joke, 5), "ip:hashed-address")
+
+
+def test_postgres_store_closes_its_connection_pool(postgres_store):
+    store, _ = postgres_store
+
+    store.close()
+
+    assert store._pool.closed

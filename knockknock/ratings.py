@@ -4,13 +4,14 @@ import json
 import logging
 import os
 import stat
+import weakref
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable, Mapping, Optional, Protocol, Union
 
-import psycopg
 from psycopg.errors import UniqueViolation
+from psycopg_pool import ConnectionPool
 
 LOGGER = logging.getLogger(__name__)
 
@@ -74,6 +75,10 @@ class RatingSummary:
 class DuplicateVoteError(Exception):
     """Raised when a visitor attempts to rate a joke more than once."""
 
+    def __init__(self, rating: Optional[int] = None) -> None:
+        super().__init__("This visitor has already rated this joke.")
+        self.rating = rating
+
 
 class JsonlRatingStore:
     """Persist ratings as one JSON object per line."""
@@ -90,8 +95,9 @@ class JsonlRatingStore:
         with self.path.open("a", encoding="utf-8") as stream:
             payload = asdict(rating)
             if voter_key is not None:
-                if self.rating_for(rating.joke_id, voter_key) is not None:
-                    raise DuplicateVoteError("This visitor has already rated this joke.")
+                existing_rating = self.rating_for(rating.joke_id, voter_key)
+                if existing_rating is not None:
+                    raise DuplicateVoteError(existing_rating)
                 payload["voter_key"] = voter_key
             stream.write(json.dumps(payload, sort_keys=True) + "\n")
 
@@ -133,37 +139,55 @@ class PostgresRatingStore:
         self.database_url = database_url or os.environ.get("DATABASE_URL")
         if not self.database_url:
             raise ValueError("DATABASE_URL is required for PostgresRatingStore")
-        self._connection = psycopg.connect(self.database_url, autocommit=True)
+        self._pool = ConnectionPool(
+            self.database_url,
+            kwargs={"autocommit": True},
+            open=False,
+        )
+        self._pool.open(wait=True)
+        self._pool_finalizer = weakref.finalize(self, self._pool.close)
         self._create_schema()
 
     def _connect(self):
-        """Return the store's shared database connection."""
-        return self._connection
+        """Check out a database connection for one operation."""
+        return self._pool.connection()
+
+    def close(self) -> None:
+        """Close the database connection pool."""
+        self._pool_finalizer()
+
+    def __enter__(self) -> "PostgresRatingStore":
+        return self
+
+    def __exit__(self, *args: object) -> None:
+        self.close()
 
     def _create_schema(self) -> None:
-        with self._connection.cursor() as cursor:
-            cursor.execute(
-                """
-                CREATE TABLE IF NOT EXISTS joke_ratings (
-                    id BIGSERIAL PRIMARY KEY,
-                    joke_id TEXT NOT NULL,
-                    value SMALLINT NOT NULL CHECK (value BETWEEN 1 AND 5),
-                    rated_at TIMESTAMPTZ NOT NULL,
-                    voter_key TEXT,
-                    UNIQUE (joke_id, voter_key)
+        with self._connect() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS joke_ratings (
+                        id BIGSERIAL PRIMARY KEY,
+                        joke_id TEXT NOT NULL,
+                        value SMALLINT NOT NULL CHECK (value BETWEEN 1 AND 5),
+                        rated_at TIMESTAMPTZ NOT NULL,
+                        voter_key TEXT,
+                        UNIQUE (joke_id, voter_key)
+                    )
+                    """
                 )
-                """
-            )
 
     def save(self, rating: Rating, voter_key: Optional[str] = None) -> None:
         try:
-            with self._connection.cursor() as cursor:
-                cursor.execute(
-                    "INSERT INTO joke_ratings (joke_id, value, rated_at, voter_key) VALUES (%s, %s, %s, %s)",
-                    (rating.joke_id, rating.value, rating.timestamp, voter_key),
-                )
+            with self._connect() as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "INSERT INTO joke_ratings (joke_id, value, rated_at, voter_key) VALUES (%s, %s, %s, %s)",
+                        (rating.joke_id, rating.value, rating.timestamp, voter_key),
+                    )
         except UniqueViolation as error:
-            raise DuplicateVoteError("This visitor has already rated this joke.") from error
+            raise DuplicateVoteError(self.rating_for(rating.joke_id, voter_key)) from error
 
     def summary(self, joke_id: str) -> RatingSummary:
         return self.summaries([joke_id])[joke_id]
@@ -173,23 +197,25 @@ class PostgresRatingStore:
         summaries = {joke_id: RatingSummary(None, 0) for joke_id in joke_ids}
         if not summaries:
             return summaries
-        with self._connection.cursor() as cursor:
-            cursor.execute(
-                "SELECT joke_id, AVG(value), COUNT(*) FROM joke_ratings "
-                "WHERE joke_id = ANY(%s) GROUP BY joke_id",
-                (list(summaries),),
-            )
-            for joke_id, average, count in cursor.fetchall():
-                summaries[joke_id] = RatingSummary(float(average), count)
+        with self._connect() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "SELECT joke_id, AVG(value), COUNT(*) FROM joke_ratings "
+                    "WHERE joke_id = ANY(%s) GROUP BY joke_id",
+                    (list(summaries),),
+                )
+                for joke_id, average, count in cursor.fetchall():
+                    summaries[joke_id] = RatingSummary(float(average), count)
         return summaries
 
     def rating_for(self, joke_id: str, voter_key: Optional[str]) -> Optional[int]:
         if voter_key is None:
             return None
-        with self._connection.cursor() as cursor:
-            cursor.execute(
-                "SELECT value FROM joke_ratings WHERE joke_id = %s AND voter_key = %s",
-                (joke_id, voter_key),
-            )
-            row = cursor.fetchone()
+        with self._connect() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "SELECT value FROM joke_ratings WHERE joke_id = %s AND voter_key = %s",
+                    (joke_id, voter_key),
+                )
+                row = cursor.fetchone()
         return row[0] if row is not None else None

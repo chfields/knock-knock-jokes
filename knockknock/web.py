@@ -147,9 +147,8 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
             return jsonify({"message": "Please choose a whole-number rating from 1 to 5."}), 400
         try:
             store().save(rating, _voter_key())
-        except DuplicateVoteError:
-            existing = store().rating_for(joke.id, _voter_key())
-            return jsonify({"message": "You have already rated this joke.", "rating": existing}), 409
+        except DuplicateVoteError as error:
+            return jsonify({"message": "You have already rated this joke.", "rating": error.rating}), 409
         except OSError:
             return jsonify({"message": "Your rating could not be saved. Please try again later."}), 500
         return jsonify({"message": "Thanks for rating this joke!", "rating": rating.value}), 201
@@ -216,13 +215,13 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
             ), 400
         try:
             store().save(rating, _voter_key())
-        except DuplicateVoteError:
+        except DuplicateVoteError as error:
             return render_template(
                 "joke.html",
                 joke=joke,
                 lines=tell(joke),
                 rating_error="You have already rated this joke.",
-                voter_rating=store().rating_for(joke.id, _voter_key()),
+                voter_rating=error.rating,
                 reveal_full=True,
             ), 409
         except OSError:

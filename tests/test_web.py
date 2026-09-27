@@ -3,7 +3,7 @@ from html import unescape
 import pytest
 
 from knockknock.jokes import JOKES
-from knockknock.ratings import DuplicateVoteError, Rating, RatingSummary
+from knockknock.ratings import DuplicateVoteError, JsonlRatingStore, Rating, RatingSummary
 from knockknock.sequence import tell
 from knockknock.web import _count_text, create_app
 
@@ -13,11 +13,10 @@ class MemoryRatingStore:
         self.ratings = []
 
     def save(self, rating, voter_key=None):
-        if voter_key and any(
-            saved.joke_id == rating.joke_id and identity == voter_key
-            for saved, identity in self.ratings
-        ):
-            raise DuplicateVoteError()
+        if voter_key:
+            existing_rating = self.rating_for(rating.joke_id, voter_key)
+            if existing_rating is not None:
+                raise DuplicateVoteError(existing_rating)
         self.ratings.append((rating, voter_key))
 
     def summary(self, joke_id):
@@ -46,6 +45,32 @@ def store():
 @pytest.fixture
 def client(store):
     return create_app({"TESTING": True, "RATING_STORE": store}).test_client()
+
+
+def test_create_app_selects_postgres_store_when_database_url_is_set(monkeypatch):
+    database_url = "postgres://ratings.example/knockknock"
+    created_with = []
+
+    class FakePostgresRatingStore:
+        def __init__(self, url):
+            created_with.append(url)
+
+    monkeypatch.setattr("knockknock.web.PostgresRatingStore", FakePostgresRatingStore)
+
+    app = create_app({"DATABASE_URL": database_url})
+
+    assert isinstance(app.extensions["knockknock_rating_store"], FakePostgresRatingStore)
+    assert created_with == [database_url]
+
+
+def test_create_app_uses_jsonl_store_when_database_url_is_unset(tmp_path):
+    rating_path = tmp_path / "ratings.jsonl"
+
+    app = create_app({"DATABASE_URL": None, "RATING_STORE_PATH": rating_path})
+
+    store = app.extensions["knockknock_rating_store"]
+    assert isinstance(store, JsonlRatingStore)
+    assert store.path == rating_path
 
 
 def test_random_page_uses_selected_joke_and_domain_sequence(client, monkeypatch):
@@ -270,6 +295,19 @@ def test_api_repeat_rating_is_refused_and_cookie_is_set(client):
     assert "SameSite=Lax" in visit.headers["Set-Cookie"]
     assert second.status_code == 409
     assert second.get_json() == {"message": "You have already rated this joke.", "rating": 5}
+
+
+def test_api_repeat_rating_uses_the_rating_from_the_save_error(client, store, monkeypatch):
+    def fail(_rating, _voter_key):
+        raise DuplicateVoteError(4)
+
+    monkeypatch.setattr(store, "save", fail)
+    monkeypatch.setattr(store, "rating_for", lambda *_args: pytest.fail("rating_for should not be called"))
+
+    response = client.post("/api/jokes/cow-says/ratings", json={"rating": 3})
+
+    assert response.status_code == 409
+    assert response.get_json()["rating"] == 4
 
 
 def test_api_repeat_rating_without_cookie_uses_ip(client):
