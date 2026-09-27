@@ -32,6 +32,26 @@ def test_postgres_store_saves_averages_and_counts(postgres_store):
     assert store.rating_for(joke_id, "cookie:first") == 3
 
 
+def test_postgres_store_summaries_returns_ratings_for_multiple_jokes(postgres_store):
+    store, prefix = postgres_store
+    first_joke = prefix + "-first"
+    second_joke = prefix + "-second"
+    unrated_joke = prefix + "-unrated"
+
+    store.save(Rating.now(first_joke, 2), "cookie:first")
+    store.save(Rating.now(first_joke, 4), "cookie:second")
+    store.save(Rating.now(second_joke, 5), "cookie:first")
+
+    summaries = store.summaries([first_joke, second_joke, unrated_joke])
+
+    assert summaries[first_joke].average == 3.0
+    assert summaries[first_joke].count == 2
+    assert summaries[second_joke].average == 5.0
+    assert summaries[second_joke].count == 1
+    assert summaries[unrated_joke].average is None
+    assert summaries[unrated_joke].count == 0
+
+
 def test_postgres_store_refuses_duplicate_cookie_and_ip_votes(postgres_store):
     store, prefix = postgres_store
     cookie_joke = prefix + "-cookie"

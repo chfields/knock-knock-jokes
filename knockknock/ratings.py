@@ -7,7 +7,7 @@ import stat
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Iterable, Optional, Protocol, Union
+from typing import Iterable, Mapping, Optional, Protocol, Union
 
 import psycopg
 from psycopg.errors import UniqueViolation
@@ -56,6 +56,9 @@ class RatingStore(Protocol):
     def summary(self, joke_id: str) -> "RatingSummary":
         """Return the aggregate rating for a joke."""
 
+    def summaries(self, joke_ids: Iterable[str]) -> Mapping[str, "RatingSummary"]:
+        """Return aggregate ratings for multiple jokes."""
+
     def rating_for(self, joke_id: str, voter_key: Optional[str]) -> Optional[int]:
         """Return a voter's rating for a joke, if it exists."""
 
@@ -99,11 +102,20 @@ class JsonlRatingStore:
             return [json.loads(line) for line in stream if line.strip()]
 
     def summary(self, joke_id: str) -> RatingSummary:
-        ratings = self._ratings()
-        values = [entry["value"] for entry in ratings if entry.get("joke_id") == joke_id]
-        if not values:
-            return RatingSummary(None, 0)
-        return RatingSummary(float(sum(values)) / len(values), len(values))
+        return self.summaries([joke_id])[joke_id]
+
+    def summaries(self, joke_ids: Iterable[str]) -> Mapping[str, RatingSummary]:
+        """Return aggregate ratings for multiple jokes in one file read."""
+        summaries = {joke_id: RatingSummary(None, 0) for joke_id in joke_ids}
+        values = {joke_id: [] for joke_id in summaries}
+        for entry in self._ratings():
+            joke_id = entry.get("joke_id")
+            if joke_id in values:
+                values[joke_id].append(entry["value"])
+        for joke_id, ratings in values.items():
+            if ratings:
+                summaries[joke_id] = RatingSummary(float(sum(ratings)) / len(ratings), len(ratings))
+        return summaries
 
     def rating_for(self, joke_id: str, voter_key: Optional[str]) -> Optional[int]:
         if voter_key is None:
@@ -121,13 +133,15 @@ class PostgresRatingStore:
         self.database_url = database_url or os.environ.get("DATABASE_URL")
         if not self.database_url:
             raise ValueError("DATABASE_URL is required for PostgresRatingStore")
+        self._connection = psycopg.connect(self.database_url, autocommit=True)
         self._create_schema()
 
     def _connect(self):
-        return psycopg.connect(self.database_url)
+        """Return the store's shared database connection."""
+        return self._connection
 
     def _create_schema(self) -> None:
-        with self._connect() as connection, connection.cursor() as cursor:
+        with self._connection.cursor() as cursor:
             cursor.execute(
                 """
                 CREATE TABLE IF NOT EXISTS joke_ratings (
@@ -143,7 +157,7 @@ class PostgresRatingStore:
 
     def save(self, rating: Rating, voter_key: Optional[str] = None) -> None:
         try:
-            with self._connect() as connection, connection.cursor() as cursor:
+            with self._connection.cursor() as cursor:
                 cursor.execute(
                     "INSERT INTO joke_ratings (joke_id, value, rated_at, voter_key) VALUES (%s, %s, %s, %s)",
                     (rating.joke_id, rating.value, rating.timestamp, voter_key),
@@ -152,15 +166,27 @@ class PostgresRatingStore:
             raise DuplicateVoteError("This visitor has already rated this joke.") from error
 
     def summary(self, joke_id: str) -> RatingSummary:
-        with self._connect() as connection, connection.cursor() as cursor:
-            cursor.execute("SELECT AVG(value), COUNT(*) FROM joke_ratings WHERE joke_id = %s", (joke_id,))
-            average, count = cursor.fetchone()
-        return RatingSummary(float(average) if average is not None else None, count)
+        return self.summaries([joke_id])[joke_id]
+
+    def summaries(self, joke_ids: Iterable[str]) -> Mapping[str, RatingSummary]:
+        """Return aggregate ratings for multiple jokes in one query."""
+        summaries = {joke_id: RatingSummary(None, 0) for joke_id in joke_ids}
+        if not summaries:
+            return summaries
+        with self._connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT joke_id, AVG(value), COUNT(*) FROM joke_ratings "
+                "WHERE joke_id = ANY(%s) GROUP BY joke_id",
+                (list(summaries),),
+            )
+            for joke_id, average, count in cursor.fetchall():
+                summaries[joke_id] = RatingSummary(float(average), count)
+        return summaries
 
     def rating_for(self, joke_id: str, voter_key: Optional[str]) -> Optional[int]:
         if voter_key is None:
             return None
-        with self._connect() as connection, connection.cursor() as cursor:
+        with self._connection.cursor() as cursor:
             cursor.execute(
                 "SELECT value FROM joke_ratings WHERE joke_id = %s AND voter_key = %s",
                 (joke_id, voter_key),

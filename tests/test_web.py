@@ -24,6 +24,9 @@ class MemoryRatingStore:
         values = [rating.value for rating, _ in self.ratings if rating.joke_id == joke_id]
         return RatingSummary(float(sum(values)) / len(values) if values else None, len(values))
 
+    def summaries(self, joke_ids):
+        return {joke_id: self.summary(joke_id) for joke_id in joke_ids}
+
     def rating_for(self, joke_id, voter_key):
         for rating, identity in self.ratings:
             if rating.joke_id == joke_id and identity == voter_key:
@@ -167,6 +170,24 @@ def test_api_catalogue_is_ordered_and_contains_ids_and_names(client):
     ]
 
 
+@pytest.mark.parametrize("path", ["/api/jokes", "/jokes"])
+def test_catalogues_use_one_batched_summary_call(client, store, monkeypatch, path):
+    calls = []
+    original_summaries = store.summaries
+
+    def record_summaries(joke_ids):
+        joke_ids = list(joke_ids)
+        calls.append(joke_ids)
+        return original_summaries(joke_ids)
+
+    monkeypatch.setattr(store, "summaries", record_summaries)
+
+    response = client.get(path)
+
+    assert response.status_code == 200
+    assert calls == [[joke.id for joke in JOKES]]
+
+
 def test_api_joke_count_matches_catalogue(client):
     response = client.get("/api/jokes/count")
 
@@ -245,6 +266,7 @@ def test_api_repeat_rating_is_refused_and_cookie_is_set(client):
 
     assert first.status_code == 201
     assert "HttpOnly" in visit.headers["Set-Cookie"]
+    assert "Max-Age=31536000" in visit.headers["Set-Cookie"]
     assert "SameSite=Lax" in visit.headers["Set-Cookie"]
     assert second.status_code == 409
     assert second.get_json() == {"message": "You have already rated this joke.", "rating": 5}

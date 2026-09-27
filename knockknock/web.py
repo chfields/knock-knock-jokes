@@ -27,6 +27,7 @@ from .ratings import (
     PostgresRatingStore,
     Rating,
     RatingStore,
+    RatingSummary,
 )
 from .sequence import tell
 
@@ -92,14 +93,21 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     @app.after_request
     def set_voter_cookie(response):
         if not request.cookies.get(VOTER_COOKIE):
-            response.set_cookie(VOTER_COOKIE, secrets.token_urlsafe(32), httponly=True, samesite="Lax")
+            response.set_cookie(
+                VOTER_COOKIE,
+                secrets.token_urlsafe(32),
+                max_age=60 * 60 * 24 * 365,
+                httponly=True,
+                samesite="Lax",
+            )
         return response
 
     def store() -> RatingStore:
         return app.extensions["knockknock_rating_store"]
 
-    def joke_json(joke: Joke) -> dict[str, object]:
-        summary = store().summary(joke.id)
+    def joke_json(joke: Joke, summary: Optional[RatingSummary] = None) -> dict[str, object]:
+        if summary is None:
+            summary = store().summary(joke.id)
         return {
             "id": joke.id,
             "name": joke.name,
@@ -109,7 +117,8 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
 
     @app.get("/api/jokes")
     def api_jokes():
-        return jsonify([joke_json(joke) for joke in JOKES])
+        summaries = store().summaries(joke.id for joke in JOKES)
+        return jsonify([joke_json(joke, summaries[joke.id]) for joke in JOKES])
 
     @app.get("/api/jokes/count")
     def api_joke_count():
@@ -160,7 +169,8 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     def catalogue():
         if built_app_available():
             return send_from_directory(static_root, "index.html")
-        return render_template("catalogue.html", jokes=[(joke, store().summary(joke.id)) for joke in JOKES])
+        summaries = store().summaries(joke.id for joke in JOKES)
+        return render_template("catalogue.html", jokes=[(joke, summaries[joke.id]) for joke in JOKES])
 
     @app.get("/")
     def random_joke():
