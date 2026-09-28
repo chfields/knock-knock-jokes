@@ -46,13 +46,17 @@ class MemoryJokeStore:
         return self.jokes.get(joke_id)
 
     def create(self, name: str, punchline: str) -> Joke:
+        name = name.strip()
+        punchline = punchline.strip()
+        if any(joke.name == name for joke in self.jokes.values()):
+            raise DuplicateJokeError
         base_id = _joke_id(name)
         joke_id = base_id
         suffix = 2
         while joke_id in self.jokes:
             joke_id = "{}-{}".format(base_id, suffix)
             suffix += 1
-        joke = Joke(name.strip(), punchline.strip(), joke_id)
+        joke = Joke(name, punchline, joke_id)
         self.jokes[joke.id] = joke
         return joke
 

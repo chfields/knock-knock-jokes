@@ -206,6 +206,8 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     @app.get("/api/jokes/random")
     def api_random_joke():
         catalogue = jokes()
+        if not catalogue:
+            abort(404)
         joke = catalogue[random.choice(range(len(catalogue)))]
         return jsonify({**joke_json(joke), "lines": tell(joke), "myRating": store().rating_for(joke.id, _voter_key())})
 
@@ -261,6 +263,8 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
         if built_app_available():
             return send_from_directory(static_root, "index.html")
         catalogue = jokes()
+        if not catalogue:
+            abort(404)
         joke = catalogue[random.choice(range(len(catalogue)))]
         return render_template(
             "joke.html",

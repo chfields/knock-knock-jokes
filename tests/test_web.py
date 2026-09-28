@@ -321,6 +321,15 @@ def test_api_random_joke_returns_selected_joke_data(client, monkeypatch):
     }
 
 
+@pytest.mark.parametrize("path", ["/", "/api/jokes/random"])
+def test_random_joke_routes_return_404_when_catalogue_is_empty(store, path):
+    client = create_app({"TESTING": True, "RATING_STORE": store, "JOKE_STORE": MemoryJokeStore([])}).test_client()
+
+    response = client.get(path)
+
+    assert response.status_code == 404
+
+
 def test_api_unknown_joke_returns_404(client):
     response = client.get("/api/jokes/not-a-real-joke")
     assert response.status_code == 404
@@ -337,6 +346,16 @@ def test_api_creates_a_joke_from_its_specific_lines(client):
         "Knock knock.", "Who's there?", "Banana.", "Banana who?", "Banana split!",
     ]
     assert client.get("/api/jokes/banana").status_code == 200
+
+
+def test_api_rejects_duplicate_joke_names(client):
+    payload = {"name": "Banana", "punchline": "Banana split!"}
+
+    assert client.post("/api/jokes", json=payload).status_code == 201
+    response = client.post("/api/jokes", json=payload)
+
+    assert response.status_code == 409
+    assert response.get_json() == {"message": "That joke already exists."}
 
 
 @pytest.mark.parametrize("payload", [{}, {"name": "", "punchline": "Punchline"}, {"name": "Setup", "punchline": ""}])
