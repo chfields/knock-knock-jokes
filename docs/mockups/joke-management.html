@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Joke management mockups</title>
+    <style>
+      :root {
+        color: #18213b;
+        background: #edf3ff;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      button, input { font: inherit; }
+      .page { margin: 0 auto; max-width: 1280px; padding: 48px 24px 64px; }
+      .intro { margin: 0 auto 36px; max-width: 760px; text-align: center; }
+      .eyebrow { color: #5c3fbf; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      h1 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.04em; line-height: 1; margin: 10px 0 16px; }
+      .intro p { color: #526078; font-size: 1.08rem; line-height: 1.6; margin: 0; }
+      .screens { display: grid; gap: 28px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .screen { background: #fff; border: 1px solid #dce4f6; border-radius: 22px; box-shadow: 0 22px 45px rgb(49 76 130 / 12%); overflow: hidden; }
+      .browser { align-items: center; background: #222b48; color: #eff3ff; display: flex; gap: 6px; min-height: 44px; padding: 0 18px; }
+      .dot { background: #fc6d70; border-radius: 50%; height: 9px; width: 9px; }
+      .dot:nth-child(2) { background: #ffc75f; }
+      .dot:nth-child(3) { background: #56d3a5; }
+      .address { background: #394566; border-radius: 6px; color: #cbd5ee; font-size: .75rem; margin-left: 8px; overflow: hidden; padding: 5px 9px; text-overflow: ellipsis; white-space: nowrap; }
+      .app { min-height: 620px; }
+      .nav { align-items: center; border-bottom: 1px solid #e9edf7; display: flex; justify-content: space-between; padding: 18px 24px; }
+      .brand { align-items: center; color: #202a49; display: flex; font-size: 1.05rem; font-weight: 800; gap: 9px; }
+      .brand-mark { align-items: center; background: linear-gradient(135deg, #6e47d7, #8c6cf5); border-radius: 9px; color: #fff; display: inline-flex; height: 28px; justify-content: center; width: 28px; }
+      .nav-links { color: #65728b; display: flex; font-size: .84rem; gap: 16px; }
+      .nav-links .active { color: #5d3fbd; font-weight: 750; }
+      .content { padding: 30px 32px 36px; }
+      h2 { font-size: 1.62rem; letter-spacing: -.03em; margin: 0; }
+      .lede { color: #63708a; line-height: 1.5; margin: 8px 0 24px; }
+      .notice { align-items: flex-start; background: #f2edff; border: 1px solid #ded1ff; border-radius: 10px; color: #52359d; display: flex; font-size: .88rem; gap: 9px; line-height: 1.45; margin-bottom: 24px; padding: 12px 14px; }
+      .notice strong { display: block; }
+      .field { margin: 0 0 17px; }
+      label { color: #293654; display: block; font-size: .9rem; font-weight: 750; margin-bottom: 7px; }
+      .hint { color: #758198; float: right; font-size: .78rem; font-weight: 500; }
+      input { border: 1px solid #cbd5e8; border-radius: 9px; color: #17213c; display: block; outline: none; padding: 11px 12px; width: 100%; }
+      input:focus { border-color: #7650dc; box-shadow: 0 0 0 3px #e8e0ff; }
+      .preview { background: linear-gradient(135deg, #faf7ff, #f3f8ff); border: 1px dashed #cfc0f4; border-radius: 12px; margin: 22px 0; padding: 15px 17px; }
+      .preview-title { color: #7554b8; font-size: .75rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+      .preview p { color: #3a4762; font-size: .92rem; line-height: 1.5; margin: 9px 0 0; }
+      .actions { align-items: center; display: flex; gap: 12px; }
+      button { border: 0; border-radius: 9px; cursor: default; font-weight: 750; padding: 11px 16px; }
+      .primary { background: #6542c8; box-shadow: 0 4px 0 #4e31a3; color: #fff; }
+      .secondary { background: #eef1f8; color: #46536d; }
+      .screen-note { color: #768198; font-size: .77rem; line-height: 1.45; margin: 17px 0 0; }
+      .catalogue-top { align-items: flex-start; display: flex; justify-content: space-between; }
+      .add { background: #6542c8; color: #fff; font-size: .86rem; padding: 10px 13px; white-space: nowrap; }
+      .list { border: 1px solid #e2e8f3; border-radius: 12px; margin-top: 24px; overflow: hidden; }
+      .row { align-items: center; border-bottom: 1px solid #e8edf6; display: grid; gap: 10px; grid-template-columns: 1fr auto; padding: 15px 16px; }
+      .row:last-child { border-bottom: 0; }
+      .joke-name { color: #293755; font-size: .95rem; font-weight: 750; }
+      .meta { color: #7a879d; font-size: .78rem; margin-top: 3px; }
+      .delete { background: #fff0f1; color: #b42d43; font-size: .82rem; padding: 8px 10px; }
+      .delete-row { background: #fffafa; }
+      .modal { background: rgb(26 34 60 / 55%); inset: 0; padding: 72px 24px 24px; position: absolute; }
+      .catalogue-app { position: relative; }
+      .dialog { background: #fff; border-radius: 16px; box-shadow: 0 20px 45px rgb(20 30 60 / 28%); margin: 0 auto; max-width: 390px; padding: 25px; }
+      .danger-icon { align-items: center; background: #ffedf0; border-radius: 50%; color: #c12d46; display: flex; font-weight: 900; height: 38px; justify-content: center; width: 38px; }
+      h3 { color: #202b49; font-size: 1.25rem; margin: 15px 0 8px; }
+      .dialog p { color: #617089; font-size: .9rem; line-height: 1.5; margin: 0 0 21px; }
+      .dialog-actions { display: flex; gap: 10px; justify-content: flex-end; }
+      .danger { background: #c6344c; color: #fff; }
+      .caption { background: #f8f9fd; border-top: 1px solid #e7ebf4; color: #526078; font-size: .86rem; line-height: 1.5; margin: 0; padding: 16px 24px; }
+      .caption strong { color: #293654; }
+      @media (max-width: 850px) { .screens { grid-template-columns: 1fr; } }
+      @media (max-width: 420px) { .page { padding: 30px 14px; } .content { padding: 25px 20px; } .nav { padding: 15px; } .nav-links { gap: 10px; } .actions { align-items: stretch; flex-direction: column-reverse; } .actions button { width: 100%; } }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="intro">
+        <div class="eyebrow">Screen design mockups · Issue #95</div>
+        <h1>Joke management</h1>
+        <p>Static review screens for adding jokes to the catalogue and removing a joke when needed. These controls are intentionally unauthenticated for this first iteration.</p>
+      </section>
+
+      <section class="screens" aria-label="Joke management screen designs">
+        <article class="screen">
+          <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="address">knockknock.example/jokes/new</span></div>
+          <div class="app">
+            <header class="nav"><div class="brand"><span class="brand-mark">K</span> Knock-knock jokes</div><nav class="nav-links"><span>Random joke</span><span class="active">Manage jokes</span></nav></header>
+            <div class="content">
+              <h2>Add a joke</h2>
+              <p class="lede">Create a new call-and-response for the catalogue. It will be available to everyone as soon as it is saved.</p>
+              <div class="notice"><span aria-hidden="true">✦</span><span><strong>Open catalogue</strong>No account is needed to add or remove jokes in this early version.</span></div>
+              <form aria-label="Add a new joke">
+                <div class="field"><label for="name">Joke name <span class="hint">Shown in the catalogue</span></label><input id="name" value="Orange you glad" readonly></div>
+                <div class="field"><label for="prompt">Opening line</label><input id="prompt" value="Knock, knock."></div>
+                <div class="field"><label for="reply">First reply</label><input id="reply" value="Who's there?"></div>
+                <div class="field"><label for="setup">Setup <span class="hint">The visitor's answer</span></label><input id="setup" value="Orange."></div>
+                <div class="field"><label for="punchline">Punchline</label><input id="punchline" value="Orange you glad I didn't say banana?"></div>
+                <aside class="preview"><div class="preview-title">Conversation preview</div><p>Knock, knock. · Who's there? · Orange. · Orange who? · Orange you glad I didn't say banana?</p></aside>
+                <div class="actions"><button class="secondary" type="button">Cancel</button><button class="primary" type="button">Add joke</button></div>
+              </form>
+              <p class="screen-note">Mockup behavior: “Add joke” saves the entry and returns to the catalogue with a success message.</p>
+            </div>
+          </div>
+          <p class="caption"><strong>Create screen.</strong> A focused form makes the five joke beats explicit and previews the finished exchange before submission.</p>
+        </article>
+
+        <article class="screen">
+          <div class="browser"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="address">knockknock.example/jokes</span></div>
+          <div class="app catalogue-app">
+            <header class="nav"><div class="brand"><span class="brand-mark">K</span> Knock-knock jokes</div><nav class="nav-links"><span>Random joke</span><span class="active">Manage jokes</span></nav></header>
+            <div class="content">
+              <div class="catalogue-top"><div><h2>Joke catalogue</h2><p class="lede">12 jokes in the collection</p></div><button class="add" type="button">+ Add a joke</button></div>
+              <div class="list" aria-label="Joke catalogue">
+                <div class="row"><div><div class="joke-name">Cow says</div><div class="meta">Added Sep 5, 2026</div></div><button class="delete" type="button">Delete</button></div>
+                <div class="row"><div><div class="joke-name">Lettuce</div><div class="meta">Added Sep 5, 2026</div></div><button class="delete" type="button">Delete</button></div>
+                <div class="row delete-row"><div><div class="joke-name">Orange you glad</div><div class="meta">Added Sep 28, 2026</div></div><button class="delete" type="button">Delete</button></div>
+                <div class="row"><div><div class="joke-name">Tank</div><div class="meta">Added Sep 5, 2026</div></div><button class="delete" type="button">Delete</button></div>
+              </div>
+            </div>
+            <div class="modal" aria-label="Delete confirmation preview">
+              <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+                <div class="danger-icon" aria-hidden="true">!</div>
+                <h3 id="delete-title">Delete “Orange you glad”?</h3>
+                <p>This will permanently remove the joke from the catalogue. This action cannot be undone.</p>
+                <div class="dialog-actions"><button class="secondary" type="button">Keep joke</button><button class="danger" type="button">Delete joke</button></div>
+              </section>
+            </div>
+          </div>
+          <p class="caption"><strong>Catalogue and delete confirmation.</strong> The destructive action is available per joke, then requires an explicit confirmation instead of offering an edit path.</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
