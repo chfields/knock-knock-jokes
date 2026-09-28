@@ -23,3 +23,22 @@ export async function rateJoke(id: string, rating: number): Promise<{ message: s
   if (!response.ok) throw new Error(body.message ?? "Your rating could not be saved.");
   return body;
 }
+
+export async function createJoke(name: string, punchline: string): Promise<FullJoke> {
+  const response = await fetch("/api/jokes", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, punchline }),
+  });
+  const body = await response.json();
+  if (!response.ok) throw new Error(body.message ?? "Your joke could not be saved.");
+  return body;
+}
+
+export async function deleteJoke(id: string): Promise<void> {
+  const response = await fetch(`/api/jokes/${id}`, { method: "DELETE" });
+  if (!response.ok) {
+    const body = await response.json();
+    throw new Error(body.message ?? "Your joke could not be deleted.");
+  }
+}
