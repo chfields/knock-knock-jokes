@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Link, Route, Routes, useNavigate, useParams } from "react-router";
 import { Alert, AlertTitle, Button, Card, CardContent, CardHeader, ListBox, ListBoxItem, Radio, RadioGroup, Tooltip } from "@heroui/react";
 import { announce } from "@react-aria/live-announcer";
-import { FullJoke, getJoke, getJokes, Joke, rateJoke } from "./api";
+import { createJoke, deleteJoke, FullJoke, getJoke, getJokes, Joke, rateJoke } from "./api";
 
 type ThemeMode = "system" | "light" | "dark";
 
@@ -51,7 +51,7 @@ function Layout({ children }: { children: ReactNode }) {
   return <main className="mx-auto min-h-screen max-w-3xl px-4 py-8">
     <header className="mb-8 flex items-center justify-between">
       <Link className="text-2xl font-bold" to="/">Knock-knock jokes</Link>
-      <div className="flex items-center gap-4"><nav className="flex gap-4"><Link to="/">Random joke</Link><Link to="/jokes">Catalogue</Link></nav><ThemeSelector /></div>
+      <div className="flex items-center gap-4"><nav className="flex gap-4"><Link to="/">Random joke</Link><Link to="/jokes">Catalogue</Link><Link to="/jokes/new">Add joke</Link></nav><ThemeSelector /></div>
     </header>{children}
   </main>;
 }
@@ -120,8 +120,32 @@ function JokePage({ random = false }: { random?: boolean }) {
 function Catalogue() {
   const [jokes, setJokes] = useState<Joke[]>([]); const [error, setError] = useState("");
   useEffect(() => { getJokes().then(setJokes).catch(reason => setError(reason.message)); }, []);
+  const remove = async (joke: Joke) => {
+    setError("");
+    try { await deleteJoke(joke.id); setJokes(current => current.filter(item => item.id !== joke.id)); }
+    catch (reason) { setError(reason instanceof Error ? reason.message : "Your joke could not be deleted."); }
+  };
   if (error) return <ErrorMessage message={error} />;
-  return <Card><CardHeader><h1 className="text-xl font-semibold">Catalogue</h1></CardHeader><CardContent><ListBox aria-label="Jokes">{jokes.map(joke => <ListBoxItem key={joke.id} textValue={joke.name}><Link to={`/jokes/${joke.id}`}>{joke.name}</Link><span className="ml-2">{joke.ratingCount ? `${joke.averageRating?.toFixed(1)} ${"★".repeat(Math.round(joke.averageRating ?? 0))} (${joke.ratingCount} vote${joke.ratingCount === 1 ? "" : "s"})` : "No ratings yet"}</span></ListBoxItem>)}</ListBox></CardContent></Card>;
+  return <Card><CardHeader><h1 className="text-xl font-semibold">Catalogue</h1></CardHeader><CardContent><ListBox aria-label="Jokes">{jokes.map(joke => <ListBoxItem key={joke.id} textValue={joke.name}><Link to={`/jokes/${joke.id}`}>{joke.name}</Link><span className="ml-2">{joke.ratingCount ? `${joke.averageRating?.toFixed(1)} ${"★".repeat(Math.round(joke.averageRating ?? 0))} (${joke.ratingCount} vote${joke.ratingCount === 1 ? "" : "s"})` : "No ratings yet"}</span><Button aria-label={`Delete ${joke.name}`} className="ml-2" onPress={() => void remove(joke)} size="sm" variant="danger">Delete</Button></ListBoxItem>)}</ListBox></CardContent></Card>;
 }
 
-export default function App() { return <Layout><Routes><Route path="/" element={<JokePage random />} /><Route path="/jokes" element={<Catalogue />} /><Route path="/jokes/:id" element={<JokePage />} /></Routes></Layout>; }
+function AddJoke() {
+  const navigate = useNavigate(); const [name, setName] = useState(""); const [punchline, setPunchline] = useState(""); const [error, setError] = useState(""); const [saving, setSaving] = useState(false);
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); setError(""); setSaving(true);
+    try { const joke = await createJoke(name, punchline); navigate(`/jokes/${joke.id}`); }
+    catch (reason) { setError(reason instanceof Error ? reason.message : "Your joke could not be saved."); }
+    finally { setSaving(false); }
+  };
+  return <Card><CardHeader><h1 className="text-xl font-semibold">Add a joke</h1></CardHeader><CardContent>
+    <p>“Knock knock” and “Who’s there?” are included automatically.</p>
+    <form className="mt-4 space-y-4" onSubmit={event => void submit(event)}>
+      <label className="block">Setup line<input aria-label="Setup line" className="block w-full" onChange={event => setName(event.target.value)} required value={name} /></label>
+      <label className="block">Punchline<textarea aria-label="Punchline" className="block w-full" onChange={event => setPunchline(event.target.value)} required value={punchline} /></label>
+      <Button isDisabled={saving} type="submit">{saving ? "Saving…" : "Add joke"}</Button>
+    </form>
+    {error && <div className="mt-4"><ErrorMessage message={error} /></div>}
+  </CardContent></Card>;
+}
+
+export default function App() { return <Layout><Routes><Route path="/" element={<JokePage random />} /><Route path="/jokes" element={<Catalogue />} /><Route path="/jokes/new" element={<AddJoke />} /><Route path="/jokes/:id" element={<JokePage />} /></Routes></Layout>; }

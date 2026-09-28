@@ -24,6 +24,7 @@ from flask import (
 from itsdangerous import BadData, URLSafeSerializer
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+from .joke_store import DuplicateJokeError, JokeStore, MemoryJokeStore, PostgresJokeStore
 from .jokes import JOKES, Joke
 from .ratings import (
     DuplicateVoteError,
@@ -34,13 +35,6 @@ from .ratings import (
     RatingSummary,
 )
 from .sequence import tell
-
-
-def _joke_by_id(joke_id: str) -> Joke:
-    for joke in JOKES:
-        if joke.id == joke_id:
-            return joke
-    abort(404)
 
 
 def _count_text(count: int) -> str:
@@ -113,6 +107,7 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
         SECRET_KEY=os.environ.get("KNOCKKNOCK_SECRET_KEY", "knockknock-local-web"),
         RATING_STORE_PATH=Path.home() / ".local" / "share" / "knockknock" / "ratings.jsonl",
         DATABASE_URL=os.environ.get("DATABASE_URL"),
+        JOKE_STORE=None,
         TRUSTED_PROXY_COUNT=int(os.environ.get("KNOCKKNOCK_TRUSTED_PROXIES", "0")),
     )
     if config is not None:
@@ -132,6 +127,16 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
         )
     app.extensions["knockknock_rating_store"] = configured_store
 
+    configured_joke_store = app.config.get("JOKE_STORE")
+    if configured_joke_store is None:
+        database_url = app.config.get("DATABASE_URL")
+        configured_joke_store = (
+            PostgresJokeStore(database_url, JOKES)
+            if isinstance(database_url, str) and database_url
+            else MemoryJokeStore(JOKES)
+        )
+    app.extensions["knockknock_joke_store"] = configured_joke_store
+
     @app.after_request
     def set_voter_cookie(response):
         voter_id = _voter_id()
@@ -148,6 +153,18 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     def store() -> RatingStore:
         return app.extensions["knockknock_rating_store"]
 
+    def joke_store() -> JokeStore:
+        return app.extensions["knockknock_joke_store"]
+
+    def jokes() -> list[Joke]:
+        return joke_store().list()
+
+    def joke_by_id(joke_id: str) -> Joke:
+        joke = joke_store().get(joke_id)
+        if joke is None:
+            abort(404)
+        return joke
+
     def joke_json(joke: Joke, summary: Optional[RatingSummary] = None) -> dict[str, object]:
         if summary is None:
             summary = store().summary(joke.id)
@@ -160,28 +177,52 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
 
     @app.get("/api/jokes")
     def api_jokes():
-        summaries = store().summaries(joke.id for joke in JOKES)
-        return jsonify([joke_json(joke, summaries[joke.id]) for joke in JOKES])
+        catalogue = jokes()
+        summaries = store().summaries(joke.id for joke in catalogue)
+        return jsonify([joke_json(joke, summaries[joke.id]) for joke in catalogue])
+
+    @app.post("/api/jokes")
+    def api_create_joke():
+        payload = request.get_json(silent=True)
+        name = payload.get("name") if isinstance(payload, dict) else None
+        punchline = payload.get("punchline") if isinstance(payload, dict) else None
+        try:
+            if not isinstance(name, str) or not isinstance(punchline, str):
+                raise ValueError
+            joke = joke_store().create(name, punchline)
+        except ValueError:
+            return jsonify({"message": "Enter a setup line and a punchline."}), 400
+        except DuplicateJokeError:
+            return jsonify({"message": "That joke already exists."}), 409
+        except OSError:
+            return jsonify({"message": "Your joke could not be saved. Please try again later."}), 500
+        return jsonify({**joke_json(joke), "lines": tell(joke)}), 201
 
     @app.get("/api/jokes/count")
     def api_joke_count():
-        count = len(JOKES)
+        count = len(jokes())
         return jsonify({"count": count, "count_label": _count_text(count)})
 
     @app.get("/api/jokes/random")
     def api_random_joke():
-        selector = random.choice(range(len(JOKES)))
-        joke = JOKES[selector]
+        catalogue = jokes()
+        joke = catalogue[random.choice(range(len(catalogue)))]
         return jsonify({**joke_json(joke), "lines": tell(joke), "myRating": store().rating_for(joke.id, _voter_key())})
 
     @app.get("/api/jokes/<joke_id>")
     def api_joke_detail(joke_id: str):
-        joke = _joke_by_id(joke_id)
+        joke = joke_by_id(joke_id)
         return jsonify({**joke_json(joke), "lines": tell(joke), "myRating": store().rating_for(joke.id, _voter_key())})
+
+    @app.delete("/api/jokes/<joke_id>")
+    def api_delete_joke(joke_id: str):
+        if not joke_store().delete(joke_id):
+            abort(404)
+        return "", 204
 
     @app.post("/api/jokes/<joke_id>/ratings")
     def api_rate_joke(joke_id: str):
-        joke = _joke_by_id(joke_id)
+        joke = joke_by_id(joke_id)
         payload = request.get_json(silent=True)
         submitted_value = payload.get("rating") if isinstance(payload, dict) else None
         try:
@@ -211,14 +252,16 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
     def catalogue():
         if built_app_available():
             return send_from_directory(static_root, "index.html")
-        summaries = store().summaries(joke.id for joke in JOKES)
-        return render_template("catalogue.html", jokes=[(joke, summaries[joke.id]) for joke in JOKES])
+        catalogue = jokes()
+        summaries = store().summaries(joke.id for joke in catalogue)
+        return render_template("catalogue.html", jokes=[(joke, summaries[joke.id]) for joke in catalogue])
 
     @app.get("/")
     def random_joke():
         if built_app_available():
             return send_from_directory(static_root, "index.html")
-        joke = random.choice(JOKES)
+        catalogue = jokes()
+        joke = catalogue[random.choice(range(len(catalogue)))]
         return render_template(
             "joke.html",
             joke=joke,
@@ -229,7 +272,7 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
 
     @app.get("/jokes/<joke_id>")
     def joke_detail(joke_id: str):
-        joke = _joke_by_id(joke_id)
+        joke = joke_by_id(joke_id)
         if built_app_available():
             return send_from_directory(static_root, "index.html")
         return render_template(
@@ -242,7 +285,7 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
 
     @app.post("/jokes/<joke_id>/ratings")
     def rate_joke(joke_id: str):
-        joke = _joke_by_id(joke_id)
+        joke = joke_by_id(joke_id)
         submitted_value = request.form.get("rating")
         try:
             if submitted_value is None:

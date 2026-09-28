@@ -1,4 +1,5 @@
 import hashlib
+import os
 from html import unescape
 
 import pytest
@@ -6,6 +7,7 @@ from itsdangerous import URLSafeSerializer
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from knockknock import ratings
+from knockknock.joke_store import MemoryJokeStore, PostgresJokeStore
 from knockknock.jokes import JOKES
 from knockknock.ratings import DuplicateVoteError, JsonlRatingStore, Rating, RatingSummary
 from knockknock.sequence import tell
@@ -48,7 +50,7 @@ def store():
 
 @pytest.fixture
 def client(store):
-    return create_app({"TESTING": True, "RATING_STORE": store}).test_client()
+    return create_app({"TESTING": True, "RATING_STORE": store, "JOKE_STORE": MemoryJokeStore(JOKES)}).test_client()
 
 
 def test_create_app_selects_postgres_store_when_database_url_is_set(monkeypatch):
@@ -61,7 +63,7 @@ def test_create_app_selects_postgres_store_when_database_url_is_set(monkeypatch)
 
     monkeypatch.setattr("knockknock.web.PostgresRatingStore", FakePostgresRatingStore)
 
-    app = create_app({"DATABASE_URL": database_url})
+    app = create_app({"DATABASE_URL": database_url, "JOKE_STORE": MemoryJokeStore(JOKES)})
 
     assert isinstance(app.extensions["knockknock_rating_store"], FakePostgresRatingStore)
     assert created_with == [database_url]
@@ -95,7 +97,7 @@ def test_create_app_explains_how_to_install_missing_postgres_extra(monkeypatch):
 
 def test_create_app_does_not_trust_forwarded_addresses_by_default(store, monkeypatch):
     monkeypatch.delenv("KNOCKKNOCK_TRUSTED_PROXIES", raising=False)
-    app = create_app({"TESTING": True, "RATING_STORE": store})
+    app = create_app({"TESTING": True, "RATING_STORE": store, "JOKE_STORE": MemoryJokeStore(JOKES)})
     client = app.test_client()
 
     response = client.post(
@@ -112,7 +114,7 @@ def test_create_app_does_not_trust_forwarded_addresses_by_default(store, monkeyp
 
 def test_create_app_uses_trusted_proxy_count_for_forwarded_addresses(store, monkeypatch):
     monkeypatch.setenv("KNOCKKNOCK_TRUSTED_PROXIES", "2")
-    app = create_app({"TESTING": True, "RATING_STORE": store})
+    app = create_app({"TESTING": True, "RATING_STORE": store, "JOKE_STORE": MemoryJokeStore(JOKES)})
     client = app.test_client()
 
     response = client.post(
@@ -322,6 +324,50 @@ def test_api_random_joke_returns_selected_joke_data(client, monkeypatch):
 def test_api_unknown_joke_returns_404(client):
     response = client.get("/api/jokes/not-a-real-joke")
     assert response.status_code == 404
+
+
+def test_api_creates_a_joke_from_its_specific_lines(client):
+    response = client.post("/api/jokes", json={"name": "Banana", "punchline": "Banana split!"})
+
+    assert response.status_code == 201
+    joke = response.get_json()
+    assert joke["id"] == "banana"
+    assert joke["name"] == "Banana"
+    assert joke["lines"] == [
+        "Knock knock.", "Who's there?", "Banana.", "Banana who?", "Banana split!",
+    ]
+    assert client.get("/api/jokes/banana").status_code == 200
+
+
+@pytest.mark.parametrize("payload", [{}, {"name": "", "punchline": "Punchline"}, {"name": "Setup", "punchline": ""}])
+def test_api_rejects_incomplete_new_jokes(client, payload):
+    response = client.post("/api/jokes", json=payload)
+
+    assert response.status_code == 400
+    assert response.get_json()["message"] == "Enter a setup line and a punchline."
+
+
+def test_api_deletes_a_joke(client):
+    created = client.post("/api/jokes", json={"name": "Banana", "punchline": "Banana split!"})
+    joke_id = created.get_json()["id"]
+
+    response = client.delete("/api/jokes/" + joke_id)
+
+    assert response.status_code == 204
+    assert client.get("/api/jokes/" + joke_id).status_code == 404
+
+
+def test_postgres_joke_store_persists_created_jokes():
+    database_url = os.environ["DATABASE_URL"]
+    store = PostgresJokeStore(database_url, JOKES)
+    try:
+        joke = store.create("Database banana", "Database split!")
+        assert store.get(joke.id) == joke
+        assert store.delete(joke.id)
+        assert store.get(joke.id) is None
+    finally:
+        store.delete("database-banana")
+        store.close()
 
 
 @pytest.mark.parametrize("value", [None, "", True, 0, 6, 1.0])
