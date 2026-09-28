@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Link, Route, Routes, useNavigate, useParams } from "react-router";
-import { Alert, AlertTitle, Button, Card, CardContent, CardHeader, ListBox, ListBoxItem, Radio, RadioGroup, Tooltip } from "@heroui/react";
+import { Alert, AlertTitle, Button, Card, CardContent, CardHeader, Input, ListBox, ListBoxItem, Radio, RadioGroup, TextArea, Tooltip } from "@heroui/react";
 import { announce } from "@react-aria/live-announcer";
 import { createJoke, deleteJoke, FullJoke, getJoke, getJokes, Joke, rateJoke } from "./api";
 
@@ -140,8 +140,8 @@ function AddJoke() {
   return <Card><CardHeader><h1 className="text-xl font-semibold">Add a joke</h1></CardHeader><CardContent>
     <p>“Knock knock” and “Who’s there?” are included automatically.</p>
     <form className="mt-4 space-y-4" onSubmit={event => void submit(event)}>
-      <label className="block">Setup line<input aria-label="Setup line" className="block w-full" onChange={event => setName(event.target.value)} required value={name} /></label>
-      <label className="block">Punchline<textarea aria-label="Punchline" className="block w-full" onChange={event => setPunchline(event.target.value)} required value={punchline} /></label>
+      <label className="block">Setup line<Input aria-label="Setup line" fullWidth onChange={event => setName(event.target.value)} required value={name} /></label>
+      <label className="block">Punchline<TextArea aria-label="Punchline" fullWidth onChange={event => setPunchline(event.target.value)} required value={punchline} /></label>
       <Button isDisabled={saving} type="submit">{saving ? "Saving…" : "Add joke"}</Button>
     </form>
     {error && <div className="mt-4"><ErrorMessage message={error} /></div>}
