@@ -77,10 +77,12 @@ Set `KNOCKKNOCK_SECRET_KEY` to a private, stable value in deployed web
 applications. Flask uses it for sessions and the application uses it to sign
 voter-identity cookies; changing it invalidates existing voter cookies.
 
-Set `DATABASE_URL` to use PostgreSQL for ratings. If the application is behind
-reverse proxies, set `KNOCKKNOCK_TRUSTED_PROXIES` to the number of trusted
-proxy hops so Flask uses `X-Forwarded-For` for the client address. It defaults
-to `0`, which leaves forwarded addresses untrusted.
+Set `DATABASE_URL` to use PostgreSQL for ratings and the web catalogue. The
+first connection seeds the built-in jokes; jokes added through the web UI and
+deletions are persisted there. If the application is behind reverse proxies,
+set `KNOCKKNOCK_TRUSTED_PROXIES` to the number of trusted proxy hops so Flask
+uses `X-Forwarded-For` for the client address. It defaults to `0`, which leaves
+forwarded addresses untrusted.
 
 PostgreSQL-backed ratings also require the `postgres` extra:
 

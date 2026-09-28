@@ -9,6 +9,7 @@ how something is built or tested updates this file in the same pull request.
 - `knockknock/` — the Python package (Python 3.9+; its core has no required
   third-party dependencies, with optional PostgreSQL support via psycopg):
   - `jokes.py` — the joke catalogue (`JOKES`) and lookup (`get_joke`)
+  - `joke_store.py` — persistent web catalogue storage
   - `ratings.py` — joke ratings and their storage
   - `sequence.py` — the knock-knock exchange
   - `__main__.py` — the command-line program (`python -m knockknock`)

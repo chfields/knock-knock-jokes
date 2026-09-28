@@ -261,3 +261,36 @@ describe("catalogue ratings", () => {
     expect(screen.getByText("No ratings yet")).toBeInTheDocument();
   });
 });
+
+describe("adding and deleting jokes", () => {
+  it("submits only the joke-specific lines and opens the new joke", async () => {
+    const added = { id: "banana", name: "Banana", lines: ["Knock knock.", "Who's there?", "Banana.", "Banana who?", "Banana split!"] };
+    vi.stubGlobal("fetch", vi.fn((url: string, init?: RequestInit) => {
+      if (url === "/api/jokes" && init?.method === "POST") return Promise.resolve(new Response(JSON.stringify(added), { status: 201 }));
+      return Promise.resolve(new Response(JSON.stringify(added)));
+    }));
+    renderApp("/jokes/new");
+
+    expect(screen.getByText("“Knock knock” and “Who’s there?” are included automatically.")).toBeInTheDocument();
+    fireEvent.change(screen.getByRole("textbox", { name: "Setup line" }), { target: { value: "Banana" } });
+    fireEvent.change(screen.getByRole("textbox", { name: "Punchline" }), { target: { value: "Banana split!" } });
+    fireEvent.click(screen.getByRole("button", { name: "Add joke" }));
+
+    await screen.findByText("Knock knock.");
+    expect(fetch).toHaveBeenCalledWith("/api/jokes", expect.objectContaining({ method: "POST" }));
+  });
+
+  it("removes a joke from the catalogue", async () => {
+    vi.stubGlobal("fetch", vi.fn((url: string, init?: RequestInit) => {
+      if (init?.method === "DELETE") return Promise.resolve(new Response(null, { status: 204 }));
+      return Promise.resolve(new Response(JSON.stringify([joke])));
+    }));
+    renderApp("/jokes");
+    await screen.findByText(joke.name);
+
+    fireEvent.click(screen.getByRole("button", { name: "Delete Cow says" }));
+
+    await waitFor(() => expect(screen.queryByText(joke.name)).not.toBeInTheDocument());
+    expect(fetch).toHaveBeenCalledWith("/api/jokes/cow-says", { method: "DELETE" });
+  });
+});
