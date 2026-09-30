@@ -81,8 +81,10 @@ Set `DATABASE_URL` to use PostgreSQL for ratings and the web catalogue. The
 first connection seeds the built-in jokes; jokes added through the web UI and
 deletions are persisted there. If the application is behind reverse proxies,
 set `KNOCKKNOCK_TRUSTED_PROXIES` to the number of trusted proxy hops so Flask
-uses `X-Forwarded-For` for the client address. It defaults to `0`, which leaves
-forwarded addresses untrusted.
+uses `X-Forwarded-For` for the client address and `X-Forwarded-Proto` for the
+request scheme. It defaults to `0`, which leaves forwarded headers untrusted.
+The voter cookie is marked `Secure` whenever the request arrived over HTTPS,
+directly or through a trusted proxy, so plain-HTTP local installs keep working.
 
 PostgreSQL-backed ratings also require the `postgres` extra:
 
@@ -121,7 +123,8 @@ these environment variables on the Vercel project:
 - `KNOCKKNOCK_SECRET_KEY` — required; the entrypoint refuses to start
   without it.
 - `KNOCKKNOCK_TRUSTED_PROXIES` — set to `1` so Flask reads the client address
-  from Vercel's `X-Forwarded-For` header.
+  and HTTPS scheme from Vercel's `X-Forwarded-For` and `X-Forwarded-Proto`
+  headers; without it the voter cookie is not marked `Secure`.
 
 Without `DATABASE_URL` the app falls back to the local JSONL rating file,
 which a Vercel function cannot write to, so ratings fail to save.
