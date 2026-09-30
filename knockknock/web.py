@@ -115,7 +115,7 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
 
     trusted_proxy_count = app.config["TRUSTED_PROXY_COUNT"]
     if trusted_proxy_count > 0:
-        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=trusted_proxy_count)
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=trusted_proxy_count, x_proto=trusted_proxy_count)
 
     configured_store = app.config.get("RATING_STORE")
     if configured_store is None:
@@ -147,6 +147,7 @@ def create_app(config: Optional[Mapping[str, object]] = None) -> Flask:
                 max_age=60 * 60 * 24 * 365,
                 httponly=True,
                 samesite="Lax",
+                secure=request.is_secure,
             )
         return response
 
