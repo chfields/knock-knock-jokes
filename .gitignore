@@ -11,3 +11,5 @@ htmlcov/
 venv/
 web/node_modules/
 web/dist/
+.vercel/
+.env*

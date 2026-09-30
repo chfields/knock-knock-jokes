@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "uv pip install --python .vercel/python/.venv/bin/python -r requirements.txt && cd web && npm ci && npm run build",
+  "functions": {
+    "app.py": {
+      "excludeFiles": "{tests/**,docs/**,web/node_modules/**,web/src/**,.wardby/**,.github/**}"
+    }
+  }
+}

@@ -22,6 +22,9 @@ how something is built or tested updates this file in the same pull request.
   - `web/src/api.ts` — every call to the Flask API goes through here
   - `web/src/App.tsx` — the app; `web/src/App.test.tsx` — its tests
 - `docs/` — design notes and plans
+- `app.py`, `vercel.json`, `requirements.txt`, `.vercelignore` — the Vercel
+  deployment (see README, "Deploying to Vercel"). Keep `requirements.txt`
+  in step with the `web` and `postgres` extras in `pyproject.toml`.
 
 ## Python
 
