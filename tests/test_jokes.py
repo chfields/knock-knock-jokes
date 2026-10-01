@@ -4,7 +4,7 @@ from knockknock.jokes import JOKES, Joke, get_joke
 
 
 def test_joke_bank_has_34_unique_well_formed_jokes():
-    assert len(JOKES) == 34
+    assert len(JOKES) == 35
     assert all(isinstance(joke, Joke) for joke in JOKES)
     assert all(joke.name.strip() and joke.punchline.strip() for joke in JOKES)
     assert len({joke.name.casefold() for joke in JOKES}) == len(JOKES)
