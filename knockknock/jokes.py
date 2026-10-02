@@ -63,6 +63,7 @@ JOKES: tuple[Joke, ...] = (
         "I didn't know you could yodel!",
         "a-little-old-lady",
     ),
+    Joke("Meow", "Cat got your tongue?", "cat"),
 )
 
 
