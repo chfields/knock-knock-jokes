@@ -7,6 +7,17 @@ from urllib.parse import urlparse
 import pytest
 
 
+def _read_redis_response(connection):
+    """Read a complete Redis response, failing if the peer closes early."""
+    response = b""
+    while not response.endswith(b"\r\n"):
+        chunk = connection.recv(1024)
+        if not chunk:
+            pytest.fail("Redis closed the connection before sending PONG")
+        response += chunk
+    return response
+
+
 def test_postgres_health_check():
     """PostgreSQL accepts a simple query when it is configured."""
     database_url = os.environ.get("DATABASE_URL")
@@ -29,4 +40,27 @@ def test_redis_health_check():
     parsed_url = urlparse(redis_url)
     with socket.create_connection((parsed_url.hostname, parsed_url.port or 6379)) as connection:
         connection.sendall(b"*1\r\n$4\r\nPING\r\n")
-        assert connection.recv(7) == b"+PONG\r\n"
+        assert _read_redis_response(connection) == b"+PONG\r\n"
+
+
+def test_read_redis_response_fails_when_peer_closes_early():
+    """A truncated Redis response fails instead of looping forever."""
+
+    class EarlyClosingSocket:
+        def __init__(self):
+            self.recv_sizes = []
+            self.responses = iter((b"+PO", b""))
+
+        def recv(self, size):
+            self.recv_sizes.append(size)
+            return next(self.responses)
+
+    connection = EarlyClosingSocket()
+
+    with pytest.raises(
+        pytest.fail.Exception,
+        match="Redis closed the connection before sending PONG",
+    ):
+        _read_redis_response(connection)
+
+    assert connection.recv_sizes == [1024, 1024]
