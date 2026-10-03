@@ -377,7 +377,10 @@ def test_api_deletes_a_joke(client):
 
 
 def test_postgres_joke_store_persists_created_jokes():
-    database_url = os.environ["DATABASE_URL"]
+    database_url = os.environ.get("DATABASE_URL")
+    if not database_url:
+        pytest.skip("DATABASE_URL is not set")
+
     store = PostgresJokeStore(database_url, JOKES)
     try:
         joke = store.create("Database banana", "Database split!")
