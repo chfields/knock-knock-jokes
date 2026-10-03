@@ -81,8 +81,10 @@ Set `DATABASE_URL` to use PostgreSQL for ratings and the web catalogue. The
 first connection seeds the built-in jokes; jokes added through the web UI and
 deletions are persisted there. If the application is behind reverse proxies,
 set `KNOCKKNOCK_TRUSTED_PROXIES` to the number of trusted proxy hops so Flask
-uses `X-Forwarded-For` for the client address. It defaults to `0`, which leaves
-forwarded addresses untrusted.
+uses `X-Forwarded-For` for the client address and `X-Forwarded-Proto` for the
+request scheme. It defaults to `0`, which leaves forwarded headers untrusted.
+The voter cookie is marked `Secure` whenever the request arrived over HTTPS,
+directly or through a trusted proxy, so plain-HTTP local installs keep working.
 
 PostgreSQL-backed ratings also require the `postgres` extra:
 
@@ -101,6 +103,31 @@ npm ci && npm run build
 ```
 
 The build is written to `web/dist`, which the Flask application serves.
+
+## Deploying to Vercel
+
+The repository deploys to [Vercel](https://vercel.com) as a single Python
+function. `app.py` is the entrypoint; `vercel.json` builds `web/` first, and
+the build output in `web/dist` ships with the function. Runtime dependencies
+are listed in `requirements.txt`: Vercel installs only the base dependencies
+from `pyproject.toml`, which are empty, so the build command installs
+`requirements.txt` into Vercel's build environment before building `web/`.
+
+With the Vercel project connected to this repository, every pull request gets
+a preview deployment and every merge to `main` deploys to production. Set
+these environment variables on the Vercel project:
+
+- `DATABASE_URL` — PostgreSQL connection string. Use a pooled connection
+  (for example, Neon's pooled URL), because each function instance opens its
+  own connection pools.
+- `KNOCKKNOCK_SECRET_KEY` — required; the entrypoint refuses to start
+  without it.
+- `KNOCKKNOCK_TRUSTED_PROXIES` — set to `1` so Flask reads the client address
+  and HTTPS scheme from Vercel's `X-Forwarded-For` and `X-Forwarded-Proto`
+  headers; without it the voter cookie is not marked `Secure`.
+
+Without `DATABASE_URL` the app falls back to the local JSONL rating file,
+which a Vercel function cannot write to, so ratings fail to save.
 
 ## Development
 

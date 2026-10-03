@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 34, "count_label": "34"}
+    assert response.get_json() == {"count": 35, "count_label": "35"}
 
 
 @pytest.mark.parametrize(
@@ -427,6 +427,39 @@ def test_api_repeat_rating_is_refused_and_cookie_is_set(client):
     assert "SameSite=Lax" in visit.headers["Set-Cookie"]
     assert second.status_code == 409
     assert second.get_json() == {"message": "You have already rated this joke.", "rating": 5}
+
+
+def test_voter_cookie_is_not_secure_over_http(client):
+    response = client.get("/api/jokes/cow-says")
+
+    assert "Secure" not in response.headers["Set-Cookie"]
+
+
+def test_voter_cookie_is_secure_over_https(client):
+    response = client.get("/api/jokes/cow-says", base_url="https://localhost")
+
+    assert "Secure" in response.headers["Set-Cookie"]
+
+
+def test_voter_cookie_ignores_forwarded_https_from_untrusted_proxies(store, monkeypatch):
+    monkeypatch.delenv("KNOCKKNOCK_TRUSTED_PROXIES", raising=False)
+    app = create_app({"TESTING": True, "RATING_STORE": store, "JOKE_STORE": MemoryJokeStore(JOKES)})
+
+    response = app.test_client().get("/api/jokes/cow-says", headers={"X-Forwarded-Proto": "https"})
+
+    assert "Secure" not in response.headers["Set-Cookie"]
+
+
+def test_voter_cookie_is_secure_behind_a_trusted_https_proxy(store, monkeypatch):
+    monkeypatch.setenv("KNOCKKNOCK_TRUSTED_PROXIES", "1")
+    app = create_app({"TESTING": True, "RATING_STORE": store, "JOKE_STORE": MemoryJokeStore(JOKES)})
+
+    response = app.test_client().get(
+        "/api/jokes/cow-says",
+        headers={"X-Forwarded-For": "198.51.100.10", "X-Forwarded-Proto": "https"},
+    )
+
+    assert "Secure" in response.headers["Set-Cookie"]
 
 
 def test_api_rating_replaces_an_unsigned_voter_cookie(client, store):
