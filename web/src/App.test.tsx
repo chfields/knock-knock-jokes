@@ -263,6 +263,13 @@ describe("catalogue ratings", () => {
 });
 
 describe("adding and deleting jokes", () => {
+  it("uses HeroUI input components for the joke fields", () => {
+    renderApp("/jokes/new");
+
+    expect(screen.getByRole("textbox", { name: "Setup line" })).toHaveAttribute("data-slot", "input");
+    expect(screen.getByRole("textbox", { name: "Punchline" })).toHaveAttribute("data-slot", "textarea");
+  });
+
   it("submits only the joke-specific lines and opens the new joke", async () => {
     const added = { id: "banana", name: "Banana", lines: ["Knock knock.", "Who's there?", "Banana.", "Banana who?", "Banana split!"] };
     vi.stubGlobal("fetch", vi.fn((url: string, init?: RequestInit) => {
