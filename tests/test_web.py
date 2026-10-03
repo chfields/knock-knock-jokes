@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 35, "count_label": "35"}
+    assert response.get_json() == {"count": 38, "count_label": "38"}
 
 
 @pytest.mark.parametrize(
@@ -387,6 +387,25 @@ def test_postgres_joke_store_persists_created_jokes():
     finally:
         store.delete("database-banana")
         store.close()
+
+
+def test_postgres_joke_store_adds_new_builtins_to_existing_catalogue():
+    database_url = os.environ["DATABASE_URL"]
+    migration_id = "2026-10-03-add-justin-harry-ice-cream"
+    new_joke_ids = ("justin", "harry", "ice-cream")
+    store = PostgresJokeStore(database_url, JOKES)
+    try:
+        with store._connect() as connection, connection.cursor() as cursor:
+            cursor.execute("DELETE FROM jokes WHERE id = ANY(%s)", (list(new_joke_ids),))
+            cursor.execute("DELETE FROM builtin_joke_migrations WHERE id = %s", (migration_id,))
+    finally:
+        store.close()
+
+    migrated_store = PostgresJokeStore(database_url, JOKES)
+    try:
+        assert {joke.id for joke in migrated_store.list()} >= set(new_joke_ids)
+    finally:
+        migrated_store.close()
 
 
 @pytest.mark.parametrize("value", [None, "", True, 0, 6, 1.0])
