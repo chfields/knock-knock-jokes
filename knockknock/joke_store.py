@@ -44,6 +44,7 @@ class MemoryJokeStore:
         self.jokes = {joke.id: joke for joke in jokes}
 
     def list(self) -> list[Joke]:
+        """Return every joke in insertion (catalogue) order."""
         return list(self.jokes.values())
 
     def get(self, joke_id: str) -> Optional[Joke]:
