@@ -26,6 +26,13 @@ how something is built or tested updates this file in the same pull request.
   deployment (see README, "Deploying to Vercel"). Keep `requirements.txt`
   in step with the `web` and `postgres` extras in `pyproject.toml`.
 
+## Architecture knowledge
+
+Before designing or changing an area, read `docs/knowledge/index.md` and open
+the concepts that cover the files you will touch. They record non-obvious
+pitfalls and invariants, with citations to the code. This file wins if the two
+ever disagree.
+
 ## Python
 
 Run from the repository root (pytest imports `knockknock` from there; no
