@@ -78,7 +78,8 @@ applications. Flask uses it for sessions and the application uses it to sign
 voter-identity cookies; changing it invalidates existing voter cookies.
 
 Set `DATABASE_URL` to use PostgreSQL for ratings and the web catalogue. The
-first connection seeds the built-in jokes; jokes added through the web UI and
+first connection seeds the built-in jokes. Later built-in catalogue versions
+are seeded once on deployment, while jokes added through the web UI and
 deletions are persisted there. If the application is behind reverse proxies,
 set `KNOCKKNOCK_TRUSTED_PROXIES` to the number of trusted proxy hops so Flask
 uses `X-Forwarded-For` for the client address and `X-Forwarded-Proto` for the

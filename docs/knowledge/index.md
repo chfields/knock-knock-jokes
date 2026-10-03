@@ -4,7 +4,7 @@ okf_version: 0.2
 
 # Pitfalls
 
-* [Built-in jokes are seeded into PostgreSQL only once](builtin-jokes-seed-once.md) - editing JOKES doesn't reach a deployed database; re-seeding resurrects deletions
+* [Built-in jokes are seeded into PostgreSQL by version](builtin-jokes-seed-once.md) - additions reach deployed databases without resurrecting deletions
 * [Catalogue order differs by store](catalogue-order-differs-by-store.md) - memory keeps JOKES order, PostgreSQL sorts by name
 
 # Invariants

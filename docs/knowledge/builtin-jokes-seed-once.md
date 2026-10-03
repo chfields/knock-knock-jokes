@@ -1,7 +1,7 @@
 ---
 type: pitfall
-title: Built-in jokes are seeded into PostgreSQL only once
-description: Adding to JOKES in jokes.py does not reach an already-seeded database such as production; naive re-seeding would resurrect deleted jokes.
+title: Built-in jokes are seeded into PostgreSQL by version
+description: Built-in jokes are seeded by version so new entries reach deployed databases without restoring deletions.
 tags: [jokes, postgres, deployment]
 status: stable
 generated: { by: human:chfields-spike, at: 2026-10-03T00:00:00Z }
@@ -19,18 +19,12 @@ wardby:
 ---
 
 When `DATABASE_URL` is set (the deployed site), the web catalogue comes from the
-`jokes` table, not from `JOKES`.[^select] `PostgresJokeStore._seed` copies `JOKES`
-in **only when the table is empty**.[^seed] So a change that adds or edits entries in
-`JOKES` passes every local test (which use `MemoryJokeStore`) yet never appears on
-an existing deployment.
-
-**Why it is this way:** jokes deleted through the web UI must stay deleted. Changing
-`_seed` to insert missing built-ins on every start would bring deleted jokes back.
-
-**What to do:** if a change to built-in jokes must reach existing databases, add a
-way that records which built-ins were already seeded (so deletions are respected),
-with tests against PostgreSQL — or state plainly in the pull request summary that
-existing deployments will not show the change.
+`jokes` table, not from `JOKES`.[^select] `PostgresJokeStore._seed` records each
+built-in seed version in `builtin_joke_seed_versions`.[^seed] A newly deployed
+version inserts only the jokes introduced in that version, so existing deployments
+receive additions without restoring jokes deleted through the web UI. The initial
+version is marked as complete for legacy databases because those catalogues were
+already seeded before version tracking was introduced.
 
 [^seed]: knockknock/joke_store.py, PostgresJokeStore._seed
 [^select]: knockknock/web.py, create_app store selection

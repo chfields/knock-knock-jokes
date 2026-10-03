@@ -11,6 +11,7 @@ class Joke:
     name: str
     punchline: str
     id: str = ""
+    seed_version: int = 1
 
     def __post_init__(self) -> None:
         """Reject malformed catalogue values at the boundary."""
@@ -22,6 +23,8 @@ class Joke:
             object.__setattr__(self, "id", self.name.casefold().replace(" ", "-"))
         elif not isinstance(self.id, str) or not self.id.strip():
             raise ValueError("Joke ID must be a non-empty string")
+        if isinstance(self.seed_version, bool) or not isinstance(self.seed_version, int) or self.seed_version < 1:
+            raise ValueError("Joke seed version must be a positive integer")
 
 
 JOKES: tuple[Joke, ...] = (
@@ -64,6 +67,9 @@ JOKES: tuple[Joke, ...] = (
         "a-little-old-lady",
     ),
     Joke("Meow", "Cat got your tongue?", "cat"),
+    Joke("Justin", "Justin time for dinner!", "justin", 2),
+    Joke("Harry", "Harry up and open the door, it's cold!", "harry", 2),
+    Joke("Ice cream", "Ice cream every time I see a ghost!", "ice-cream", 2),
 )
 
 

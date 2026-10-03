@@ -77,15 +77,18 @@ class PostgresJokeStore:
             ) from error
         self._pool = connection_pool(database_url, kwargs={"autocommit": True}, open=False)
         self._pool.open(wait=True)
-        self._create_schema()
-        self._seed(jokes)
+        existing_catalogue = self._create_schema()
+        self._seed(jokes, existing_catalogue)
 
     def _connect(self):
         return self._pool.connection()
 
-    def _create_schema(self) -> None:
+    def _create_schema(self) -> bool:
+        """Create storage and report whether this database already had a catalogue."""
         with self._connect() as connection:
             with connection.cursor() as cursor:
+                cursor.execute("SELECT to_regclass('jokes') IS NOT NULL")
+                existing_catalogue = cursor.fetchone()[0]
                 cursor.execute(
                     """
                     CREATE TABLE IF NOT EXISTS jokes (
@@ -95,20 +98,39 @@ class PostgresJokeStore:
                     )
                     """
                 )
+                cursor.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS builtin_joke_seed_versions (
+                        version INTEGER PRIMARY KEY
+                    )
+                    """
+                )
+        return existing_catalogue
 
-    def _seed(self, jokes: Iterable[Joke]) -> None:
+    def _seed(self, jokes: Iterable[Joke], existing_catalogue: bool) -> None:
+        """Seed each catalogue version once, preserving deleted built-in jokes."""
+        jokes = tuple(jokes)
         with self._connect() as connection:
             with connection.cursor() as cursor:
-                cursor.execute("SELECT EXISTS (SELECT 1 FROM jokes)")
-                if cursor.fetchone()[0]:
-                    return
-                for joke in jokes:
+                for version in sorted({joke.seed_version for joke in jokes}):
                     cursor.execute(
-                        """
-                        INSERT INTO jokes (id, name, punchline) VALUES (%s, %s, %s)
-                        ON CONFLICT (id) DO NOTHING
-                        """,
-                        (joke.id, joke.name, joke.punchline),
+                        "SELECT EXISTS (SELECT 1 FROM builtin_joke_seed_versions WHERE version = %s)",
+                        (version,),
+                    )
+                    if cursor.fetchone()[0]:
+                        continue
+                    if not (existing_catalogue and version == 1):
+                        for joke in jokes:
+                            if joke.seed_version == version:
+                                cursor.execute(
+                                    """
+                                    INSERT INTO jokes (id, name, punchline) VALUES (%s, %s, %s)
+                                    ON CONFLICT (id) DO NOTHING
+                                    """,
+                                    (joke.id, joke.name, joke.punchline),
+                                )
+                    cursor.execute(
+                        "INSERT INTO builtin_joke_seed_versions (version) VALUES (%s)", (version,)
                     )
 
     def list(self) -> list[Joke]:
