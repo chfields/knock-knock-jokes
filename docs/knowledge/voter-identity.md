@@ -1,24 +1,35 @@
 ---
 type: invariant
-title: Per-voter data is keyed by _voter_key(), never raw identity
-description: Ratings are keyed by a signed-cookie id or a SHA-256 of the client IP; raw IPs and cookie values are never stored or returned.
+title: Per-voter data uses verified cookie IDs or IP hashes
+description: Ratings receive a verified cookie ID or a SHA-256 client-IP fallback, never the signed cookie string or raw address.
 tags: [ratings, privacy]
 status: stable
-generated: { by: human:chfields-spike, at: 2026-10-03T00:00:00Z }
+generated: { by: knockknock-architect/gpt-5.6-terra, at: 2026-10-03T19:22:19Z }
 sources:
-  - { id: key, resource: "https://github.com/chfields/knock-knock-jokes/blob/b92f0a0606448cf4d1163b0420644fac997e2c05/knockknock/web.py#L89-L100" }
+  - { id: key, resource: "https://github.com/chfields/knock-knock-jokes/blob/db6e4fa032e52c80670a86918faead2c7fe790bc/knockknock/web.py#L89-L100" }
+  - { id: lookup, resource: "https://github.com/chfields/knock-knock-jokes/blob/db6e4fa032e52c80670a86918faead2c7fe790bc/knockknock/web.py#L207-L218" }
+  - { id: save, resource: "https://github.com/chfields/knock-knock-jokes/blob/db6e4fa032e52c80670a86918faead2c7fe790bc/knockknock/web.py#L226-L241" }
 wardby:
   schema: 1
   roles: [builder, reviewer]
   affects: ["knockknock/web.py", "knockknock/ratings.py"]
   citations:
-    - { id: key, repo: github:chfields/knock-knock-jokes, path: knockknock/web.py, lines: [89, 100], symbol: _voter_key, sha: b92f0a0606448cf4d1163b0420644fac997e2c05, spanHash: sha256:ee61b7ad45722b99ac5da6107a3bc366d05302b4e16a49de4a9afbfa4c5d1b42 }
+    - { id: key, repo: github:chfields/knock-knock-jokes, path: knockknock/web.py, lines: [89, 100], symbol: _voter_key, sha: db6e4fa032e52c80670a86918faead2c7fe790bc, spanHash: sha256:ee61b7ad45722b99ac5da6107a3bc366d05302b4e16a49de4a9afbfa4c5d1b42 }
+    - { id: lookup, repo: github:chfields/knock-knock-jokes, path: knockknock/web.py, lines: [207, 218], symbol: create_app.api_random_joke, sha: db6e4fa032e52c80670a86918faead2c7fe790bc, spanHash: sha256:be13c0c4fa738ef0982be78ee935b4d8f68891776876cdd71b9a990c5a6e9d8d }
+    - { id: save, repo: github:chfields/knock-knock-jokes, path: knockknock/web.py, lines: [226, 241], symbol: create_app.api_rate_joke, sha: db6e4fa032e52c80670a86918faead2c7fe790bc, spanHash: sha256:86ddc8335886d9db60120c8b35eed9f56cb3657aa814fb5656d9f8a65ff1f33c }
   confidence: high
 ---
 
-Anything stored or looked up per voter uses `_voter_key()`:[^key] `cookie:<id>` from
-the signed voter cookie, else `ip:<sha256 of client address>`. Never persist, log,
-or return a raw IP address or the cookie value. Note a first-time visitor has no
-cookie yet, so their first vote is keyed by IP hash.
+Anything stored or looked up per voter uses `_voter_key()`:[^key] a verified
+`cookie:<id>` value from the signed voter cookie, else `ip:<sha256 of client
+address>`. The signed cookie string and raw client address are not passed to the
+rating store: API reads use the key for lookup[^lookup] and rating submissions use
+it for persistence.[^save] A first-time visitor has no cookie yet, so their first
+vote is keyed by IP hash.
+
+**What to do:** pass `_voter_key()` to per-voter storage and lookup calls; do not
+substitute an unverified cookie value or raw client address.
 
 [^key]: knockknock/web.py, _voter_key
+[^lookup]: knockknock/web.py, create_app.api_random_joke
+[^save]: knockknock/web.py, create_app.api_rate_joke

@@ -8,7 +8,11 @@ okf_version: 0.2
 * [Catalogue order differs by store](catalogue-order-differs-by-store.md) - memory keeps JOKES order, PostgreSQL sorts by name
 * [Trusted proxy count controls the fallback voter identity](trusted-proxy-count-controls-voter-ip.md) - proxy-hop configuration determines whether IP-hash voting uses a client or forwarded address
 
+# Risks
+
+* [Catalogue mutations have no authorization boundary](catalogue-mutations-are-unauthenticated.md) - API callers can add or delete jokes without an access check
+
 # Invariants
 
 * [Every store change lands in both backends](store-parity.md) - memory/JSONL and PostgreSQL implementations stay in step, tested both ways
-* [Per-voter data is keyed by _voter_key()](voter-identity.md) - never store or return raw IPs or cookie values
+* [Per-voter data uses verified cookie IDs or IP hashes](voter-identity.md) - stores get a verified ID or address hash, never a signed cookie string or raw address

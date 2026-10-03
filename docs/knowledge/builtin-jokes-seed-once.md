@@ -4,19 +4,19 @@ title: Built-in jokes are seeded into PostgreSQL only once
 description: Built-in additions need a one-time catalogue migration; re-seeding resurrects deletions.
 tags: [jokes, postgres, deployment]
 status: stable
-generated: { by: knockknock-architect/gpt-5, at: 2026-10-03T19:15:23Z }
+generated: { by: knockknock-architect/gpt-5.6-terra, at: 2026-10-03T19:22:19Z }
 sources:
-  - { id: seed, resource: "https://github.com/chfields/knock-knock-jokes/blob/b92f0a0606448cf4d1163b0420644fac997e2c05/knockknock/joke_store.py#L111-L124" }
-  - { id: migration, resource: "https://github.com/chfields/knock-knock-jokes/blob/b92f0a0606448cf4d1163b0420644fac997e2c05/knockknock/joke_store.py#L126-L151" }
-  - { id: select, resource: "https://github.com/chfields/knock-knock-jokes/blob/b92f0a0606448cf4d1163b0420644fac997e2c05/knockknock/web.py#L130-L138" }
+  - { id: seed, resource: "https://github.com/chfields/knock-knock-jokes/blob/db6e4fa032e52c80670a86918faead2c7fe790bc/knockknock/joke_store.py#L111-L124" }
+  - { id: migration, resource: "https://github.com/chfields/knock-knock-jokes/blob/db6e4fa032e52c80670a86918faead2c7fe790bc/knockknock/joke_store.py#L126-L151" }
+  - { id: select, resource: "https://github.com/chfields/knock-knock-jokes/blob/db6e4fa032e52c80670a86918faead2c7fe790bc/knockknock/web.py#L130-L138" }
 wardby:
   schema: 1
   roles: [builder, reviewer, planner]
   affects: ["knockknock/jokes.py", "knockknock/joke_store.py"]
   citations:
-    - { id: seed, repo: github:chfields/knock-knock-jokes, path: knockknock/joke_store.py, lines: [111, 124], symbol: PostgresJokeStore._seed, sha: b92f0a0606448cf4d1163b0420644fac997e2c05, spanHash: sha256:52acecc228a6274974fd0cbb986480cad4c4c1666c943d1f94b4ed557c4ab44b }
-    - { id: migration, repo: github:chfields/knock-knock-jokes, path: knockknock/joke_store.py, lines: [126, 151], symbol: PostgresJokeStore._apply_builtin_joke_migrations, sha: b92f0a0606448cf4d1163b0420644fac997e2c05, spanHash: sha256:b777770160fe5d62ae06bcaaf61cd1bf9c84e1728474437af415475e1960a00e }
-    - { id: select, repo: github:chfields/knock-knock-jokes, path: knockknock/web.py, lines: [130, 138], symbol: create_app, sha: b92f0a0606448cf4d1163b0420644fac997e2c05, spanHash: sha256:7eb25a3a5b55a04e6c1d6f0b75c211c7ab9883855ccabc7ed90b0e414e6b9206 }
+    - { id: seed, repo: github:chfields/knock-knock-jokes, path: knockknock/joke_store.py, lines: [111, 124], symbol: PostgresJokeStore._seed, sha: db6e4fa032e52c80670a86918faead2c7fe790bc, spanHash: sha256:52acecc228a6274974fd0cbb986480cad4c4c1666c943d1f94b4ed557c4ab44b }
+    - { id: migration, repo: github:chfields/knock-knock-jokes, path: knockknock/joke_store.py, lines: [126, 151], symbol: PostgresJokeStore._apply_builtin_joke_migrations, sha: db6e4fa032e52c80670a86918faead2c7fe790bc, spanHash: sha256:b777770160fe5d62ae06bcaaf61cd1bf9c84e1728474437af415475e1960a00e }
+    - { id: select, repo: github:chfields/knock-knock-jokes, path: knockknock/web.py, lines: [130, 138], symbol: create_app, sha: db6e4fa032e52c80670a86918faead2c7fe790bc, spanHash: sha256:7eb25a3a5b55a04e6c1d6f0b75c211c7ab9883855ccabc7ed90b0e414e6b9206 }
   confidence: high
 ---
 
