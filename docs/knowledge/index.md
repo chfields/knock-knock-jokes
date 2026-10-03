@@ -10,6 +10,7 @@ okf_version: 0.2
 
 # Risks
 
+* [Every web response provisions a persistent voter cookie](all-web-responses-provision-voter-cookie.md) - passive browsing receives a signed one-year voter identifier
 * [Catalogue mutations have no authorization boundary](catalogue-mutations-are-unauthenticated.md) - API callers can add or delete jokes without an access check
 
 # Invariants
