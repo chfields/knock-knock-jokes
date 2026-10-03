@@ -6,6 +6,10 @@ from typing import Iterable, Optional, Protocol
 
 from .jokes import Joke
 
+BUILTIN_JOKE_MIGRATIONS = (
+    ("2026-10-03-add-justin-harry-ice-cream", ("justin", "harry", "ice-cream")),
+)
+
 
 class DuplicateJokeError(Exception):
     """Raised when a joke with the same setup already exists."""
@@ -79,6 +83,7 @@ class PostgresJokeStore:
         self._pool.open(wait=True)
         self._create_schema()
         self._seed(jokes)
+        self._apply_builtin_joke_migrations(jokes)
 
     def _connect(self):
         return self._pool.connection()
@@ -92,6 +97,13 @@ class PostgresJokeStore:
                         id TEXT PRIMARY KEY,
                         name TEXT NOT NULL UNIQUE,
                         punchline TEXT NOT NULL
+                    )
+                    """
+                )
+                cursor.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS builtin_joke_migrations (
+                        id TEXT PRIMARY KEY
                     )
                     """
                 )
@@ -110,6 +122,33 @@ class PostgresJokeStore:
                         """,
                         (joke.id, joke.name, joke.punchline),
                     )
+
+    def _apply_builtin_joke_migrations(self, jokes: Iterable[Joke]) -> None:
+        """Apply each built-in catalogue addition to existing databases once."""
+        jokes_by_id = {joke.id: joke for joke in jokes}
+        with self._connect() as connection:
+            with connection.transaction():
+                with connection.cursor() as cursor:
+                    for migration_id, joke_ids in BUILTIN_JOKE_MIGRATIONS:
+                        cursor.execute(
+                            """
+                            INSERT INTO builtin_joke_migrations (id) VALUES (%s)
+                            ON CONFLICT (id) DO NOTHING
+                            RETURNING id
+                            """,
+                            (migration_id,),
+                        )
+                        if cursor.fetchone() is None:
+                            continue
+                        for joke_id in joke_ids:
+                            joke = jokes_by_id[joke_id]
+                            cursor.execute(
+                                """
+                                INSERT INTO jokes (id, name, punchline) VALUES (%s, %s, %s)
+                                ON CONFLICT (id) DO NOTHING
+                                """,
+                                (joke.id, joke.name, joke.punchline),
+                            )
 
     def list(self) -> list[Joke]:
         with self._connect() as connection:
