@@ -6,6 +6,7 @@ okf_version: 0.2
 
 * [Built-in jokes are seeded into PostgreSQL only once](builtin-jokes-seed-once.md) - editing JOKES doesn't reach a deployed database; re-seeding resurrects deletions
 * [Catalogue order differs by store](catalogue-order-differs-by-store.md) - memory keeps JOKES order, PostgreSQL sorts by name
+* [Trusted proxy count controls the fallback voter identity](trusted-proxy-count-controls-voter-ip.md) - proxy-hop configuration determines whether IP-hash voting uses a client or forwarded address
 
 # Invariants
 
