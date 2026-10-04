@@ -77,7 +77,7 @@ Set `KNOCKKNOCK_SECRET_KEY` to a private, stable value in deployed web
 applications. Flask uses it for sessions and the application uses it to sign
 voter-identity cookies; changing it invalidates existing voter cookies.
 
-Set `DATABASE_URL` to use PostgreSQL for ratings and the web catalogue. The
+Set `DATABASE_URL` to use PostgreSQL for joke ratings and the web catalogue. The
 first connection seeds the built-in jokes. Later built-in additions are applied
 once through catalogue migrations, while jokes added through the web UI and
 deletions remain persisted. If the application is behind reverse proxies,
