@@ -2,7 +2,7 @@
 
 ## Goal
 
-After a joke is printed, let the user optionally rate it from 1 to 5 stars.
+After a joke is printed, let the user optionally rate it from 1 to 5 stars (whole numbers only).
 The existing non-interactive and listing flows should remain unchanged unless
 the user explicitly enables rating.
 
