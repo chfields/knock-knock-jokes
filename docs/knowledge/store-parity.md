@@ -30,7 +30,7 @@ diverges by deployment choice. Backend-specific implementation details, such as
 PostgreSQL's durable built-in-catalogue migrations, need not be mirrored locally.
 
 **What to do:** implement and test every shared storage behavior in both backends;
-keep backend-specific durability mechanisms scoped to the backend that needs them.
+keep backend-specific durability mechanisms scoped to the one backend that needs them.
 
 [^jmemory]: knockknock/joke_store.py, MemoryJokeStore
 [^jpostgres]: knockknock/joke_store.py, PostgresJokeStore
