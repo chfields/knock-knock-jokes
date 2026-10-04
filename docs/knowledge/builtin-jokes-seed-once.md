@@ -6,16 +6,16 @@ tags: [jokes, postgres, deployment]
 status: stable
 generated: { by: knockknock-architect/gpt-5.6-terra, at: 2026-10-03T21:28:18Z }
 sources:
-  - { id: seed, resource: "https://github.com/chfields/knock-knock-jokes/blob/3333698bdcaa149060a79d0392042fd68dd996f4/knockknock/joke_store.py#L111-L124" }
-  - { id: migration, resource: "https://github.com/chfields/knock-knock-jokes/blob/3333698bdcaa149060a79d0392042fd68dd996f4/knockknock/joke_store.py#L126-L151" }
+  - { id: seed, resource: "https://github.com/chfields/knock-knock-jokes/blob/6e3aafb6e0ace0132522c3cdca6c0bf1c1893887/knockknock/joke_store.py#L112-L125" }
+  - { id: migration, resource: "https://github.com/chfields/knock-knock-jokes/blob/6e3aafb6e0ace0132522c3cdca6c0bf1c1893887/knockknock/joke_store.py#L127-L152" }
   - { id: select, resource: "https://github.com/chfields/knock-knock-jokes/blob/3333698bdcaa149060a79d0392042fd68dd996f4/knockknock/web.py#L130-L138" }
 wardby:
   schema: 1
   roles: [builder, reviewer, planner]
   affects: ["knockknock/jokes.py", "knockknock/joke_store.py"]
   citations:
-    - { id: seed, repo: github:chfields/knock-knock-jokes, path: knockknock/joke_store.py, lines: [111, 124], symbol: PostgresJokeStore._seed, sha: 3333698bdcaa149060a79d0392042fd68dd996f4, spanHash: sha256:52acecc228a6274974fd0cbb986480cad4c4c1666c943d1f94b4ed557c4ab44b }
-    - { id: migration, repo: github:chfields/knock-knock-jokes, path: knockknock/joke_store.py, lines: [126, 151], symbol: PostgresJokeStore._apply_builtin_joke_migrations, sha: 3333698bdcaa149060a79d0392042fd68dd996f4, spanHash: sha256:b777770160fe5d62ae06bcaaf61cd1bf9c84e1728474437af415475e1960a00e }
+    - { id: seed, repo: github:chfields/knock-knock-jokes, path: knockknock/joke_store.py, lines: [112, 125], symbol: PostgresJokeStore._seed, sha: 6e3aafb6e0ace0132522c3cdca6c0bf1c1893887, spanHash: sha256:52acecc228a6274974fd0cbb986480cad4c4c1666c943d1f94b4ed557c4ab44b }
+    - { id: migration, repo: github:chfields/knock-knock-jokes, path: knockknock/joke_store.py, lines: [127, 152], symbol: PostgresJokeStore._apply_builtin_joke_migrations, sha: 6e3aafb6e0ace0132522c3cdca6c0bf1c1893887, spanHash: sha256:b777770160fe5d62ae06bcaaf61cd1bf9c84e1728474437af415475e1960a00e }
     - { id: select, repo: github:chfields/knock-knock-jokes, path: knockknock/web.py, lines: [130, 138], symbol: create_app, sha: 3333698bdcaa149060a79d0392042fd68dd996f4, spanHash: sha256:7eb25a3a5b55a04e6c1d6f0b75c211c7ab9883855ccabc7ed90b0e414e6b9206 }
   confidence: high
 ---
