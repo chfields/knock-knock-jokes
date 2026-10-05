@@ -13,6 +13,7 @@ okf_version: 0.2
 * [Every web response provisions a persistent voter cookie](all-web-responses-provision-voter-cookie.md) - passive browsing receives a signed one-year voter identifier
 * [Catalogue mutations have no authorization boundary](catalogue-mutations-are-unauthenticated.md) - API callers can add or delete jokes without an access check
 * [A first direct vote switches from IP to cookie identity](first-vote-switches-from-ip-to-cookie-identity.md) - a direct initial rating can bypass the later cookie's duplicate-vote check
+* [Deleting a joke leaves ratings that can attach to a replacement](deleting-jokes-leaves-ratings.md) - recreating the same setup can expose its prior scores and vote history
 
 # Invariants
 
