@@ -7,3 +7,4 @@
 - 2026-10-03: weekly review verified existing citations and recorded the initial direct-vote identity switch.
 - 2026-10-04: drift review re-anchored changed joke-store citations, clarified insertion ordering, and scoped store parity to shared public behavior.
 - 2026-10-05: weekly review verified existing citations and added the rating-retention risk of deleting and recreating a joke.
+- 2026-10-12: weekly review verified existing citations and recorded that local catalogue mutations reset independently of persisted JSONL ratings.
