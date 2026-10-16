@@ -14,7 +14,6 @@
     "@react-aria/live-announcer": "^3.5.1",
     "@react-aria/ssr": "^3.10.1",
     "@react-aria/utils": "^3.34.1",
-    "pretty-ms": "^9.3.1",
     "react": "^19.3.0",
     "react-aria": "^3.52.1",
     "react-aria-components": "^1.21.1",
