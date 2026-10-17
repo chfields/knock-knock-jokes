@@ -3,12 +3,25 @@ import pytest
 from knockknock.jokes import JOKES, Joke, get_joke
 
 
-def test_joke_bank_has_38_unique_well_formed_jokes():
-    assert len(JOKES) == 38
+def test_joke_bank_has_78_unique_well_formed_jokes():
+    assert len(JOKES) == 78
     assert all(isinstance(joke, Joke) for joke in JOKES)
     assert all(joke.name.strip() and joke.punchline.strip() for joke in JOKES)
     assert len({joke.name.casefold() for joke in JOKES}) == len(JOKES)
     assert len({joke.id for joke in JOKES}) == len(JOKES)
+
+
+def test_new_animal_and_country_jokes_load():
+    expected_joke_ids = {
+        "llama", "bee", "chicken", "deer", "elephant", "frog", "giraffe",
+        "horse", "kangaroo", "lion", "monkey", "owl", "penguin", "rabbit",
+        "sheep", "tiger", "turtle", "walrus", "bison", "zebra", "brazil",
+        "chile", "china", "denmark", "egypt", "finland", "france", "greece",
+        "hungary", "india", "iran", "japan", "kenya", "laos", "mali", "mexico",
+        "nepal", "oman", "peru", "thailand",
+    }
+
+    assert {joke.id for joke in JOKES} >= expected_joke_ids
 
 
 def test_get_joke_supports_zero_based_index_and_name():

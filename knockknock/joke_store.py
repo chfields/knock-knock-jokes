@@ -8,6 +8,17 @@ from .jokes import Joke
 
 BUILTIN_JOKE_MIGRATIONS = (
     ("2026-10-03-add-justin-harry-ice-cream", ("justin", "harry", "ice-cream")),
+    (
+        "2026-10-17-add-animal-and-country-jokes",
+        (
+            "llama", "bee", "chicken", "deer", "elephant", "frog", "giraffe",
+            "horse", "kangaroo", "lion", "monkey", "owl", "penguin", "rabbit",
+            "sheep", "tiger", "turtle", "walrus", "bison", "zebra", "brazil",
+            "chile", "china", "denmark", "egypt", "finland", "france", "greece",
+            "hungary", "india", "iran", "japan", "kenya", "laos", "mali", "mexico",
+            "nepal", "oman", "peru", "thailand",
+        ),
+    ),
 )
 
 

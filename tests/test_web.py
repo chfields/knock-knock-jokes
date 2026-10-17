@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 38, "count_label": "38"}
+    assert response.get_json() == {"count": 78, "count_label": "78"}
 
 
 @pytest.mark.parametrize(
@@ -393,6 +393,32 @@ def test_postgres_joke_store_adds_new_builtins_to_existing_catalogue():
     database_url = os.environ["DATABASE_URL"]
     migration_id = "2026-10-03-add-justin-harry-ice-cream"
     new_joke_ids = ("justin", "harry", "ice-cream")
+    store = PostgresJokeStore(database_url, JOKES)
+    try:
+        with store._connect() as connection, connection.cursor() as cursor:
+            cursor.execute("DELETE FROM jokes WHERE id = ANY(%s)", (list(new_joke_ids),))
+            cursor.execute("DELETE FROM builtin_joke_migrations WHERE id = %s", (migration_id,))
+    finally:
+        store.close()
+
+    migrated_store = PostgresJokeStore(database_url, JOKES)
+    try:
+        assert {joke.id for joke in migrated_store.list()} >= set(new_joke_ids)
+    finally:
+        migrated_store.close()
+
+
+def test_postgres_joke_store_adds_animal_and_country_builtins_to_existing_catalogue():
+    database_url = os.environ["DATABASE_URL"]
+    migration_id = "2026-10-17-add-animal-and-country-jokes"
+    new_joke_ids = (
+        "llama", "bee", "chicken", "deer", "elephant", "frog", "giraffe",
+        "horse", "kangaroo", "lion", "monkey", "owl", "penguin", "rabbit",
+        "sheep", "tiger", "turtle", "walrus", "bison", "zebra", "brazil",
+        "chile", "china", "denmark", "egypt", "finland", "france", "greece",
+        "hungary", "india", "iran", "japan", "kenya", "laos", "mali", "mexico",
+        "nepal", "oman", "peru", "thailand",
+    )
     store = PostgresJokeStore(database_url, JOKES)
     try:
         with store._connect() as connection, connection.cursor() as cursor:

@@ -54,6 +54,26 @@ def test_cli_search_reports_no_match():
     assert result.stderr == ""
 
 
+def test_cli_lists_animal_category_jokes():
+    result = run_cli("--category", "animals")
+
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert "38: Llama" in result.stdout
+    assert "57: Zebra" in result.stdout
+    assert "58: Brazil" not in result.stdout
+
+
+def test_cli_lists_country_category_jokes():
+    result = run_cli("--category", "countries")
+
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert "58: Brazil" in result.stdout
+    assert "77: Thailand" in result.stdout
+    assert "57: Zebra" not in result.stdout
+
+
 def test_cli_tells_joke_by_index():
     result = run_cli("--joke", "0")
 

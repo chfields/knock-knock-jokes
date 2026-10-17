@@ -26,6 +26,13 @@ List the available jokes:
 python -m knockknock --list
 ```
 
+List the new animal or country jokes:
+
+```bash
+python -m knockknock --category animals
+python -m knockknock --category countries
+```
+
 Tell a joke by its zero-based index or setup name:
 
 ```bash
