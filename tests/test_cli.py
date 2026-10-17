@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 from knockknock.__main__ import TITLE_LINES
-from knockknock.jokes import JOKES
+from knockknock.jokes import JOKE_CATEGORIES, JOKES
 
 # The joke output is still the 5-line sequence from the core sequence builder.
 JOKE_LINE_COUNT = 5
@@ -52,6 +52,36 @@ def test_cli_search_reports_no_match():
     assert result.returncode == 1
     assert result.stdout == "No jokes match.\n"
     assert result.stderr == ""
+
+
+def test_cli_lists_animal_jokes_by_category():
+    result = run_cli("--category", "animals")
+
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert result.stdout.splitlines()[-20:] == [
+        f"{index}: {joke.name}" for index, joke in enumerate(JOKES) if joke in JOKE_CATEGORIES["animals"]
+    ]
+
+
+def test_cli_lists_country_jokes_by_category():
+    result = run_cli("--category", "countries")
+
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert result.stdout.splitlines()[-20:] == [
+        f"{index}: {joke.name}" for index, joke in enumerate(JOKES) if joke in JOKE_CATEGORIES["countries"]
+    ]
+
+
+def test_cli_lists_instrument_jokes_by_category():
+    result = run_cli("--category", "instruments")
+
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert result.stdout.splitlines()[-20:] == [
+        f"{index}: {joke.name}" for index, joke in enumerate(JOKES) if joke in JOKE_CATEGORIES["instruments"]
+    ]
 
 
 def test_cli_tells_joke_by_index():

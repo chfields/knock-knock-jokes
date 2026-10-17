@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from .jokes import JOKES, get_joke
+from .jokes import JOKE_CATEGORIES, JOKES, get_joke
 from .ratings import JsonlRatingStore, Rating, RatingStore
 from .sequence import tell
 
@@ -168,6 +168,7 @@ def main() -> int:
     group.add_argument("--list", action="store_true", help="list all available jokes")
     group.add_argument("--joke", metavar="INDEX_OR_NAME", help="tell a joke by index or name")
     group.add_argument("--search", metavar="TEXT", help="list jokes matching text in the setup or punchline")
+    group.add_argument("--category", choices=JOKE_CATEGORIES, help="list jokes in a category")
     parser.add_argument("--rate", action="store_true", help="optionally rate the joke interactively")
     parser.add_argument(
         "--skip-seconds",
@@ -205,6 +206,13 @@ def main() -> int:
         print_title()
         for index, joke in matches:
             print(f"{index}: {joke.name}")
+        return 0
+
+    if args.category is not None:
+        print_title()
+        for index, joke in enumerate(JOKES):
+            if joke in JOKE_CATEGORIES[args.category]:
+                print(f"{index}: {joke.name}")
         return 0
 
     if args.joke is None:
