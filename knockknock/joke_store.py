@@ -8,6 +8,23 @@ from .jokes import Joke
 
 BUILTIN_JOKE_MIGRATIONS = (
     ("2026-10-03-add-justin-harry-ice-cream", ("justin", "harry", "ice-cream")),
+    (
+        "2026-10-17-add-twelve-fruit-jokes",
+        (
+            "apple",
+            "banana",
+            "grape",
+            "pear",
+            "peach",
+            "mango",
+            "kiwi",
+            "cherry",
+            "lemon",
+            "lime",
+            "plum",
+            "melon",
+        ),
+    ),
 )
 
 

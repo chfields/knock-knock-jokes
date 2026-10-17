@@ -3,12 +3,33 @@ import pytest
 from knockknock.jokes import JOKES, Joke, get_joke
 
 
-def test_joke_bank_has_38_unique_well_formed_jokes():
-    assert len(JOKES) == 38
+def test_joke_bank_has_50_unique_well_formed_jokes():
+    assert len(JOKES) == 50
     assert all(isinstance(joke, Joke) for joke in JOKES)
     assert all(joke.name.strip() and joke.punchline.strip() for joke in JOKES)
     assert len({joke.name.casefold() for joke in JOKES}) == len(JOKES)
     assert len({joke.id for joke in JOKES}) == len(JOKES)
+
+
+@pytest.mark.parametrize(
+    ("name", "punchline", "joke_id"),
+    [
+        ("Apple", "Apple-y ever after!", "apple"),
+        ("Banana", "Banana split if you don't let me in!", "banana"),
+        ("Grape", "Grape to meet you!", "grape"),
+        ("Pear", "Pear up, it's me!", "pear"),
+        ("Peach", "Peachy keen to see you!", "peach"),
+        ("Mango", "Man-go open the door!", "mango"),
+        ("Kiwi", "Kiwi be friends?", "kiwi"),
+        ("Cherry", "Cherry up and open the door!", "cherry"),
+        ("Lemon", "Lemon in, it's cold out here!", "lemon"),
+        ("Lime", "Lime going to wait out here?", "lime"),
+        ("Plum", "Plum tired of waiting!", "plum"),
+        ("Melon", "Melon me in!", "melon"),
+    ],
+)
+def test_get_joke_includes_twelve_new_fruit_jokes(name, punchline, joke_id):
+    assert get_joke(name) == Joke(name, punchline, joke_id)
 
 
 def test_get_joke_supports_zero_based_index_and_name():

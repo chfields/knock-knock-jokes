@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 38, "count_label": "38"}
+    assert response.get_json() == {"count": 50, "count_label": "50"}
 
 
 @pytest.mark.parametrize(
@@ -336,20 +336,24 @@ def test_api_unknown_joke_returns_404(client):
 
 
 def test_api_creates_a_joke_from_its_specific_lines(client):
-    response = client.post("/api/jokes", json={"name": "Banana", "punchline": "Banana split!"})
+    response = client.post(
+        "/api/jokes",
+        json={"name": "Doorbell", "punchline": "Doorbell is broken, so I knocked!"},
+    )
 
     assert response.status_code == 201
     joke = response.get_json()
-    assert joke["id"] == "banana"
-    assert joke["name"] == "Banana"
+    assert joke["id"] == "doorbell"
+    assert joke["name"] == "Doorbell"
     assert joke["lines"] == [
-        "Knock knock.", "Who's there?", "Banana.", "Banana who?", "Banana split!",
+        "Knock knock.", "Who's there?", "Doorbell.", "Doorbell who?",
+        "Doorbell is broken, so I knocked!",
     ]
-    assert client.get("/api/jokes/banana").status_code == 200
+    assert client.get("/api/jokes/doorbell").status_code == 200
 
 
 def test_api_rejects_duplicate_joke_names(client):
-    payload = {"name": "Banana", "punchline": "Banana split!"}
+    payload = {"name": "Doorbell", "punchline": "Doorbell is broken, so I knocked!"}
 
     assert client.post("/api/jokes", json=payload).status_code == 201
     response = client.post("/api/jokes", json=payload)
@@ -367,7 +371,10 @@ def test_api_rejects_incomplete_new_jokes(client, payload):
 
 
 def test_api_deletes_a_joke(client):
-    created = client.post("/api/jokes", json={"name": "Banana", "punchline": "Banana split!"})
+    created = client.post(
+        "/api/jokes",
+        json={"name": "Doorbell", "punchline": "Doorbell is broken, so I knocked!"},
+    )
     joke_id = created.get_json()["id"]
 
     response = client.delete("/api/jokes/" + joke_id)
@@ -391,8 +398,21 @@ def test_postgres_joke_store_persists_created_jokes():
 
 def test_postgres_joke_store_adds_new_builtins_to_existing_catalogue():
     database_url = os.environ["DATABASE_URL"]
-    migration_id = "2026-10-03-add-justin-harry-ice-cream"
-    new_joke_ids = ("justin", "harry", "ice-cream")
+    migration_id = "2026-10-17-add-twelve-fruit-jokes"
+    new_joke_ids = (
+        "apple",
+        "banana",
+        "grape",
+        "pear",
+        "peach",
+        "mango",
+        "kiwi",
+        "cherry",
+        "lemon",
+        "lime",
+        "plum",
+        "melon",
+    )
     store = PostgresJokeStore(database_url, JOKES)
     try:
         with store._connect() as connection, connection.cursor() as cursor:

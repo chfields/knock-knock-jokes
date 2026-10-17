@@ -67,6 +67,18 @@ JOKES: tuple[Joke, ...] = (
     Joke("Justin", "Justin time for dinner!", "justin"),
     Joke("Harry", "Harry up and open the door, it's cold!", "harry"),
     Joke("Ice cream", "Ice cream every time I see a ghost!", "ice-cream"),
+    Joke("Apple", "Apple-y ever after!", "apple"),
+    Joke("Banana", "Banana split if you don't let me in!", "banana"),
+    Joke("Grape", "Grape to meet you!", "grape"),
+    Joke("Pear", "Pear up, it's me!", "pear"),
+    Joke("Peach", "Peachy keen to see you!", "peach"),
+    Joke("Mango", "Man-go open the door!", "mango"),
+    Joke("Kiwi", "Kiwi be friends?", "kiwi"),
+    Joke("Cherry", "Cherry up and open the door!", "cherry"),
+    Joke("Lemon", "Lemon in, it's cold out here!", "lemon"),
+    Joke("Lime", "Lime going to wait out here?", "lime"),
+    Joke("Plum", "Plum tired of waiting!", "plum"),
+    Joke("Melon", "Melon me in!", "melon"),
 )
 
 
