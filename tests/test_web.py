@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 98, "count_label": "98"}
+    assert response.get_json() == {"count": 108, "count_label": "108"}
 
 
 @pytest.mark.parametrize(
@@ -404,6 +404,13 @@ def test_postgres_joke_store_persists_created_jokes():
                 "accordion", "bass", "cello", "drum", "flute", "guitar", "harp", "kazoo",
                 "lute", "mandolin", "oboe", "piano", "recorder", "saxophone", "trombone",
                 "ukulele", "violin", "whistle", "xylophone", "zither",
+            ),
+        ),
+        (
+            "2026-10-17-add-planet-jokes",
+            (
+                "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus",
+                "neptune", "pluto", "planet-nine",
             ),
         ),
     ],

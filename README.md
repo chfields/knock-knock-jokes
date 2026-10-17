@@ -32,6 +32,7 @@ List jokes from one of the new themed categories:
 python -m knockknock --category animals
 python -m knockknock --category countries
 python -m knockknock --category instruments
+python -m knockknock --category planets
 ```
 
 Tell a joke by its zero-based index or setup name:

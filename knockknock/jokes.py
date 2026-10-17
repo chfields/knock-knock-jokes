@@ -127,6 +127,16 @@ JOKES: tuple[Joke, ...] = (
     Joke("Whistle", "Whistle you open the door?", "whistle"),
     Joke("Xylophone", "Xylophone home, but I can wait!", "xylophone"),
     Joke("Zither", "Zither you like it or not, I'm outside!", "zither"),
+    Joke("Mercury", "Mercury-fully, I brought a space joke!", "mercury"),
+    Joke("Venus", "Venus a while and let me in!", "venus"),
+    Joke("Earth", "Earth you glad I knocked?", "earth"),
+    Joke("Mars", "Mars you open the door, please?", "mars"),
+    Joke("Jupiter", "Jupiter a minute—I have a joke!", "jupiter"),
+    Joke("Saturn", "Saturn the lock and let me in!", "saturn"),
+    Joke("Uranus", "Uranus for a stellar joke!", "uranus"),
+    Joke("Neptune", "Neptune's knocking—open up!", "neptune"),
+    Joke("Pluto", "Pluto much to leave me outside!", "pluto"),
+    Joke("Planet Nine", "Planet Nine of a good reason to open the door!", "planet-nine"),
 )
 
 # Categories group new catalogue entries without changing the Joke data format.
@@ -134,6 +144,7 @@ JOKE_CATEGORIES = {
     "animals": JOKES[38:58],
     "countries": JOKES[58:78],
     "instruments": JOKES[78:98],
+    "planets": JOKES[98:108],
 }
 
 

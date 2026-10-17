@@ -21,6 +21,13 @@ BUILTIN_JOKE_MIGRATIONS = (
             "ukulele", "violin", "whistle", "xylophone", "zither",
         ),
     ),
+    (
+        "2026-10-17-add-planet-jokes",
+        (
+            "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus",
+            "neptune", "pluto", "planet-nine",
+        ),
+    ),
 )
 
 

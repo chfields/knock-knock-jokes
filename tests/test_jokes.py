@@ -3,8 +3,8 @@ import pytest
 from knockknock.jokes import JOKE_CATEGORIES, JOKES, Joke, get_joke
 
 
-def test_joke_bank_has_98_unique_well_formed_jokes():
-    assert len(JOKES) == 98
+def test_joke_bank_has_108_unique_well_formed_jokes():
+    assert len(JOKES) == 108
     assert all(isinstance(joke, Joke) for joke in JOKES)
     assert all(joke.name.strip() and joke.punchline.strip() for joke in JOKES)
     assert len({joke.name.casefold() for joke in JOKES}) == len(JOKES)
@@ -74,6 +74,16 @@ def test_joke_bank_has_98_unique_well_formed_jokes():
         ("instruments", "Whistle", "Whistle you open the door?", "whistle"),
         ("instruments", "Xylophone", "Xylophone home, but I can wait!", "xylophone"),
         ("instruments", "Zither", "Zither you like it or not, I'm outside!", "zither"),
+        ("planets", "Mercury", "Mercury-fully, I brought a space joke!", "mercury"),
+        ("planets", "Venus", "Venus a while and let me in!", "venus"),
+        ("planets", "Earth", "Earth you glad I knocked?", "earth"),
+        ("planets", "Mars", "Mars you open the door, please?", "mars"),
+        ("planets", "Jupiter", "Jupiter a minute—I have a joke!", "jupiter"),
+        ("planets", "Saturn", "Saturn the lock and let me in!", "saturn"),
+        ("planets", "Uranus", "Uranus for a stellar joke!", "uranus"),
+        ("planets", "Neptune", "Neptune's knocking—open up!", "neptune"),
+        ("planets", "Pluto", "Pluto much to leave me outside!", "pluto"),
+        ("planets", "Planet Nine", "Planet Nine of a good reason to open the door!", "planet-nine"),
     ],
 )
 def test_new_categorized_jokes_load(category, name, punchline, joke_id):

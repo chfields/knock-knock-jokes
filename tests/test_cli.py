@@ -84,6 +84,16 @@ def test_cli_lists_instrument_jokes_by_category():
     ]
 
 
+def test_cli_lists_planet_jokes_by_category():
+    result = run_cli("--category", "planets")
+
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert result.stdout.splitlines()[-10:] == [
+        f"{index}: {joke.name}" for index, joke in enumerate(JOKES) if joke in JOKE_CATEGORIES["planets"]
+    ]
+
+
 def test_cli_tells_joke_by_index():
     result = run_cli("--joke", "0")
 
