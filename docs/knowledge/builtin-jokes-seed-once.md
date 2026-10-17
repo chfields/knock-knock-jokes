@@ -29,10 +29,11 @@ have a one-time entry in `BUILTIN_JOKE_MIGRATIONS`, which records its applicatio
 **Why it is this way:** jokes deleted through the web UI must stay deleted. Changing
 `_seed` to insert missing built-ins on every start would bring deleted jokes back.
 
-**What to do:** for a new built-in joke, add its ID to a new uniquely named
-`BUILTIN_JOKE_MIGRATIONS` entry and test it against PostgreSQL. Never re-seed all
-built-ins: that would resurrect deleted jokes. Editing a previously deployed
-built-in's text still requires a dedicated migration.
+**What to do:** for new built-in jokes, add their IDs to a new uniquely named
+`BUILTIN_JOKE_MIGRATIONS` entry and test it against PostgreSQL. For example, the
+2026-10-17 vegetable-catalogue addition is one migration containing all twenty-four
+new IDs. Never re-seed all built-ins: that would resurrect deleted jokes. Editing a
+previously deployed built-in's text still requires a dedicated migration.
 
 [^seed]: knockknock/joke_store.py, PostgresJokeStore._seed
 [^migration]: knockknock/joke_store.py, PostgresJokeStore._apply_builtin_joke_migrations

@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 from knockknock.__main__ import TITLE_LINES
-from knockknock.jokes import JOKES
+from knockknock.jokes import JOKES, VEGETABLE_JOKE_IDS
 
 # The joke output is still the 5-line sequence from the core sequence builder.
 JOKE_LINE_COUNT = 5
@@ -52,6 +52,28 @@ def test_cli_search_reports_no_match():
     assert result.returncode == 1
     assert result.stdout == "No jokes match.\n"
     assert result.stderr == ""
+
+
+def test_cli_lists_vegetable_jokes_by_category():
+    result = run_cli("--category", "vegetables")
+
+    assert result.returncode == 0
+    assert result.stderr == ""
+    output = result.stdout.splitlines()
+    assert output[: len(TITLE_LINES)] == TITLE_LINES
+    assert output[len(TITLE_LINES) :] == [
+        f"{index}: {joke.name}"
+        for index, joke in enumerate(JOKES)
+        if joke.id in VEGETABLE_JOKE_IDS
+    ]
+
+
+def test_cli_rejects_unknown_category():
+    result = run_cli("--category", "fruit")
+
+    assert result.returncode != 0
+    assert result.stdout == ""
+    assert "invalid choice" in result.stderr
 
 
 def test_cli_tells_joke_by_index():

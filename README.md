@@ -26,6 +26,12 @@ List the available jokes:
 python -m knockknock --list
 ```
 
+List the vegetable jokes:
+
+```bash
+python -m knockknock --category vegetables
+```
+
 Tell a joke by its zero-based index or setup name:
 
 ```bash

@@ -8,6 +8,35 @@ from .jokes import Joke
 
 BUILTIN_JOKE_MIGRATIONS = (
     ("2026-10-03-add-justin-harry-ice-cream", ("justin", "harry", "ice-cream")),
+    (
+        "2026-10-17-add-vegetable-jokes",
+        (
+            "artichoke",
+            "asparagus",
+            "beet",
+            "broccoli",
+            "carrot",
+            "cauliflower",
+            "celery",
+            "corn",
+            "cucumber",
+            "eggplant",
+            "garlic",
+            "green-bean",
+            "kale",
+            "leek",
+            "onion",
+            "pea",
+            "pepper",
+            "potato",
+            "radish",
+            "spinach",
+            "squash",
+            "sweet-potato",
+            "turnip",
+            "zucchini",
+        ),
+    ),
 )
 
 
