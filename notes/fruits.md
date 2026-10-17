@@ -1,0 +1,20 @@
+Apple
+Banana
+Cherry
+Date
+Elderberry
+Fig
+Grape
+Honeydew
+Iris (not a fruit, removed)
+Jackfruit
+Kiwi
+Lemon
+Mango
+Nectarine
+Orange
+Papaya
+Quince
+Raspberry
+Strawberry
+Tangerine
