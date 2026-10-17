@@ -34,6 +34,10 @@ have a one-time entry in `BUILTIN_JOKE_MIGRATIONS`, which records its applicatio
 built-ins: that would resurrect deleted jokes. Editing a previously deployed
 built-in's text still requires a dedicated migration.
 
+The animal, country, and instrument catalogue additions use the
+`2026-10-17-add-animal-country-instrument-jokes` migration; the planet
+additions use `2026-10-17-add-planet-jokes`.
+
 [^seed]: knockknock/joke_store.py, PostgresJokeStore._seed
 [^migration]: knockknock/joke_store.py, PostgresJokeStore._apply_builtin_joke_migrations
 [^select]: knockknock/web.py, create_app store selection

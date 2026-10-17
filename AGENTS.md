@@ -12,7 +12,9 @@ how something is built or tested updates this file in the same pull request.
   - `joke_store.py` — persistent web catalogue storage
   - `ratings.py` — joke ratings and their storage
   - `sequence.py` — the knock-knock exchange
-  - `__main__.py` — the command-line program (`python -m knockknock`)
+  - `__main__.py` — the command-line program (`python -m knockknock`), including
+    themed catalogue listings via `--category animals`, `--category countries`,
+    `--category instruments`, and `--category planets`
   - `web.py` — the Flask app and its JSON API (`/api/...`); `templates/` holds
     the server-rendered fallback pages
 - `tests/` — pytest tests for the package, the CLI and the Flask app

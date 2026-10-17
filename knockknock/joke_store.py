@@ -8,6 +8,26 @@ from .jokes import Joke
 
 BUILTIN_JOKE_MIGRATIONS = (
     ("2026-10-03-add-justin-harry-ice-cream", ("justin", "harry", "ice-cream")),
+    (
+        "2026-10-17-add-animal-country-instrument-jokes",
+        (
+            "alpaca", "beaver", "cheetah", "dolphin", "ewe", "frog", "gnu", "horse",
+            "iguana", "jaguar", "koala", "llama", "marmoset", "newt", "otter", "penguin",
+            "rabbit", "sheep", "tiger", "yak", "canada", "chile", "denmark", "egypt",
+            "finland", "greece", "hungary", "india", "japan", "kenya", "laos", "mali",
+            "nepal", "oman", "peru", "qatar", "rwanda", "spain", "turkey", "yemen",
+            "accordion", "bass", "cello", "drum", "flute", "guitar", "harp", "kazoo",
+            "lute", "mandolin", "oboe", "piano", "recorder", "saxophone", "trombone",
+            "ukulele", "violin", "whistle", "xylophone", "zither",
+        ),
+    ),
+    (
+        "2026-10-17-add-planet-jokes",
+        (
+            "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus",
+            "neptune", "pluto", "planet-nine",
+        ),
+    ),
 )
 
 
