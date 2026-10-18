@@ -7,7 +7,7 @@ from itsdangerous import URLSafeSerializer
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from knockknock import ratings
-from knockknock.joke_store import MemoryJokeStore, PostgresJokeStore
+from knockknock.joke_store import BUILTIN_JOKE_MIGRATIONS, MemoryJokeStore, PostgresJokeStore
 from knockknock.jokes import JOKES
 from knockknock.ratings import DuplicateVoteError, JsonlRatingStore, Rating, RatingSummary
 from knockknock.sequence import tell
@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 38, "count_label": "38"}
+    assert response.get_json() == {"count": 39, "count_label": "39"}
 
 
 @pytest.mark.parametrize(
@@ -404,6 +404,26 @@ def test_postgres_joke_store_adds_new_builtins_to_existing_catalogue():
     migrated_store = PostgresJokeStore(database_url, JOKES)
     try:
         assert {joke.id for joke in migrated_store.list()} >= set(new_joke_ids)
+    finally:
+        migrated_store.close()
+
+
+def test_postgres_joke_store_applies_otter_builtin_migration():
+    database_url = os.environ["DATABASE_URL"]
+    migration_id = "2026-10-18-add-otter"
+    assert (migration_id, ("otter",)) in BUILTIN_JOKE_MIGRATIONS
+
+    store = PostgresJokeStore(database_url, JOKES)
+    try:
+        with store._connect() as connection, connection.cursor() as cursor:
+            cursor.execute("DELETE FROM jokes WHERE id = %s", ("otter",))
+            cursor.execute("DELETE FROM builtin_joke_migrations WHERE id = %s", (migration_id,))
+    finally:
+        store.close()
+
+    migrated_store = PostgresJokeStore(database_url, JOKES)
+    try:
+        assert migrated_store.get("otter").id == "otter"
     finally:
         migrated_store.close()
 

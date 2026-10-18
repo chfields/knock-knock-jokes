@@ -75,6 +75,13 @@ def test_cli_tells_joke_by_name():
     assert f"{JOKES[1].name} who?" in result.stdout
 
 
+def test_cli_tells_otter_joke():
+    result = run_cli("--joke", "Otter")
+
+    assert result.returncode == 0
+    assert "Otter be home by now!" in result.stdout
+
+
 def test_cli_defaults_to_a_joke():
     result = run_cli()
 
