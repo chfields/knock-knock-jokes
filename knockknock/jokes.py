@@ -76,7 +76,8 @@ def get_joke(selector: Union[int, str]) -> Joke:
         raise TypeError("Joke selector must be an integer or string")
     if isinstance(selector, int):
         if selector < 0:
-            raise IndexError(f"No joke at index {selector}")
+            # Negative indexes count from the end, like a Python list.
+            selector = len(JOKES) + selector + 1
         try:
             return JOKES[selector]
         except IndexError as error:

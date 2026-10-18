@@ -1,0 +1,1096 @@
+# A history of knock-knock jokes
+
+This page collects background notes on the jokes in the catalogue.
+
+- Note 1: the owls joke has been told in many variations; this entry records variation 1, its setup, its punchline and where it was first written down.
+- Note 2: the doors joke has been told in many variations; this entry records variation 2, its setup, its punchline and where it was first written down.
+- Note 3: the bananas joke has been told in many variations; this entry records variation 3, its setup, its punchline and where it was first written down.
+- Note 4: the cows joke has been told in many variations; this entry records variation 4, its setup, its punchline and where it was first written down.
+- Note 5: the interrupting animals joke has been told in many variations; this entry records variation 5, its setup, its punchline and where it was first written down.
+- Note 6: the boo joke has been told in many variations; this entry records variation 6, its setup, its punchline and where it was first written down.
+- Note 7: the lettuce joke has been told in many variations; this entry records variation 7, its setup, its punchline and where it was first written down.
+- Note 8: the orange joke has been told in many variations; this entry records variation 8, its setup, its punchline and where it was first written down.
+- Note 9: the atch joke has been told in many variations; this entry records variation 9, its setup, its punchline and where it was first written down.
+- Note 10: the tank joke has been told in many variations; this entry records variation 10, its setup, its punchline and where it was first written down.
+- Note 11: the owls joke has been told in many variations; this entry records variation 11, its setup, its punchline and where it was first written down.
+- Note 12: the doors joke has been told in many variations; this entry records variation 12, its setup, its punchline and where it was first written down.
+- Note 13: the bananas joke has been told in many variations; this entry records variation 13, its setup, its punchline and where it was first written down.
+- Note 14: the cows joke has been told in many variations; this entry records variation 14, its setup, its punchline and where it was first written down.
+- Note 15: the interrupting animals joke has been told in many variations; this entry records variation 15, its setup, its punchline and where it was first written down.
+- Note 16: the boo joke has been told in many variations; this entry records variation 16, its setup, its punchline and where it was first written down.
+- Note 17: the lettuce joke has been told in many variations; this entry records variation 17, its setup, its punchline and where it was first written down.
+- Note 18: the orange joke has been told in many variations; this entry records variation 18, its setup, its punchline and where it was first written down.
+- Note 19: the atch joke has been told in many variations; this entry records variation 19, its setup, its punchline and where it was first written down.
+- Note 20: the tank joke has been told in many variations; this entry records variation 20, its setup, its punchline and where it was first written down.
+- Note 21: the owls joke has been told in many variations; this entry records variation 21, its setup, its punchline and where it was first written down.
+- Note 22: the doors joke has been told in many variations; this entry records variation 22, its setup, its punchline and where it was first written down.
+- Note 23: the bananas joke has been told in many variations; this entry records variation 23, its setup, its punchline and where it was first written down.
+- Note 24: the cows joke has been told in many variations; this entry records variation 24, its setup, its punchline and where it was first written down.
+- Note 25: the interrupting animals joke has been told in many variations; this entry records variation 25, its setup, its punchline and where it was first written down.
+- Note 26: the boo joke has been told in many variations; this entry records variation 26, its setup, its punchline and where it was first written down.
+- Note 27: the lettuce joke has been told in many variations; this entry records variation 27, its setup, its punchline and where it was first written down.
+- Note 28: the orange joke has been told in many variations; this entry records variation 28, its setup, its punchline and where it was first written down.
+- Note 29: the atch joke has been told in many variations; this entry records variation 29, its setup, its punchline and where it was first written down.
+- Note 30: the tank joke has been told in many variations; this entry records variation 30, its setup, its punchline and where it was first written down.
+- Note 31: the owls joke has been told in many variations; this entry records variation 31, its setup, its punchline and where it was first written down.
+- Note 32: the doors joke has been told in many variations; this entry records variation 32, its setup, its punchline and where it was first written down.
+- Note 33: the bananas joke has been told in many variations; this entry records variation 33, its setup, its punchline and where it was first written down.
+- Note 34: the cows joke has been told in many variations; this entry records variation 34, its setup, its punchline and where it was first written down.
+- Note 35: the interrupting animals joke has been told in many variations; this entry records variation 35, its setup, its punchline and where it was first written down.
+- Note 36: the boo joke has been told in many variations; this entry records variation 36, its setup, its punchline and where it was first written down.
+- Note 37: the lettuce joke has been told in many variations; this entry records variation 37, its setup, its punchline and where it was first written down.
+- Note 38: the orange joke has been told in many variations; this entry records variation 38, its setup, its punchline and where it was first written down.
+- Note 39: the atch joke has been told in many variations; this entry records variation 39, its setup, its punchline and where it was first written down.
+- Note 40: the tank joke has been told in many variations; this entry records variation 40, its setup, its punchline and where it was first written down.
+- Note 41: the owls joke has been told in many variations; this entry records variation 41, its setup, its punchline and where it was first written down.
+- Note 42: the doors joke has been told in many variations; this entry records variation 42, its setup, its punchline and where it was first written down.
+- Note 43: the bananas joke has been told in many variations; this entry records variation 43, its setup, its punchline and where it was first written down.
+- Note 44: the cows joke has been told in many variations; this entry records variation 44, its setup, its punchline and where it was first written down.
+- Note 45: the interrupting animals joke has been told in many variations; this entry records variation 45, its setup, its punchline and where it was first written down.
+- Note 46: the boo joke has been told in many variations; this entry records variation 46, its setup, its punchline and where it was first written down.
+- Note 47: the lettuce joke has been told in many variations; this entry records variation 47, its setup, its punchline and where it was first written down.
+- Note 48: the orange joke has been told in many variations; this entry records variation 48, its setup, its punchline and where it was first written down.
+- Note 49: the atch joke has been told in many variations; this entry records variation 49, its setup, its punchline and where it was first written down.
+- Note 50: the tank joke has been told in many variations; this entry records variation 50, its setup, its punchline and where it was first written down.
+- Note 51: the owls joke has been told in many variations; this entry records variation 51, its setup, its punchline and where it was first written down.
+- Note 52: the doors joke has been told in many variations; this entry records variation 52, its setup, its punchline and where it was first written down.
+- Note 53: the bananas joke has been told in many variations; this entry records variation 53, its setup, its punchline and where it was first written down.
+- Note 54: the cows joke has been told in many variations; this entry records variation 54, its setup, its punchline and where it was first written down.
+- Note 55: the interrupting animals joke has been told in many variations; this entry records variation 55, its setup, its punchline and where it was first written down.
+- Note 56: the boo joke has been told in many variations; this entry records variation 56, its setup, its punchline and where it was first written down.
+- Note 57: the lettuce joke has been told in many variations; this entry records variation 57, its setup, its punchline and where it was first written down.
+- Note 58: the orange joke has been told in many variations; this entry records variation 58, its setup, its punchline and where it was first written down.
+- Note 59: the atch joke has been told in many variations; this entry records variation 59, its setup, its punchline and where it was first written down.
+- Note 60: the tank joke has been told in many variations; this entry records variation 60, its setup, its punchline and where it was first written down.
+- Note 61: the owls joke has been told in many variations; this entry records variation 61, its setup, its punchline and where it was first written down.
+- Note 62: the doors joke has been told in many variations; this entry records variation 62, its setup, its punchline and where it was first written down.
+- Note 63: the bananas joke has been told in many variations; this entry records variation 63, its setup, its punchline and where it was first written down.
+- Note 64: the cows joke has been told in many variations; this entry records variation 64, its setup, its punchline and where it was first written down.
+- Note 65: the interrupting animals joke has been told in many variations; this entry records variation 65, its setup, its punchline and where it was first written down.
+- Note 66: the boo joke has been told in many variations; this entry records variation 66, its setup, its punchline and where it was first written down.
+- Note 67: the lettuce joke has been told in many variations; this entry records variation 67, its setup, its punchline and where it was first written down.
+- Note 68: the orange joke has been told in many variations; this entry records variation 68, its setup, its punchline and where it was first written down.
+- Note 69: the atch joke has been told in many variations; this entry records variation 69, its setup, its punchline and where it was first written down.
+- Note 70: the tank joke has been told in many variations; this entry records variation 70, its setup, its punchline and where it was first written down.
+- Note 71: the owls joke has been told in many variations; this entry records variation 71, its setup, its punchline and where it was first written down.
+- Note 72: the doors joke has been told in many variations; this entry records variation 72, its setup, its punchline and where it was first written down.
+- Note 73: the bananas joke has been told in many variations; this entry records variation 73, its setup, its punchline and where it was first written down.
+- Note 74: the cows joke has been told in many variations; this entry records variation 74, its setup, its punchline and where it was first written down.
+- Note 75: the interrupting animals joke has been told in many variations; this entry records variation 75, its setup, its punchline and where it was first written down.
+- Note 76: the boo joke has been told in many variations; this entry records variation 76, its setup, its punchline and where it was first written down.
+- Note 77: the lettuce joke has been told in many variations; this entry records variation 77, its setup, its punchline and where it was first written down.
+- Note 78: the orange joke has been told in many variations; this entry records variation 78, its setup, its punchline and where it was first written down.
+- Note 79: the atch joke has been told in many variations; this entry records variation 79, its setup, its punchline and where it was first written down.
+- Note 80: the tank joke has been told in many variations; this entry records variation 80, its setup, its punchline and where it was first written down.
+- Note 81: the owls joke has been told in many variations; this entry records variation 81, its setup, its punchline and where it was first written down.
+- Note 82: the doors joke has been told in many variations; this entry records variation 82, its setup, its punchline and where it was first written down.
+- Note 83: the bananas joke has been told in many variations; this entry records variation 83, its setup, its punchline and where it was first written down.
+- Note 84: the cows joke has been told in many variations; this entry records variation 84, its setup, its punchline and where it was first written down.
+- Note 85: the interrupting animals joke has been told in many variations; this entry records variation 85, its setup, its punchline and where it was first written down.
+- Note 86: the boo joke has been told in many variations; this entry records variation 86, its setup, its punchline and where it was first written down.
+- Note 87: the lettuce joke has been told in many variations; this entry records variation 87, its setup, its punchline and where it was first written down.
+- Note 88: the orange joke has been told in many variations; this entry records variation 88, its setup, its punchline and where it was first written down.
+- Note 89: the atch joke has been told in many variations; this entry records variation 89, its setup, its punchline and where it was first written down.
+- Note 90: the tank joke has been told in many variations; this entry records variation 90, its setup, its punchline and where it was first written down.
+- Note 91: the owls joke has been told in many variations; this entry records variation 91, its setup, its punchline and where it was first written down.
+- Note 92: the doors joke has been told in many variations; this entry records variation 92, its setup, its punchline and where it was first written down.
+- Note 93: the bananas joke has been told in many variations; this entry records variation 93, its setup, its punchline and where it was first written down.
+- Note 94: the cows joke has been told in many variations; this entry records variation 94, its setup, its punchline and where it was first written down.
+- Note 95: the interrupting animals joke has been told in many variations; this entry records variation 95, its setup, its punchline and where it was first written down.
+- Note 96: the boo joke has been told in many variations; this entry records variation 96, its setup, its punchline and where it was first written down.
+- Note 97: the lettuce joke has been told in many variations; this entry records variation 97, its setup, its punchline and where it was first written down.
+- Note 98: the orange joke has been told in many variations; this entry records variation 98, its setup, its punchline and where it was first written down.
+- Note 99: the atch joke has been told in many variations; this entry records variation 99, its setup, its punchline and where it was first written down.
+- Note 100: the tank joke has been told in many variations; this entry records variation 100, its setup, its punchline and where it was first written down.
+- Note 101: the owls joke has been told in many variations; this entry records variation 101, its setup, its punchline and where it was first written down.
+- Note 102: the doors joke has been told in many variations; this entry records variation 102, its setup, its punchline and where it was first written down.
+- Note 103: the bananas joke has been told in many variations; this entry records variation 103, its setup, its punchline and where it was first written down.
+- Note 104: the cows joke has been told in many variations; this entry records variation 104, its setup, its punchline and where it was first written down.
+- Note 105: the interrupting animals joke has been told in many variations; this entry records variation 105, its setup, its punchline and where it was first written down.
+- Note 106: the boo joke has been told in many variations; this entry records variation 106, its setup, its punchline and where it was first written down.
+- Note 107: the lettuce joke has been told in many variations; this entry records variation 107, its setup, its punchline and where it was first written down.
+- Note 108: the orange joke has been told in many variations; this entry records variation 108, its setup, its punchline and where it was first written down.
+- Note 109: the atch joke has been told in many variations; this entry records variation 109, its setup, its punchline and where it was first written down.
+- Note 110: the tank joke has been told in many variations; this entry records variation 110, its setup, its punchline and where it was first written down.
+- Note 111: the owls joke has been told in many variations; this entry records variation 111, its setup, its punchline and where it was first written down.
+- Note 112: the doors joke has been told in many variations; this entry records variation 112, its setup, its punchline and where it was first written down.
+- Note 113: the bananas joke has been told in many variations; this entry records variation 113, its setup, its punchline and where it was first written down.
+- Note 114: the cows joke has been told in many variations; this entry records variation 114, its setup, its punchline and where it was first written down.
+- Note 115: the interrupting animals joke has been told in many variations; this entry records variation 115, its setup, its punchline and where it was first written down.
+- Note 116: the boo joke has been told in many variations; this entry records variation 116, its setup, its punchline and where it was first written down.
+- Note 117: the lettuce joke has been told in many variations; this entry records variation 117, its setup, its punchline and where it was first written down.
+- Note 118: the orange joke has been told in many variations; this entry records variation 118, its setup, its punchline and where it was first written down.
+- Note 119: the atch joke has been told in many variations; this entry records variation 119, its setup, its punchline and where it was first written down.
+- Note 120: the tank joke has been told in many variations; this entry records variation 120, its setup, its punchline and where it was first written down.
+- Note 121: the owls joke has been told in many variations; this entry records variation 121, its setup, its punchline and where it was first written down.
+- Note 122: the doors joke has been told in many variations; this entry records variation 122, its setup, its punchline and where it was first written down.
+- Note 123: the bananas joke has been told in many variations; this entry records variation 123, its setup, its punchline and where it was first written down.
+- Note 124: the cows joke has been told in many variations; this entry records variation 124, its setup, its punchline and where it was first written down.
+- Note 125: the interrupting animals joke has been told in many variations; this entry records variation 125, its setup, its punchline and where it was first written down.
+- Note 126: the boo joke has been told in many variations; this entry records variation 126, its setup, its punchline and where it was first written down.
+- Note 127: the lettuce joke has been told in many variations; this entry records variation 127, its setup, its punchline and where it was first written down.
+- Note 128: the orange joke has been told in many variations; this entry records variation 128, its setup, its punchline and where it was first written down.
+- Note 129: the atch joke has been told in many variations; this entry records variation 129, its setup, its punchline and where it was first written down.
+- Note 130: the tank joke has been told in many variations; this entry records variation 130, its setup, its punchline and where it was first written down.
+- Note 131: the owls joke has been told in many variations; this entry records variation 131, its setup, its punchline and where it was first written down.
+- Note 132: the doors joke has been told in many variations; this entry records variation 132, its setup, its punchline and where it was first written down.
+- Note 133: the bananas joke has been told in many variations; this entry records variation 133, its setup, its punchline and where it was first written down.
+- Note 134: the cows joke has been told in many variations; this entry records variation 134, its setup, its punchline and where it was first written down.
+- Note 135: the interrupting animals joke has been told in many variations; this entry records variation 135, its setup, its punchline and where it was first written down.
+- Note 136: the boo joke has been told in many variations; this entry records variation 136, its setup, its punchline and where it was first written down.
+- Note 137: the lettuce joke has been told in many variations; this entry records variation 137, its setup, its punchline and where it was first written down.
+- Note 138: the orange joke has been told in many variations; this entry records variation 138, its setup, its punchline and where it was first written down.
+- Note 139: the atch joke has been told in many variations; this entry records variation 139, its setup, its punchline and where it was first written down.
+- Note 140: the tank joke has been told in many variations; this entry records variation 140, its setup, its punchline and where it was first written down.
+- Note 141: the owls joke has been told in many variations; this entry records variation 141, its setup, its punchline and where it was first written down.
+- Note 142: the doors joke has been told in many variations; this entry records variation 142, its setup, its punchline and where it was first written down.
+- Note 143: the bananas joke has been told in many variations; this entry records variation 143, its setup, its punchline and where it was first written down.
+- Note 144: the cows joke has been told in many variations; this entry records variation 144, its setup, its punchline and where it was first written down.
+- Note 145: the interrupting animals joke has been told in many variations; this entry records variation 145, its setup, its punchline and where it was first written down.
+- Note 146: the boo joke has been told in many variations; this entry records variation 146, its setup, its punchline and where it was first written down.
+- Note 147: the lettuce joke has been told in many variations; this entry records variation 147, its setup, its punchline and where it was first written down.
+- Note 148: the orange joke has been told in many variations; this entry records variation 148, its setup, its punchline and where it was first written down.
+- Note 149: the atch joke has been told in many variations; this entry records variation 149, its setup, its punchline and where it was first written down.
+- Note 150: the tank joke has been told in many variations; this entry records variation 150, its setup, its punchline and where it was first written down.
+- Note 151: the owls joke has been told in many variations; this entry records variation 151, its setup, its punchline and where it was first written down.
+- Note 152: the doors joke has been told in many variations; this entry records variation 152, its setup, its punchline and where it was first written down.
+- Note 153: the bananas joke has been told in many variations; this entry records variation 153, its setup, its punchline and where it was first written down.
+- Note 154: the cows joke has been told in many variations; this entry records variation 154, its setup, its punchline and where it was first written down.
+- Note 155: the interrupting animals joke has been told in many variations; this entry records variation 155, its setup, its punchline and where it was first written down.
+- Note 156: the boo joke has been told in many variations; this entry records variation 156, its setup, its punchline and where it was first written down.
+- Note 157: the lettuce joke has been told in many variations; this entry records variation 157, its setup, its punchline and where it was first written down.
+- Note 158: the orange joke has been told in many variations; this entry records variation 158, its setup, its punchline and where it was first written down.
+- Note 159: the atch joke has been told in many variations; this entry records variation 159, its setup, its punchline and where it was first written down.
+- Note 160: the tank joke has been told in many variations; this entry records variation 160, its setup, its punchline and where it was first written down.
+- Note 161: the owls joke has been told in many variations; this entry records variation 161, its setup, its punchline and where it was first written down.
+- Note 162: the doors joke has been told in many variations; this entry records variation 162, its setup, its punchline and where it was first written down.
+- Note 163: the bananas joke has been told in many variations; this entry records variation 163, its setup, its punchline and where it was first written down.
+- Note 164: the cows joke has been told in many variations; this entry records variation 164, its setup, its punchline and where it was first written down.
+- Note 165: the interrupting animals joke has been told in many variations; this entry records variation 165, its setup, its punchline and where it was first written down.
+- Note 166: the boo joke has been told in many variations; this entry records variation 166, its setup, its punchline and where it was first written down.
+- Note 167: the lettuce joke has been told in many variations; this entry records variation 167, its setup, its punchline and where it was first written down.
+- Note 168: the orange joke has been told in many variations; this entry records variation 168, its setup, its punchline and where it was first written down.
+- Note 169: the atch joke has been told in many variations; this entry records variation 169, its setup, its punchline and where it was first written down.
+- Note 170: the tank joke has been told in many variations; this entry records variation 170, its setup, its punchline and where it was first written down.
+- Note 171: the owls joke has been told in many variations; this entry records variation 171, its setup, its punchline and where it was first written down.
+- Note 172: the doors joke has been told in many variations; this entry records variation 172, its setup, its punchline and where it was first written down.
+- Note 173: the bananas joke has been told in many variations; this entry records variation 173, its setup, its punchline and where it was first written down.
+- Note 174: the cows joke has been told in many variations; this entry records variation 174, its setup, its punchline and where it was first written down.
+- Note 175: the interrupting animals joke has been told in many variations; this entry records variation 175, its setup, its punchline and where it was first written down.
+- Note 176: the boo joke has been told in many variations; this entry records variation 176, its setup, its punchline and where it was first written down.
+- Note 177: the lettuce joke has been told in many variations; this entry records variation 177, its setup, its punchline and where it was first written down.
+- Note 178: the orange joke has been told in many variations; this entry records variation 178, its setup, its punchline and where it was first written down.
+- Note 179: the atch joke has been told in many variations; this entry records variation 179, its setup, its punchline and where it was first written down.
+- Note 180: the tank joke has been told in many variations; this entry records variation 180, its setup, its punchline and where it was first written down.
+- Note 181: the owls joke has been told in many variations; this entry records variation 181, its setup, its punchline and where it was first written down.
+- Note 182: the doors joke has been told in many variations; this entry records variation 182, its setup, its punchline and where it was first written down.
+- Note 183: the bananas joke has been told in many variations; this entry records variation 183, its setup, its punchline and where it was first written down.
+- Note 184: the cows joke has been told in many variations; this entry records variation 184, its setup, its punchline and where it was first written down.
+- Note 185: the interrupting animals joke has been told in many variations; this entry records variation 185, its setup, its punchline and where it was first written down.
+- Note 186: the boo joke has been told in many variations; this entry records variation 186, its setup, its punchline and where it was first written down.
+- Note 187: the lettuce joke has been told in many variations; this entry records variation 187, its setup, its punchline and where it was first written down.
+- Note 188: the orange joke has been told in many variations; this entry records variation 188, its setup, its punchline and where it was first written down.
+- Note 189: the atch joke has been told in many variations; this entry records variation 189, its setup, its punchline and where it was first written down.
+- Note 190: the tank joke has been told in many variations; this entry records variation 190, its setup, its punchline and where it was first written down.
+- Note 191: the owls joke has been told in many variations; this entry records variation 191, its setup, its punchline and where it was first written down.
+- Note 192: the doors joke has been told in many variations; this entry records variation 192, its setup, its punchline and where it was first written down.
+- Note 193: the bananas joke has been told in many variations; this entry records variation 193, its setup, its punchline and where it was first written down.
+- Note 194: the cows joke has been told in many variations; this entry records variation 194, its setup, its punchline and where it was first written down.
+- Note 195: the interrupting animals joke has been told in many variations; this entry records variation 195, its setup, its punchline and where it was first written down.
+- Note 196: the boo joke has been told in many variations; this entry records variation 196, its setup, its punchline and where it was first written down.
+- Note 197: the lettuce joke has been told in many variations; this entry records variation 197, its setup, its punchline and where it was first written down.
+- Note 198: the orange joke has been told in many variations; this entry records variation 198, its setup, its punchline and where it was first written down.
+- Note 199: the atch joke has been told in many variations; this entry records variation 199, its setup, its punchline and where it was first written down.
+- Note 200: the tank joke has been told in many variations; this entry records variation 200, its setup, its punchline and where it was first written down.
+- Note 201: the owls joke has been told in many variations; this entry records variation 201, its setup, its punchline and where it was first written down.
+- Note 202: the doors joke has been told in many variations; this entry records variation 202, its setup, its punchline and where it was first written down.
+- Note 203: the bananas joke has been told in many variations; this entry records variation 203, its setup, its punchline and where it was first written down.
+- Note 204: the cows joke has been told in many variations; this entry records variation 204, its setup, its punchline and where it was first written down.
+- Note 205: the interrupting animals joke has been told in many variations; this entry records variation 205, its setup, its punchline and where it was first written down.
+- Note 206: the boo joke has been told in many variations; this entry records variation 206, its setup, its punchline and where it was first written down.
+- Note 207: the lettuce joke has been told in many variations; this entry records variation 207, its setup, its punchline and where it was first written down.
+- Note 208: the orange joke has been told in many variations; this entry records variation 208, its setup, its punchline and where it was first written down.
+- Note 209: the atch joke has been told in many variations; this entry records variation 209, its setup, its punchline and where it was first written down.
+- Note 210: the tank joke has been told in many variations; this entry records variation 210, its setup, its punchline and where it was first written down.
+- Note 211: the owls joke has been told in many variations; this entry records variation 211, its setup, its punchline and where it was first written down.
+- Note 212: the doors joke has been told in many variations; this entry records variation 212, its setup, its punchline and where it was first written down.
+- Note 213: the bananas joke has been told in many variations; this entry records variation 213, its setup, its punchline and where it was first written down.
+- Note 214: the cows joke has been told in many variations; this entry records variation 214, its setup, its punchline and where it was first written down.
+- Note 215: the interrupting animals joke has been told in many variations; this entry records variation 215, its setup, its punchline and where it was first written down.
+- Note 216: the boo joke has been told in many variations; this entry records variation 216, its setup, its punchline and where it was first written down.
+- Note 217: the lettuce joke has been told in many variations; this entry records variation 217, its setup, its punchline and where it was first written down.
+- Note 218: the orange joke has been told in many variations; this entry records variation 218, its setup, its punchline and where it was first written down.
+- Note 219: the atch joke has been told in many variations; this entry records variation 219, its setup, its punchline and where it was first written down.
+- Note 220: the tank joke has been told in many variations; this entry records variation 220, its setup, its punchline and where it was first written down.
+- Note 221: the owls joke has been told in many variations; this entry records variation 221, its setup, its punchline and where it was first written down.
+- Note 222: the doors joke has been told in many variations; this entry records variation 222, its setup, its punchline and where it was first written down.
+- Note 223: the bananas joke has been told in many variations; this entry records variation 223, its setup, its punchline and where it was first written down.
+- Note 224: the cows joke has been told in many variations; this entry records variation 224, its setup, its punchline and where it was first written down.
+- Note 225: the interrupting animals joke has been told in many variations; this entry records variation 225, its setup, its punchline and where it was first written down.
+- Note 226: the boo joke has been told in many variations; this entry records variation 226, its setup, its punchline and where it was first written down.
+- Note 227: the lettuce joke has been told in many variations; this entry records variation 227, its setup, its punchline and where it was first written down.
+- Note 228: the orange joke has been told in many variations; this entry records variation 228, its setup, its punchline and where it was first written down.
+- Note 229: the atch joke has been told in many variations; this entry records variation 229, its setup, its punchline and where it was first written down.
+- Note 230: the tank joke has been told in many variations; this entry records variation 230, its setup, its punchline and where it was first written down.
+- Note 231: the owls joke has been told in many variations; this entry records variation 231, its setup, its punchline and where it was first written down.
+- Note 232: the doors joke has been told in many variations; this entry records variation 232, its setup, its punchline and where it was first written down.
+- Note 233: the bananas joke has been told in many variations; this entry records variation 233, its setup, its punchline and where it was first written down.
+- Note 234: the cows joke has been told in many variations; this entry records variation 234, its setup, its punchline and where it was first written down.
+- Note 235: the interrupting animals joke has been told in many variations; this entry records variation 235, its setup, its punchline and where it was first written down.
+- Note 236: the boo joke has been told in many variations; this entry records variation 236, its setup, its punchline and where it was first written down.
+- Note 237: the lettuce joke has been told in many variations; this entry records variation 237, its setup, its punchline and where it was first written down.
+- Note 238: the orange joke has been told in many variations; this entry records variation 238, its setup, its punchline and where it was first written down.
+- Note 239: the atch joke has been told in many variations; this entry records variation 239, its setup, its punchline and where it was first written down.
+- Note 240: the tank joke has been told in many variations; this entry records variation 240, its setup, its punchline and where it was first written down.
+- Note 241: the owls joke has been told in many variations; this entry records variation 241, its setup, its punchline and where it was first written down.
+- Note 242: the doors joke has been told in many variations; this entry records variation 242, its setup, its punchline and where it was first written down.
+- Note 243: the bananas joke has been told in many variations; this entry records variation 243, its setup, its punchline and where it was first written down.
+- Note 244: the cows joke has been told in many variations; this entry records variation 244, its setup, its punchline and where it was first written down.
+- Note 245: the interrupting animals joke has been told in many variations; this entry records variation 245, its setup, its punchline and where it was first written down.
+- Note 246: the boo joke has been told in many variations; this entry records variation 246, its setup, its punchline and where it was first written down.
+- Note 247: the lettuce joke has been told in many variations; this entry records variation 247, its setup, its punchline and where it was first written down.
+- Note 248: the orange joke has been told in many variations; this entry records variation 248, its setup, its punchline and where it was first written down.
+- Note 249: the atch joke has been told in many variations; this entry records variation 249, its setup, its punchline and where it was first written down.
+- Note 250: the tank joke has been told in many variations; this entry records variation 250, its setup, its punchline and where it was first written down.
+- Note 251: the owls joke has been told in many variations; this entry records variation 251, its setup, its punchline and where it was first written down.
+- Note 252: the doors joke has been told in many variations; this entry records variation 252, its setup, its punchline and where it was first written down.
+- Note 253: the bananas joke has been told in many variations; this entry records variation 253, its setup, its punchline and where it was first written down.
+- Note 254: the cows joke has been told in many variations; this entry records variation 254, its setup, its punchline and where it was first written down.
+- Note 255: the interrupting animals joke has been told in many variations; this entry records variation 255, its setup, its punchline and where it was first written down.
+- Note 256: the boo joke has been told in many variations; this entry records variation 256, its setup, its punchline and where it was first written down.
+- Note 257: the lettuce joke has been told in many variations; this entry records variation 257, its setup, its punchline and where it was first written down.
+- Note 258: the orange joke has been told in many variations; this entry records variation 258, its setup, its punchline and where it was first written down.
+- Note 259: the atch joke has been told in many variations; this entry records variation 259, its setup, its punchline and where it was first written down.
+- Note 260: the tank joke has been told in many variations; this entry records variation 260, its setup, its punchline and where it was first written down.
+- Note 261: the owls joke has been told in many variations; this entry records variation 261, its setup, its punchline and where it was first written down.
+- Note 262: the doors joke has been told in many variations; this entry records variation 262, its setup, its punchline and where it was first written down.
+- Note 263: the bananas joke has been told in many variations; this entry records variation 263, its setup, its punchline and where it was first written down.
+- Note 264: the cows joke has been told in many variations; this entry records variation 264, its setup, its punchline and where it was first written down.
+- Note 265: the interrupting animals joke has been told in many variations; this entry records variation 265, its setup, its punchline and where it was first written down.
+- Note 266: the boo joke has been told in many variations; this entry records variation 266, its setup, its punchline and where it was first written down.
+- Note 267: the lettuce joke has been told in many variations; this entry records variation 267, its setup, its punchline and where it was first written down.
+- Note 268: the orange joke has been told in many variations; this entry records variation 268, its setup, its punchline and where it was first written down.
+- Note 269: the atch joke has been told in many variations; this entry records variation 269, its setup, its punchline and where it was first written down.
+- Note 270: the tank joke has been told in many variations; this entry records variation 270, its setup, its punchline and where it was first written down.
+- Note 271: the owls joke has been told in many variations; this entry records variation 271, its setup, its punchline and where it was first written down.
+- Note 272: the doors joke has been told in many variations; this entry records variation 272, its setup, its punchline and where it was first written down.
+- Note 273: the bananas joke has been told in many variations; this entry records variation 273, its setup, its punchline and where it was first written down.
+- Note 274: the cows joke has been told in many variations; this entry records variation 274, its setup, its punchline and where it was first written down.
+- Note 275: the interrupting animals joke has been told in many variations; this entry records variation 275, its setup, its punchline and where it was first written down.
+- Note 276: the boo joke has been told in many variations; this entry records variation 276, its setup, its punchline and where it was first written down.
+- Note 277: the lettuce joke has been told in many variations; this entry records variation 277, its setup, its punchline and where it was first written down.
+- Note 278: the orange joke has been told in many variations; this entry records variation 278, its setup, its punchline and where it was first written down.
+- Note 279: the atch joke has been told in many variations; this entry records variation 279, its setup, its punchline and where it was first written down.
+- Note 280: the tank joke has been told in many variations; this entry records variation 280, its setup, its punchline and where it was first written down.
+- Note 281: the owls joke has been told in many variations; this entry records variation 281, its setup, its punchline and where it was first written down.
+- Note 282: the doors joke has been told in many variations; this entry records variation 282, its setup, its punchline and where it was first written down.
+- Note 283: the bananas joke has been told in many variations; this entry records variation 283, its setup, its punchline and where it was first written down.
+- Note 284: the cows joke has been told in many variations; this entry records variation 284, its setup, its punchline and where it was first written down.
+- Note 285: the interrupting animals joke has been told in many variations; this entry records variation 285, its setup, its punchline and where it was first written down.
+- Note 286: the boo joke has been told in many variations; this entry records variation 286, its setup, its punchline and where it was first written down.
+- Note 287: the lettuce joke has been told in many variations; this entry records variation 287, its setup, its punchline and where it was first written down.
+- Note 288: the orange joke has been told in many variations; this entry records variation 288, its setup, its punchline and where it was first written down.
+- Note 289: the atch joke has been told in many variations; this entry records variation 289, its setup, its punchline and where it was first written down.
+- Note 290: the tank joke has been told in many variations; this entry records variation 290, its setup, its punchline and where it was first written down.
+- Note 291: the owls joke has been told in many variations; this entry records variation 291, its setup, its punchline and where it was first written down.
+- Note 292: the doors joke has been told in many variations; this entry records variation 292, its setup, its punchline and where it was first written down.
+- Note 293: the bananas joke has been told in many variations; this entry records variation 293, its setup, its punchline and where it was first written down.
+- Note 294: the cows joke has been told in many variations; this entry records variation 294, its setup, its punchline and where it was first written down.
+- Note 295: the interrupting animals joke has been told in many variations; this entry records variation 295, its setup, its punchline and where it was first written down.
+- Note 296: the boo joke has been told in many variations; this entry records variation 296, its setup, its punchline and where it was first written down.
+- Note 297: the lettuce joke has been told in many variations; this entry records variation 297, its setup, its punchline and where it was first written down.
+- Note 298: the orange joke has been told in many variations; this entry records variation 298, its setup, its punchline and where it was first written down.
+- Note 299: the atch joke has been told in many variations; this entry records variation 299, its setup, its punchline and where it was first written down.
+- Note 300: the tank joke has been told in many variations; this entry records variation 300, its setup, its punchline and where it was first written down.
+- Note 301: the owls joke has been told in many variations; this entry records variation 301, its setup, its punchline and where it was first written down.
+- Note 302: the doors joke has been told in many variations; this entry records variation 302, its setup, its punchline and where it was first written down.
+- Note 303: the bananas joke has been told in many variations; this entry records variation 303, its setup, its punchline and where it was first written down.
+- Note 304: the cows joke has been told in many variations; this entry records variation 304, its setup, its punchline and where it was first written down.
+- Note 305: the interrupting animals joke has been told in many variations; this entry records variation 305, its setup, its punchline and where it was first written down.
+- Note 306: the boo joke has been told in many variations; this entry records variation 306, its setup, its punchline and where it was first written down.
+- Note 307: the lettuce joke has been told in many variations; this entry records variation 307, its setup, its punchline and where it was first written down.
+- Note 308: the orange joke has been told in many variations; this entry records variation 308, its setup, its punchline and where it was first written down.
+- Note 309: the atch joke has been told in many variations; this entry records variation 309, its setup, its punchline and where it was first written down.
+- Note 310: the tank joke has been told in many variations; this entry records variation 310, its setup, its punchline and where it was first written down.
+- Note 311: the owls joke has been told in many variations; this entry records variation 311, its setup, its punchline and where it was first written down.
+- Note 312: the doors joke has been told in many variations; this entry records variation 312, its setup, its punchline and where it was first written down.
+- Note 313: the bananas joke has been told in many variations; this entry records variation 313, its setup, its punchline and where it was first written down.
+- Note 314: the cows joke has been told in many variations; this entry records variation 314, its setup, its punchline and where it was first written down.
+- Note 315: the interrupting animals joke has been told in many variations; this entry records variation 315, its setup, its punchline and where it was first written down.
+- Note 316: the boo joke has been told in many variations; this entry records variation 316, its setup, its punchline and where it was first written down.
+- Note 317: the lettuce joke has been told in many variations; this entry records variation 317, its setup, its punchline and where it was first written down.
+- Note 318: the orange joke has been told in many variations; this entry records variation 318, its setup, its punchline and where it was first written down.
+- Note 319: the atch joke has been told in many variations; this entry records variation 319, its setup, its punchline and where it was first written down.
+- Note 320: the tank joke has been told in many variations; this entry records variation 320, its setup, its punchline and where it was first written down.
+- Note 321: the owls joke has been told in many variations; this entry records variation 321, its setup, its punchline and where it was first written down.
+- Note 322: the doors joke has been told in many variations; this entry records variation 322, its setup, its punchline and where it was first written down.
+- Note 323: the bananas joke has been told in many variations; this entry records variation 323, its setup, its punchline and where it was first written down.
+- Note 324: the cows joke has been told in many variations; this entry records variation 324, its setup, its punchline and where it was first written down.
+- Note 325: the interrupting animals joke has been told in many variations; this entry records variation 325, its setup, its punchline and where it was first written down.
+- Note 326: the boo joke has been told in many variations; this entry records variation 326, its setup, its punchline and where it was first written down.
+- Note 327: the lettuce joke has been told in many variations; this entry records variation 327, its setup, its punchline and where it was first written down.
+- Note 328: the orange joke has been told in many variations; this entry records variation 328, its setup, its punchline and where it was first written down.
+- Note 329: the atch joke has been told in many variations; this entry records variation 329, its setup, its punchline and where it was first written down.
+- Note 330: the tank joke has been told in many variations; this entry records variation 330, its setup, its punchline and where it was first written down.
+- Note 331: the owls joke has been told in many variations; this entry records variation 331, its setup, its punchline and where it was first written down.
+- Note 332: the doors joke has been told in many variations; this entry records variation 332, its setup, its punchline and where it was first written down.
+- Note 333: the bananas joke has been told in many variations; this entry records variation 333, its setup, its punchline and where it was first written down.
+- Note 334: the cows joke has been told in many variations; this entry records variation 334, its setup, its punchline and where it was first written down.
+- Note 335: the interrupting animals joke has been told in many variations; this entry records variation 335, its setup, its punchline and where it was first written down.
+- Note 336: the boo joke has been told in many variations; this entry records variation 336, its setup, its punchline and where it was first written down.
+- Note 337: the lettuce joke has been told in many variations; this entry records variation 337, its setup, its punchline and where it was first written down.
+- Note 338: the orange joke has been told in many variations; this entry records variation 338, its setup, its punchline and where it was first written down.
+- Note 339: the atch joke has been told in many variations; this entry records variation 339, its setup, its punchline and where it was first written down.
+- Note 340: the tank joke has been told in many variations; this entry records variation 340, its setup, its punchline and where it was first written down.
+- Note 341: the owls joke has been told in many variations; this entry records variation 341, its setup, its punchline and where it was first written down.
+- Note 342: the doors joke has been told in many variations; this entry records variation 342, its setup, its punchline and where it was first written down.
+- Note 343: the bananas joke has been told in many variations; this entry records variation 343, its setup, its punchline and where it was first written down.
+- Note 344: the cows joke has been told in many variations; this entry records variation 344, its setup, its punchline and where it was first written down.
+- Note 345: the interrupting animals joke has been told in many variations; this entry records variation 345, its setup, its punchline and where it was first written down.
+- Note 346: the boo joke has been told in many variations; this entry records variation 346, its setup, its punchline and where it was first written down.
+- Note 347: the lettuce joke has been told in many variations; this entry records variation 347, its setup, its punchline and where it was first written down.
+- Note 348: the orange joke has been told in many variations; this entry records variation 348, its setup, its punchline and where it was first written down.
+- Note 349: the atch joke has been told in many variations; this entry records variation 349, its setup, its punchline and where it was first written down.
+- Note 350: the tank joke has been told in many variations; this entry records variation 350, its setup, its punchline and where it was first written down.
+- Note 351: the owls joke has been told in many variations; this entry records variation 351, its setup, its punchline and where it was first written down.
+- Note 352: the doors joke has been told in many variations; this entry records variation 352, its setup, its punchline and where it was first written down.
+- Note 353: the bananas joke has been told in many variations; this entry records variation 353, its setup, its punchline and where it was first written down.
+- Note 354: the cows joke has been told in many variations; this entry records variation 354, its setup, its punchline and where it was first written down.
+- Note 355: the interrupting animals joke has been told in many variations; this entry records variation 355, its setup, its punchline and where it was first written down.
+- Note 356: the boo joke has been told in many variations; this entry records variation 356, its setup, its punchline and where it was first written down.
+- Note 357: the lettuce joke has been told in many variations; this entry records variation 357, its setup, its punchline and where it was first written down.
+- Note 358: the orange joke has been told in many variations; this entry records variation 358, its setup, its punchline and where it was first written down.
+- Note 359: the atch joke has been told in many variations; this entry records variation 359, its setup, its punchline and where it was first written down.
+- Note 360: the tank joke has been told in many variations; this entry records variation 360, its setup, its punchline and where it was first written down.
+- Note 361: the owls joke has been told in many variations; this entry records variation 361, its setup, its punchline and where it was first written down.
+- Note 362: the doors joke has been told in many variations; this entry records variation 362, its setup, its punchline and where it was first written down.
+- Note 363: the bananas joke has been told in many variations; this entry records variation 363, its setup, its punchline and where it was first written down.
+- Note 364: the cows joke has been told in many variations; this entry records variation 364, its setup, its punchline and where it was first written down.
+- Note 365: the interrupting animals joke has been told in many variations; this entry records variation 365, its setup, its punchline and where it was first written down.
+- Note 366: the boo joke has been told in many variations; this entry records variation 366, its setup, its punchline and where it was first written down.
+- Note 367: the lettuce joke has been told in many variations; this entry records variation 367, its setup, its punchline and where it was first written down.
+- Note 368: the orange joke has been told in many variations; this entry records variation 368, its setup, its punchline and where it was first written down.
+- Note 369: the atch joke has been told in many variations; this entry records variation 369, its setup, its punchline and where it was first written down.
+- Note 370: the tank joke has been told in many variations; this entry records variation 370, its setup, its punchline and where it was first written down.
+- Note 371: the owls joke has been told in many variations; this entry records variation 371, its setup, its punchline and where it was first written down.
+- Note 372: the doors joke has been told in many variations; this entry records variation 372, its setup, its punchline and where it was first written down.
+- Note 373: the bananas joke has been told in many variations; this entry records variation 373, its setup, its punchline and where it was first written down.
+- Note 374: the cows joke has been told in many variations; this entry records variation 374, its setup, its punchline and where it was first written down.
+- Note 375: the interrupting animals joke has been told in many variations; this entry records variation 375, its setup, its punchline and where it was first written down.
+- Note 376: the boo joke has been told in many variations; this entry records variation 376, its setup, its punchline and where it was first written down.
+- Note 377: the lettuce joke has been told in many variations; this entry records variation 377, its setup, its punchline and where it was first written down.
+- Note 378: the orange joke has been told in many variations; this entry records variation 378, its setup, its punchline and where it was first written down.
+- Note 379: the atch joke has been told in many variations; this entry records variation 379, its setup, its punchline and where it was first written down.
+- Note 380: the tank joke has been told in many variations; this entry records variation 380, its setup, its punchline and where it was first written down.
+- Note 381: the owls joke has been told in many variations; this entry records variation 381, its setup, its punchline and where it was first written down.
+- Note 382: the doors joke has been told in many variations; this entry records variation 382, its setup, its punchline and where it was first written down.
+- Note 383: the bananas joke has been told in many variations; this entry records variation 383, its setup, its punchline and where it was first written down.
+- Note 384: the cows joke has been told in many variations; this entry records variation 384, its setup, its punchline and where it was first written down.
+- Note 385: the interrupting animals joke has been told in many variations; this entry records variation 385, its setup, its punchline and where it was first written down.
+- Note 386: the boo joke has been told in many variations; this entry records variation 386, its setup, its punchline and where it was first written down.
+- Note 387: the lettuce joke has been told in many variations; this entry records variation 387, its setup, its punchline and where it was first written down.
+- Note 388: the orange joke has been told in many variations; this entry records variation 388, its setup, its punchline and where it was first written down.
+- Note 389: the atch joke has been told in many variations; this entry records variation 389, its setup, its punchline and where it was first written down.
+- Note 390: the tank joke has been told in many variations; this entry records variation 390, its setup, its punchline and where it was first written down.
+- Note 391: the owls joke has been told in many variations; this entry records variation 391, its setup, its punchline and where it was first written down.
+- Note 392: the doors joke has been told in many variations; this entry records variation 392, its setup, its punchline and where it was first written down.
+- Note 393: the bananas joke has been told in many variations; this entry records variation 393, its setup, its punchline and where it was first written down.
+- Note 394: the cows joke has been told in many variations; this entry records variation 394, its setup, its punchline and where it was first written down.
+- Note 395: the interrupting animals joke has been told in many variations; this entry records variation 395, its setup, its punchline and where it was first written down.
+- Note 396: the boo joke has been told in many variations; this entry records variation 396, its setup, its punchline and where it was first written down.
+- Note 397: the lettuce joke has been told in many variations; this entry records variation 397, its setup, its punchline and where it was first written down.
+- Note 398: the orange joke has been told in many variations; this entry records variation 398, its setup, its punchline and where it was first written down.
+- Note 399: the atch joke has been told in many variations; this entry records variation 399, its setup, its punchline and where it was first written down.
+- Note 400: the tank joke has been told in many variations; this entry records variation 400, its setup, its punchline and where it was first written down.
+- Note 401: the owls joke has been told in many variations; this entry records variation 401, its setup, its punchline and where it was first written down.
+- Note 402: the doors joke has been told in many variations; this entry records variation 402, its setup, its punchline and where it was first written down.
+- Note 403: the bananas joke has been told in many variations; this entry records variation 403, its setup, its punchline and where it was first written down.
+- Note 404: the cows joke has been told in many variations; this entry records variation 404, its setup, its punchline and where it was first written down.
+- Note 405: the interrupting animals joke has been told in many variations; this entry records variation 405, its setup, its punchline and where it was first written down.
+- Note 406: the boo joke has been told in many variations; this entry records variation 406, its setup, its punchline and where it was first written down.
+- Note 407: the lettuce joke has been told in many variations; this entry records variation 407, its setup, its punchline and where it was first written down.
+- Note 408: the orange joke has been told in many variations; this entry records variation 408, its setup, its punchline and where it was first written down.
+- Note 409: the atch joke has been told in many variations; this entry records variation 409, its setup, its punchline and where it was first written down.
+- Note 410: the tank joke has been told in many variations; this entry records variation 410, its setup, its punchline and where it was first written down.
+- Note 411: the owls joke has been told in many variations; this entry records variation 411, its setup, its punchline and where it was first written down.
+- Note 412: the doors joke has been told in many variations; this entry records variation 412, its setup, its punchline and where it was first written down.
+- Note 413: the bananas joke has been told in many variations; this entry records variation 413, its setup, its punchline and where it was first written down.
+- Note 414: the cows joke has been told in many variations; this entry records variation 414, its setup, its punchline and where it was first written down.
+- Note 415: the interrupting animals joke has been told in many variations; this entry records variation 415, its setup, its punchline and where it was first written down.
+- Note 416: the boo joke has been told in many variations; this entry records variation 416, its setup, its punchline and where it was first written down.
+- Note 417: the lettuce joke has been told in many variations; this entry records variation 417, its setup, its punchline and where it was first written down.
+- Note 418: the orange joke has been told in many variations; this entry records variation 418, its setup, its punchline and where it was first written down.
+- Note 419: the atch joke has been told in many variations; this entry records variation 419, its setup, its punchline and where it was first written down.
+- Note 420: the tank joke has been told in many variations; this entry records variation 420, its setup, its punchline and where it was first written down.
+- Note 421: the owls joke has been told in many variations; this entry records variation 421, its setup, its punchline and where it was first written down.
+- Note 422: the doors joke has been told in many variations; this entry records variation 422, its setup, its punchline and where it was first written down.
+- Note 423: the bananas joke has been told in many variations; this entry records variation 423, its setup, its punchline and where it was first written down.
+- Note 424: the cows joke has been told in many variations; this entry records variation 424, its setup, its punchline and where it was first written down.
+- Note 425: the interrupting animals joke has been told in many variations; this entry records variation 425, its setup, its punchline and where it was first written down.
+- Note 426: the boo joke has been told in many variations; this entry records variation 426, its setup, its punchline and where it was first written down.
+- Note 427: the lettuce joke has been told in many variations; this entry records variation 427, its setup, its punchline and where it was first written down.
+- Note 428: the orange joke has been told in many variations; this entry records variation 428, its setup, its punchline and where it was first written down.
+- Note 429: the atch joke has been told in many variations; this entry records variation 429, its setup, its punchline and where it was first written down.
+- Note 430: the tank joke has been told in many variations; this entry records variation 430, its setup, its punchline and where it was first written down.
+- Note 431: the owls joke has been told in many variations; this entry records variation 431, its setup, its punchline and where it was first written down.
+- Note 432: the doors joke has been told in many variations; this entry records variation 432, its setup, its punchline and where it was first written down.
+- Note 433: the bananas joke has been told in many variations; this entry records variation 433, its setup, its punchline and where it was first written down.
+- Note 434: the cows joke has been told in many variations; this entry records variation 434, its setup, its punchline and where it was first written down.
+- Note 435: the interrupting animals joke has been told in many variations; this entry records variation 435, its setup, its punchline and where it was first written down.
+- Note 436: the boo joke has been told in many variations; this entry records variation 436, its setup, its punchline and where it was first written down.
+- Note 437: the lettuce joke has been told in many variations; this entry records variation 437, its setup, its punchline and where it was first written down.
+- Note 438: the orange joke has been told in many variations; this entry records variation 438, its setup, its punchline and where it was first written down.
+- Note 439: the atch joke has been told in many variations; this entry records variation 439, its setup, its punchline and where it was first written down.
+- Note 440: the tank joke has been told in many variations; this entry records variation 440, its setup, its punchline and where it was first written down.
+- Note 441: the owls joke has been told in many variations; this entry records variation 441, its setup, its punchline and where it was first written down.
+- Note 442: the doors joke has been told in many variations; this entry records variation 442, its setup, its punchline and where it was first written down.
+- Note 443: the bananas joke has been told in many variations; this entry records variation 443, its setup, its punchline and where it was first written down.
+- Note 444: the cows joke has been told in many variations; this entry records variation 444, its setup, its punchline and where it was first written down.
+- Note 445: the interrupting animals joke has been told in many variations; this entry records variation 445, its setup, its punchline and where it was first written down.
+- Note 446: the boo joke has been told in many variations; this entry records variation 446, its setup, its punchline and where it was first written down.
+- Note 447: the lettuce joke has been told in many variations; this entry records variation 447, its setup, its punchline and where it was first written down.
+- Note 448: the orange joke has been told in many variations; this entry records variation 448, its setup, its punchline and where it was first written down.
+- Note 449: the atch joke has been told in many variations; this entry records variation 449, its setup, its punchline and where it was first written down.
+- Note 450: the tank joke has been told in many variations; this entry records variation 450, its setup, its punchline and where it was first written down.
+- Note 451: the owls joke has been told in many variations; this entry records variation 451, its setup, its punchline and where it was first written down.
+- Note 452: the doors joke has been told in many variations; this entry records variation 452, its setup, its punchline and where it was first written down.
+- Note 453: the bananas joke has been told in many variations; this entry records variation 453, its setup, its punchline and where it was first written down.
+- Note 454: the cows joke has been told in many variations; this entry records variation 454, its setup, its punchline and where it was first written down.
+- Note 455: the interrupting animals joke has been told in many variations; this entry records variation 455, its setup, its punchline and where it was first written down.
+- Note 456: the boo joke has been told in many variations; this entry records variation 456, its setup, its punchline and where it was first written down.
+- Note 457: the lettuce joke has been told in many variations; this entry records variation 457, its setup, its punchline and where it was first written down.
+- Note 458: the orange joke has been told in many variations; this entry records variation 458, its setup, its punchline and where it was first written down.
+- Note 459: the atch joke has been told in many variations; this entry records variation 459, its setup, its punchline and where it was first written down.
+- Note 460: the tank joke has been told in many variations; this entry records variation 460, its setup, its punchline and where it was first written down.
+- Note 461: the owls joke has been told in many variations; this entry records variation 461, its setup, its punchline and where it was first written down.
+- Note 462: the doors joke has been told in many variations; this entry records variation 462, its setup, its punchline and where it was first written down.
+- Note 463: the bananas joke has been told in many variations; this entry records variation 463, its setup, its punchline and where it was first written down.
+- Note 464: the cows joke has been told in many variations; this entry records variation 464, its setup, its punchline and where it was first written down.
+- Note 465: the interrupting animals joke has been told in many variations; this entry records variation 465, its setup, its punchline and where it was first written down.
+- Note 466: the boo joke has been told in many variations; this entry records variation 466, its setup, its punchline and where it was first written down.
+- Note 467: the lettuce joke has been told in many variations; this entry records variation 467, its setup, its punchline and where it was first written down.
+- Note 468: the orange joke has been told in many variations; this entry records variation 468, its setup, its punchline and where it was first written down.
+- Note 469: the atch joke has been told in many variations; this entry records variation 469, its setup, its punchline and where it was first written down.
+- Note 470: the tank joke has been told in many variations; this entry records variation 470, its setup, its punchline and where it was first written down.
+- Note 471: the owls joke has been told in many variations; this entry records variation 471, its setup, its punchline and where it was first written down.
+- Note 472: the doors joke has been told in many variations; this entry records variation 472, its setup, its punchline and where it was first written down.
+- Note 473: the bananas joke has been told in many variations; this entry records variation 473, its setup, its punchline and where it was first written down.
+- Note 474: the cows joke has been told in many variations; this entry records variation 474, its setup, its punchline and where it was first written down.
+- Note 475: the interrupting animals joke has been told in many variations; this entry records variation 475, its setup, its punchline and where it was first written down.
+- Note 476: the boo joke has been told in many variations; this entry records variation 476, its setup, its punchline and where it was first written down.
+- Note 477: the lettuce joke has been told in many variations; this entry records variation 477, its setup, its punchline and where it was first written down.
+- Note 478: the orange joke has been told in many variations; this entry records variation 478, its setup, its punchline and where it was first written down.
+- Note 479: the atch joke has been told in many variations; this entry records variation 479, its setup, its punchline and where it was first written down.
+- Note 480: the tank joke has been told in many variations; this entry records variation 480, its setup, its punchline and where it was first written down.
+- Note 481: the owls joke has been told in many variations; this entry records variation 481, its setup, its punchline and where it was first written down.
+- Note 482: the doors joke has been told in many variations; this entry records variation 482, its setup, its punchline and where it was first written down.
+- Note 483: the bananas joke has been told in many variations; this entry records variation 483, its setup, its punchline and where it was first written down.
+- Note 484: the cows joke has been told in many variations; this entry records variation 484, its setup, its punchline and where it was first written down.
+- Note 485: the interrupting animals joke has been told in many variations; this entry records variation 485, its setup, its punchline and where it was first written down.
+- Note 486: the boo joke has been told in many variations; this entry records variation 486, its setup, its punchline and where it was first written down.
+- Note 487: the lettuce joke has been told in many variations; this entry records variation 487, its setup, its punchline and where it was first written down.
+- Note 488: the orange joke has been told in many variations; this entry records variation 488, its setup, its punchline and where it was first written down.
+- Note 489: the atch joke has been told in many variations; this entry records variation 489, its setup, its punchline and where it was first written down.
+- Note 490: the tank joke has been told in many variations; this entry records variation 490, its setup, its punchline and where it was first written down.
+- Note 491: the owls joke has been told in many variations; this entry records variation 491, its setup, its punchline and where it was first written down.
+- Note 492: the doors joke has been told in many variations; this entry records variation 492, its setup, its punchline and where it was first written down.
+- Note 493: the bananas joke has been told in many variations; this entry records variation 493, its setup, its punchline and where it was first written down.
+- Note 494: the cows joke has been told in many variations; this entry records variation 494, its setup, its punchline and where it was first written down.
+- Note 495: the interrupting animals joke has been told in many variations; this entry records variation 495, its setup, its punchline and where it was first written down.
+- Note 496: the boo joke has been told in many variations; this entry records variation 496, its setup, its punchline and where it was first written down.
+- Note 497: the lettuce joke has been told in many variations; this entry records variation 497, its setup, its punchline and where it was first written down.
+- Note 498: the orange joke has been told in many variations; this entry records variation 498, its setup, its punchline and where it was first written down.
+- Note 499: the atch joke has been told in many variations; this entry records variation 499, its setup, its punchline and where it was first written down.
+- Note 500: the tank joke has been told in many variations; this entry records variation 500, its setup, its punchline and where it was first written down.
+- Note 501: the owls joke has been told in many variations; this entry records variation 501, its setup, its punchline and where it was first written down.
+- Note 502: the doors joke has been told in many variations; this entry records variation 502, its setup, its punchline and where it was first written down.
+- Note 503: the bananas joke has been told in many variations; this entry records variation 503, its setup, its punchline and where it was first written down.
+- Note 504: the cows joke has been told in many variations; this entry records variation 504, its setup, its punchline and where it was first written down.
+- Note 505: the interrupting animals joke has been told in many variations; this entry records variation 505, its setup, its punchline and where it was first written down.
+- Note 506: the boo joke has been told in many variations; this entry records variation 506, its setup, its punchline and where it was first written down.
+- Note 507: the lettuce joke has been told in many variations; this entry records variation 507, its setup, its punchline and where it was first written down.
+- Note 508: the orange joke has been told in many variations; this entry records variation 508, its setup, its punchline and where it was first written down.
+- Note 509: the atch joke has been told in many variations; this entry records variation 509, its setup, its punchline and where it was first written down.
+- Note 510: the tank joke has been told in many variations; this entry records variation 510, its setup, its punchline and where it was first written down.
+- Note 511: the owls joke has been told in many variations; this entry records variation 511, its setup, its punchline and where it was first written down.
+- Note 512: the doors joke has been told in many variations; this entry records variation 512, its setup, its punchline and where it was first written down.
+- Note 513: the bananas joke has been told in many variations; this entry records variation 513, its setup, its punchline and where it was first written down.
+- Note 514: the cows joke has been told in many variations; this entry records variation 514, its setup, its punchline and where it was first written down.
+- Note 515: the interrupting animals joke has been told in many variations; this entry records variation 515, its setup, its punchline and where it was first written down.
+- Note 516: the boo joke has been told in many variations; this entry records variation 516, its setup, its punchline and where it was first written down.
+- Note 517: the lettuce joke has been told in many variations; this entry records variation 517, its setup, its punchline and where it was first written down.
+- Note 518: the orange joke has been told in many variations; this entry records variation 518, its setup, its punchline and where it was first written down.
+- Note 519: the atch joke has been told in many variations; this entry records variation 519, its setup, its punchline and where it was first written down.
+- Note 520: the tank joke has been told in many variations; this entry records variation 520, its setup, its punchline and where it was first written down.
+- Note 521: the owls joke has been told in many variations; this entry records variation 521, its setup, its punchline and where it was first written down.
+- Note 522: the doors joke has been told in many variations; this entry records variation 522, its setup, its punchline and where it was first written down.
+- Note 523: the bananas joke has been told in many variations; this entry records variation 523, its setup, its punchline and where it was first written down.
+- Note 524: the cows joke has been told in many variations; this entry records variation 524, its setup, its punchline and where it was first written down.
+- Note 525: the interrupting animals joke has been told in many variations; this entry records variation 525, its setup, its punchline and where it was first written down.
+- Note 526: the boo joke has been told in many variations; this entry records variation 526, its setup, its punchline and where it was first written down.
+- Note 527: the lettuce joke has been told in many variations; this entry records variation 527, its setup, its punchline and where it was first written down.
+- Note 528: the orange joke has been told in many variations; this entry records variation 528, its setup, its punchline and where it was first written down.
+- Note 529: the atch joke has been told in many variations; this entry records variation 529, its setup, its punchline and where it was first written down.
+- Note 530: the tank joke has been told in many variations; this entry records variation 530, its setup, its punchline and where it was first written down.
+- Note 531: the owls joke has been told in many variations; this entry records variation 531, its setup, its punchline and where it was first written down.
+- Note 532: the doors joke has been told in many variations; this entry records variation 532, its setup, its punchline and where it was first written down.
+- Note 533: the bananas joke has been told in many variations; this entry records variation 533, its setup, its punchline and where it was first written down.
+- Note 534: the cows joke has been told in many variations; this entry records variation 534, its setup, its punchline and where it was first written down.
+- Note 535: the interrupting animals joke has been told in many variations; this entry records variation 535, its setup, its punchline and where it was first written down.
+- Note 536: the boo joke has been told in many variations; this entry records variation 536, its setup, its punchline and where it was first written down.
+- Note 537: the lettuce joke has been told in many variations; this entry records variation 537, its setup, its punchline and where it was first written down.
+- Note 538: the orange joke has been told in many variations; this entry records variation 538, its setup, its punchline and where it was first written down.
+- Note 539: the atch joke has been told in many variations; this entry records variation 539, its setup, its punchline and where it was first written down.
+- Note 540: the tank joke has been told in many variations; this entry records variation 540, its setup, its punchline and where it was first written down.
+- Note 541: the owls joke has been told in many variations; this entry records variation 541, its setup, its punchline and where it was first written down.
+- Note 542: the doors joke has been told in many variations; this entry records variation 542, its setup, its punchline and where it was first written down.
+- Note 543: the bananas joke has been told in many variations; this entry records variation 543, its setup, its punchline and where it was first written down.
+- Note 544: the cows joke has been told in many variations; this entry records variation 544, its setup, its punchline and where it was first written down.
+- Note 545: the interrupting animals joke has been told in many variations; this entry records variation 545, its setup, its punchline and where it was first written down.
+- Note 546: the boo joke has been told in many variations; this entry records variation 546, its setup, its punchline and where it was first written down.
+- Note 547: the lettuce joke has been told in many variations; this entry records variation 547, its setup, its punchline and where it was first written down.
+- Note 548: the orange joke has been told in many variations; this entry records variation 548, its setup, its punchline and where it was first written down.
+- Note 549: the atch joke has been told in many variations; this entry records variation 549, its setup, its punchline and where it was first written down.
+- Note 550: the tank joke has been told in many variations; this entry records variation 550, its setup, its punchline and where it was first written down.
+- Note 551: the owls joke has been told in many variations; this entry records variation 551, its setup, its punchline and where it was first written down.
+- Note 552: the doors joke has been told in many variations; this entry records variation 552, its setup, its punchline and where it was first written down.
+- Note 553: the bananas joke has been told in many variations; this entry records variation 553, its setup, its punchline and where it was first written down.
+- Note 554: the cows joke has been told in many variations; this entry records variation 554, its setup, its punchline and where it was first written down.
+- Note 555: the interrupting animals joke has been told in many variations; this entry records variation 555, its setup, its punchline and where it was first written down.
+- Note 556: the boo joke has been told in many variations; this entry records variation 556, its setup, its punchline and where it was first written down.
+- Note 557: the lettuce joke has been told in many variations; this entry records variation 557, its setup, its punchline and where it was first written down.
+- Note 558: the orange joke has been told in many variations; this entry records variation 558, its setup, its punchline and where it was first written down.
+- Note 559: the atch joke has been told in many variations; this entry records variation 559, its setup, its punchline and where it was first written down.
+- Note 560: the tank joke has been told in many variations; this entry records variation 560, its setup, its punchline and where it was first written down.
+- Note 561: the owls joke has been told in many variations; this entry records variation 561, its setup, its punchline and where it was first written down.
+- Note 562: the doors joke has been told in many variations; this entry records variation 562, its setup, its punchline and where it was first written down.
+- Note 563: the bananas joke has been told in many variations; this entry records variation 563, its setup, its punchline and where it was first written down.
+- Note 564: the cows joke has been told in many variations; this entry records variation 564, its setup, its punchline and where it was first written down.
+- Note 565: the interrupting animals joke has been told in many variations; this entry records variation 565, its setup, its punchline and where it was first written down.
+- Note 566: the boo joke has been told in many variations; this entry records variation 566, its setup, its punchline and where it was first written down.
+- Note 567: the lettuce joke has been told in many variations; this entry records variation 567, its setup, its punchline and where it was first written down.
+- Note 568: the orange joke has been told in many variations; this entry records variation 568, its setup, its punchline and where it was first written down.
+- Note 569: the atch joke has been told in many variations; this entry records variation 569, its setup, its punchline and where it was first written down.
+- Note 570: the tank joke has been told in many variations; this entry records variation 570, its setup, its punchline and where it was first written down.
+- Note 571: the owls joke has been told in many variations; this entry records variation 571, its setup, its punchline and where it was first written down.
+- Note 572: the doors joke has been told in many variations; this entry records variation 572, its setup, its punchline and where it was first written down.
+- Note 573: the bananas joke has been told in many variations; this entry records variation 573, its setup, its punchline and where it was first written down.
+- Note 574: the cows joke has been told in many variations; this entry records variation 574, its setup, its punchline and where it was first written down.
+- Note 575: the interrupting animals joke has been told in many variations; this entry records variation 575, its setup, its punchline and where it was first written down.
+- Note 576: the boo joke has been told in many variations; this entry records variation 576, its setup, its punchline and where it was first written down.
+- Note 577: the lettuce joke has been told in many variations; this entry records variation 577, its setup, its punchline and where it was first written down.
+- Note 578: the orange joke has been told in many variations; this entry records variation 578, its setup, its punchline and where it was first written down.
+- Note 579: the atch joke has been told in many variations; this entry records variation 579, its setup, its punchline and where it was first written down.
+- Note 580: the tank joke has been told in many variations; this entry records variation 580, its setup, its punchline and where it was first written down.
+- Note 581: the owls joke has been told in many variations; this entry records variation 581, its setup, its punchline and where it was first written down.
+- Note 582: the doors joke has been told in many variations; this entry records variation 582, its setup, its punchline and where it was first written down.
+- Note 583: the bananas joke has been told in many variations; this entry records variation 583, its setup, its punchline and where it was first written down.
+- Note 584: the cows joke has been told in many variations; this entry records variation 584, its setup, its punchline and where it was first written down.
+- Note 585: the interrupting animals joke has been told in many variations; this entry records variation 585, its setup, its punchline and where it was first written down.
+- Note 586: the boo joke has been told in many variations; this entry records variation 586, its setup, its punchline and where it was first written down.
+- Note 587: the lettuce joke has been told in many variations; this entry records variation 587, its setup, its punchline and where it was first written down.
+- Note 588: the orange joke has been told in many variations; this entry records variation 588, its setup, its punchline and where it was first written down.
+- Note 589: the atch joke has been told in many variations; this entry records variation 589, its setup, its punchline and where it was first written down.
+- Note 590: the tank joke has been told in many variations; this entry records variation 590, its setup, its punchline and where it was first written down.
+- Note 591: the owls joke has been told in many variations; this entry records variation 591, its setup, its punchline and where it was first written down.
+- Note 592: the doors joke has been told in many variations; this entry records variation 592, its setup, its punchline and where it was first written down.
+- Note 593: the bananas joke has been told in many variations; this entry records variation 593, its setup, its punchline and where it was first written down.
+- Note 594: the cows joke has been told in many variations; this entry records variation 594, its setup, its punchline and where it was first written down.
+- Note 595: the interrupting animals joke has been told in many variations; this entry records variation 595, its setup, its punchline and where it was first written down.
+- Note 596: the boo joke has been told in many variations; this entry records variation 596, its setup, its punchline and where it was first written down.
+- Note 597: the lettuce joke has been told in many variations; this entry records variation 597, its setup, its punchline and where it was first written down.
+- Note 598: the orange joke has been told in many variations; this entry records variation 598, its setup, its punchline and where it was first written down.
+- Note 599: the atch joke has been told in many variations; this entry records variation 599, its setup, its punchline and where it was first written down.
+- Note 600: the tank joke has been told in many variations; this entry records variation 600, its setup, its punchline and where it was first written down.
+- Note 601: the owls joke has been told in many variations; this entry records variation 601, its setup, its punchline and where it was first written down.
+- Note 602: the doors joke has been told in many variations; this entry records variation 602, its setup, its punchline and where it was first written down.
+- Note 603: the bananas joke has been told in many variations; this entry records variation 603, its setup, its punchline and where it was first written down.
+- Note 604: the cows joke has been told in many variations; this entry records variation 604, its setup, its punchline and where it was first written down.
+- Note 605: the interrupting animals joke has been told in many variations; this entry records variation 605, its setup, its punchline and where it was first written down.
+- Note 606: the boo joke has been told in many variations; this entry records variation 606, its setup, its punchline and where it was first written down.
+- Note 607: the lettuce joke has been told in many variations; this entry records variation 607, its setup, its punchline and where it was first written down.
+- Note 608: the orange joke has been told in many variations; this entry records variation 608, its setup, its punchline and where it was first written down.
+- Note 609: the atch joke has been told in many variations; this entry records variation 609, its setup, its punchline and where it was first written down.
+- Note 610: the tank joke has been told in many variations; this entry records variation 610, its setup, its punchline and where it was first written down.
+- Note 611: the owls joke has been told in many variations; this entry records variation 611, its setup, its punchline and where it was first written down.
+- Note 612: the doors joke has been told in many variations; this entry records variation 612, its setup, its punchline and where it was first written down.
+- Note 613: the bananas joke has been told in many variations; this entry records variation 613, its setup, its punchline and where it was first written down.
+- Note 614: the cows joke has been told in many variations; this entry records variation 614, its setup, its punchline and where it was first written down.
+- Note 615: the interrupting animals joke has been told in many variations; this entry records variation 615, its setup, its punchline and where it was first written down.
+- Note 616: the boo joke has been told in many variations; this entry records variation 616, its setup, its punchline and where it was first written down.
+- Note 617: the lettuce joke has been told in many variations; this entry records variation 617, its setup, its punchline and where it was first written down.
+- Note 618: the orange joke has been told in many variations; this entry records variation 618, its setup, its punchline and where it was first written down.
+- Note 619: the atch joke has been told in many variations; this entry records variation 619, its setup, its punchline and where it was first written down.
+- Note 620: the tank joke has been told in many variations; this entry records variation 620, its setup, its punchline and where it was first written down.
+- Note 621: the owls joke has been told in many variations; this entry records variation 621, its setup, its punchline and where it was first written down.
+- Note 622: the doors joke has been told in many variations; this entry records variation 622, its setup, its punchline and where it was first written down.
+- Note 623: the bananas joke has been told in many variations; this entry records variation 623, its setup, its punchline and where it was first written down.
+- Note 624: the cows joke has been told in many variations; this entry records variation 624, its setup, its punchline and where it was first written down.
+- Note 625: the interrupting animals joke has been told in many variations; this entry records variation 625, its setup, its punchline and where it was first written down.
+- Note 626: the boo joke has been told in many variations; this entry records variation 626, its setup, its punchline and where it was first written down.
+- Note 627: the lettuce joke has been told in many variations; this entry records variation 627, its setup, its punchline and where it was first written down.
+- Note 628: the orange joke has been told in many variations; this entry records variation 628, its setup, its punchline and where it was first written down.
+- Note 629: the atch joke has been told in many variations; this entry records variation 629, its setup, its punchline and where it was first written down.
+- Note 630: the tank joke has been told in many variations; this entry records variation 630, its setup, its punchline and where it was first written down.
+- Note 631: the owls joke has been told in many variations; this entry records variation 631, its setup, its punchline and where it was first written down.
+- Note 632: the doors joke has been told in many variations; this entry records variation 632, its setup, its punchline and where it was first written down.
+- Note 633: the bananas joke has been told in many variations; this entry records variation 633, its setup, its punchline and where it was first written down.
+- Note 634: the cows joke has been told in many variations; this entry records variation 634, its setup, its punchline and where it was first written down.
+- Note 635: the interrupting animals joke has been told in many variations; this entry records variation 635, its setup, its punchline and where it was first written down.
+- Note 636: the boo joke has been told in many variations; this entry records variation 636, its setup, its punchline and where it was first written down.
+- Note 637: the lettuce joke has been told in many variations; this entry records variation 637, its setup, its punchline and where it was first written down.
+- Note 638: the orange joke has been told in many variations; this entry records variation 638, its setup, its punchline and where it was first written down.
+- Note 639: the atch joke has been told in many variations; this entry records variation 639, its setup, its punchline and where it was first written down.
+- Note 640: the tank joke has been told in many variations; this entry records variation 640, its setup, its punchline and where it was first written down.
+- Note 641: the owls joke has been told in many variations; this entry records variation 641, its setup, its punchline and where it was first written down.
+- Note 642: the doors joke has been told in many variations; this entry records variation 642, its setup, its punchline and where it was first written down.
+- Note 643: the bananas joke has been told in many variations; this entry records variation 643, its setup, its punchline and where it was first written down.
+- Note 644: the cows joke has been told in many variations; this entry records variation 644, its setup, its punchline and where it was first written down.
+- Note 645: the interrupting animals joke has been told in many variations; this entry records variation 645, its setup, its punchline and where it was first written down.
+- Note 646: the boo joke has been told in many variations; this entry records variation 646, its setup, its punchline and where it was first written down.
+- Note 647: the lettuce joke has been told in many variations; this entry records variation 647, its setup, its punchline and where it was first written down.
+- Note 648: the orange joke has been told in many variations; this entry records variation 648, its setup, its punchline and where it was first written down.
+- Note 649: the atch joke has been told in many variations; this entry records variation 649, its setup, its punchline and where it was first written down.
+- Note 650: the tank joke has been told in many variations; this entry records variation 650, its setup, its punchline and where it was first written down.
+- Note 651: the owls joke has been told in many variations; this entry records variation 651, its setup, its punchline and where it was first written down.
+- Note 652: the doors joke has been told in many variations; this entry records variation 652, its setup, its punchline and where it was first written down.
+- Note 653: the bananas joke has been told in many variations; this entry records variation 653, its setup, its punchline and where it was first written down.
+- Note 654: the cows joke has been told in many variations; this entry records variation 654, its setup, its punchline and where it was first written down.
+- Note 655: the interrupting animals joke has been told in many variations; this entry records variation 655, its setup, its punchline and where it was first written down.
+- Note 656: the boo joke has been told in many variations; this entry records variation 656, its setup, its punchline and where it was first written down.
+- Note 657: the lettuce joke has been told in many variations; this entry records variation 657, its setup, its punchline and where it was first written down.
+- Note 658: the orange joke has been told in many variations; this entry records variation 658, its setup, its punchline and where it was first written down.
+- Note 659: the atch joke has been told in many variations; this entry records variation 659, its setup, its punchline and where it was first written down.
+- Note 660: the tank joke has been told in many variations; this entry records variation 660, its setup, its punchline and where it was first written down.
+- Note 661: the owls joke has been told in many variations; this entry records variation 661, its setup, its punchline and where it was first written down.
+- Note 662: the doors joke has been told in many variations; this entry records variation 662, its setup, its punchline and where it was first written down.
+- Note 663: the bananas joke has been told in many variations; this entry records variation 663, its setup, its punchline and where it was first written down.
+- Note 664: the cows joke has been told in many variations; this entry records variation 664, its setup, its punchline and where it was first written down.
+- Note 665: the interrupting animals joke has been told in many variations; this entry records variation 665, its setup, its punchline and where it was first written down.
+- Note 666: the boo joke has been told in many variations; this entry records variation 666, its setup, its punchline and where it was first written down.
+- Note 667: the lettuce joke has been told in many variations; this entry records variation 667, its setup, its punchline and where it was first written down.
+- Note 668: the orange joke has been told in many variations; this entry records variation 668, its setup, its punchline and where it was first written down.
+- Note 669: the atch joke has been told in many variations; this entry records variation 669, its setup, its punchline and where it was first written down.
+- Note 670: the tank joke has been told in many variations; this entry records variation 670, its setup, its punchline and where it was first written down.
+- Note 671: the owls joke has been told in many variations; this entry records variation 671, its setup, its punchline and where it was first written down.
+- Note 672: the doors joke has been told in many variations; this entry records variation 672, its setup, its punchline and where it was first written down.
+- Note 673: the bananas joke has been told in many variations; this entry records variation 673, its setup, its punchline and where it was first written down.
+- Note 674: the cows joke has been told in many variations; this entry records variation 674, its setup, its punchline and where it was first written down.
+- Note 675: the interrupting animals joke has been told in many variations; this entry records variation 675, its setup, its punchline and where it was first written down.
+- Note 676: the boo joke has been told in many variations; this entry records variation 676, its setup, its punchline and where it was first written down.
+- Note 677: the lettuce joke has been told in many variations; this entry records variation 677, its setup, its punchline and where it was first written down.
+- Note 678: the orange joke has been told in many variations; this entry records variation 678, its setup, its punchline and where it was first written down.
+- Note 679: the atch joke has been told in many variations; this entry records variation 679, its setup, its punchline and where it was first written down.
+- Note 680: the tank joke has been told in many variations; this entry records variation 680, its setup, its punchline and where it was first written down.
+- Note 681: the owls joke has been told in many variations; this entry records variation 681, its setup, its punchline and where it was first written down.
+- Note 682: the doors joke has been told in many variations; this entry records variation 682, its setup, its punchline and where it was first written down.
+- Note 683: the bananas joke has been told in many variations; this entry records variation 683, its setup, its punchline and where it was first written down.
+- Note 684: the cows joke has been told in many variations; this entry records variation 684, its setup, its punchline and where it was first written down.
+- Note 685: the interrupting animals joke has been told in many variations; this entry records variation 685, its setup, its punchline and where it was first written down.
+- Note 686: the boo joke has been told in many variations; this entry records variation 686, its setup, its punchline and where it was first written down.
+- Note 687: the lettuce joke has been told in many variations; this entry records variation 687, its setup, its punchline and where it was first written down.
+- Note 688: the orange joke has been told in many variations; this entry records variation 688, its setup, its punchline and where it was first written down.
+- Note 689: the atch joke has been told in many variations; this entry records variation 689, its setup, its punchline and where it was first written down.
+- Note 690: the tank joke has been told in many variations; this entry records variation 690, its setup, its punchline and where it was first written down.
+- Note 691: the owls joke has been told in many variations; this entry records variation 691, its setup, its punchline and where it was first written down.
+- Note 692: the doors joke has been told in many variations; this entry records variation 692, its setup, its punchline and where it was first written down.
+- Note 693: the bananas joke has been told in many variations; this entry records variation 693, its setup, its punchline and where it was first written down.
+- Note 694: the cows joke has been told in many variations; this entry records variation 694, its setup, its punchline and where it was first written down.
+- Note 695: the interrupting animals joke has been told in many variations; this entry records variation 695, its setup, its punchline and where it was first written down.
+- Note 696: the boo joke has been told in many variations; this entry records variation 696, its setup, its punchline and where it was first written down.
+- Note 697: the lettuce joke has been told in many variations; this entry records variation 697, its setup, its punchline and where it was first written down.
+- Note 698: the orange joke has been told in many variations; this entry records variation 698, its setup, its punchline and where it was first written down.
+- Note 699: the atch joke has been told in many variations; this entry records variation 699, its setup, its punchline and where it was first written down.
+- Note 700: the tank joke has been told in many variations; this entry records variation 700, its setup, its punchline and where it was first written down.
+- Note 701: the owls joke has been told in many variations; this entry records variation 701, its setup, its punchline and where it was first written down.
+- Note 702: the doors joke has been told in many variations; this entry records variation 702, its setup, its punchline and where it was first written down.
+- Note 703: the bananas joke has been told in many variations; this entry records variation 703, its setup, its punchline and where it was first written down.
+- Note 704: the cows joke has been told in many variations; this entry records variation 704, its setup, its punchline and where it was first written down.
+- Note 705: the interrupting animals joke has been told in many variations; this entry records variation 705, its setup, its punchline and where it was first written down.
+- Note 706: the boo joke has been told in many variations; this entry records variation 706, its setup, its punchline and where it was first written down.
+- Note 707: the lettuce joke has been told in many variations; this entry records variation 707, its setup, its punchline and where it was first written down.
+- Note 708: the orange joke has been told in many variations; this entry records variation 708, its setup, its punchline and where it was first written down.
+- Note 709: the atch joke has been told in many variations; this entry records variation 709, its setup, its punchline and where it was first written down.
+- Note 710: the tank joke has been told in many variations; this entry records variation 710, its setup, its punchline and where it was first written down.
+- Note 711: the owls joke has been told in many variations; this entry records variation 711, its setup, its punchline and where it was first written down.
+- Note 712: the doors joke has been told in many variations; this entry records variation 712, its setup, its punchline and where it was first written down.
+- Note 713: the bananas joke has been told in many variations; this entry records variation 713, its setup, its punchline and where it was first written down.
+- Note 714: the cows joke has been told in many variations; this entry records variation 714, its setup, its punchline and where it was first written down.
+- Note 715: the interrupting animals joke has been told in many variations; this entry records variation 715, its setup, its punchline and where it was first written down.
+- Note 716: the boo joke has been told in many variations; this entry records variation 716, its setup, its punchline and where it was first written down.
+- Note 717: the lettuce joke has been told in many variations; this entry records variation 717, its setup, its punchline and where it was first written down.
+- Note 718: the orange joke has been told in many variations; this entry records variation 718, its setup, its punchline and where it was first written down.
+- Note 719: the atch joke has been told in many variations; this entry records variation 719, its setup, its punchline and where it was first written down.
+- Note 720: the tank joke has been told in many variations; this entry records variation 720, its setup, its punchline and where it was first written down.
+- Note 721: the owls joke has been told in many variations; this entry records variation 721, its setup, its punchline and where it was first written down.
+- Note 722: the doors joke has been told in many variations; this entry records variation 722, its setup, its punchline and where it was first written down.
+- Note 723: the bananas joke has been told in many variations; this entry records variation 723, its setup, its punchline and where it was first written down.
+- Note 724: the cows joke has been told in many variations; this entry records variation 724, its setup, its punchline and where it was first written down.
+- Note 725: the interrupting animals joke has been told in many variations; this entry records variation 725, its setup, its punchline and where it was first written down.
+- Note 726: the boo joke has been told in many variations; this entry records variation 726, its setup, its punchline and where it was first written down.
+- Note 727: the lettuce joke has been told in many variations; this entry records variation 727, its setup, its punchline and where it was first written down.
+- Note 728: the orange joke has been told in many variations; this entry records variation 728, its setup, its punchline and where it was first written down.
+- Note 729: the atch joke has been told in many variations; this entry records variation 729, its setup, its punchline and where it was first written down.
+- Note 730: the tank joke has been told in many variations; this entry records variation 730, its setup, its punchline and where it was first written down.
+- Note 731: the owls joke has been told in many variations; this entry records variation 731, its setup, its punchline and where it was first written down.
+- Note 732: the doors joke has been told in many variations; this entry records variation 732, its setup, its punchline and where it was first written down.
+- Note 733: the bananas joke has been told in many variations; this entry records variation 733, its setup, its punchline and where it was first written down.
+- Note 734: the cows joke has been told in many variations; this entry records variation 734, its setup, its punchline and where it was first written down.
+- Note 735: the interrupting animals joke has been told in many variations; this entry records variation 735, its setup, its punchline and where it was first written down.
+- Note 736: the boo joke has been told in many variations; this entry records variation 736, its setup, its punchline and where it was first written down.
+- Note 737: the lettuce joke has been told in many variations; this entry records variation 737, its setup, its punchline and where it was first written down.
+- Note 738: the orange joke has been told in many variations; this entry records variation 738, its setup, its punchline and where it was first written down.
+- Note 739: the atch joke has been told in many variations; this entry records variation 739, its setup, its punchline and where it was first written down.
+- Note 740: the tank joke has been told in many variations; this entry records variation 740, its setup, its punchline and where it was first written down.
+- Note 741: the owls joke has been told in many variations; this entry records variation 741, its setup, its punchline and where it was first written down.
+- Note 742: the doors joke has been told in many variations; this entry records variation 742, its setup, its punchline and where it was first written down.
+- Note 743: the bananas joke has been told in many variations; this entry records variation 743, its setup, its punchline and where it was first written down.
+- Note 744: the cows joke has been told in many variations; this entry records variation 744, its setup, its punchline and where it was first written down.
+- Note 745: the interrupting animals joke has been told in many variations; this entry records variation 745, its setup, its punchline and where it was first written down.
+- Note 746: the boo joke has been told in many variations; this entry records variation 746, its setup, its punchline and where it was first written down.
+- Note 747: the lettuce joke has been told in many variations; this entry records variation 747, its setup, its punchline and where it was first written down.
+- Note 748: the orange joke has been told in many variations; this entry records variation 748, its setup, its punchline and where it was first written down.
+- Note 749: the atch joke has been told in many variations; this entry records variation 749, its setup, its punchline and where it was first written down.
+- Note 750: the tank joke has been told in many variations; this entry records variation 750, its setup, its punchline and where it was first written down.
+- Note 751: the owls joke has been told in many variations; this entry records variation 751, its setup, its punchline and where it was first written down.
+- Note 752: the doors joke has been told in many variations; this entry records variation 752, its setup, its punchline and where it was first written down.
+- Note 753: the bananas joke has been told in many variations; this entry records variation 753, its setup, its punchline and where it was first written down.
+- Note 754: the cows joke has been told in many variations; this entry records variation 754, its setup, its punchline and where it was first written down.
+- Note 755: the interrupting animals joke has been told in many variations; this entry records variation 755, its setup, its punchline and where it was first written down.
+- Note 756: the boo joke has been told in many variations; this entry records variation 756, its setup, its punchline and where it was first written down.
+- Note 757: the lettuce joke has been told in many variations; this entry records variation 757, its setup, its punchline and where it was first written down.
+- Note 758: the orange joke has been told in many variations; this entry records variation 758, its setup, its punchline and where it was first written down.
+- Note 759: the atch joke has been told in many variations; this entry records variation 759, its setup, its punchline and where it was first written down.
+- Note 760: the tank joke has been told in many variations; this entry records variation 760, its setup, its punchline and where it was first written down.
+- Note 761: the owls joke has been told in many variations; this entry records variation 761, its setup, its punchline and where it was first written down.
+- Note 762: the doors joke has been told in many variations; this entry records variation 762, its setup, its punchline and where it was first written down.
+- Note 763: the bananas joke has been told in many variations; this entry records variation 763, its setup, its punchline and where it was first written down.
+- Note 764: the cows joke has been told in many variations; this entry records variation 764, its setup, its punchline and where it was first written down.
+- Note 765: the interrupting animals joke has been told in many variations; this entry records variation 765, its setup, its punchline and where it was first written down.
+- Note 766: the boo joke has been told in many variations; this entry records variation 766, its setup, its punchline and where it was first written down.
+- Note 767: the lettuce joke has been told in many variations; this entry records variation 767, its setup, its punchline and where it was first written down.
+- Note 768: the orange joke has been told in many variations; this entry records variation 768, its setup, its punchline and where it was first written down.
+- Note 769: the atch joke has been told in many variations; this entry records variation 769, its setup, its punchline and where it was first written down.
+- Note 770: the tank joke has been told in many variations; this entry records variation 770, its setup, its punchline and where it was first written down.
+- Note 771: the owls joke has been told in many variations; this entry records variation 771, its setup, its punchline and where it was first written down.
+- Note 772: the doors joke has been told in many variations; this entry records variation 772, its setup, its punchline and where it was first written down.
+- Note 773: the bananas joke has been told in many variations; this entry records variation 773, its setup, its punchline and where it was first written down.
+- Note 774: the cows joke has been told in many variations; this entry records variation 774, its setup, its punchline and where it was first written down.
+- Note 775: the interrupting animals joke has been told in many variations; this entry records variation 775, its setup, its punchline and where it was first written down.
+- Note 776: the boo joke has been told in many variations; this entry records variation 776, its setup, its punchline and where it was first written down.
+- Note 777: the lettuce joke has been told in many variations; this entry records variation 777, its setup, its punchline and where it was first written down.
+- Note 778: the orange joke has been told in many variations; this entry records variation 778, its setup, its punchline and where it was first written down.
+- Note 779: the atch joke has been told in many variations; this entry records variation 779, its setup, its punchline and where it was first written down.
+- Note 780: the tank joke has been told in many variations; this entry records variation 780, its setup, its punchline and where it was first written down.
+- Note 781: the owls joke has been told in many variations; this entry records variation 781, its setup, its punchline and where it was first written down.
+- Note 782: the doors joke has been told in many variations; this entry records variation 782, its setup, its punchline and where it was first written down.
+- Note 783: the bananas joke has been told in many variations; this entry records variation 783, its setup, its punchline and where it was first written down.
+- Note 784: the cows joke has been told in many variations; this entry records variation 784, its setup, its punchline and where it was first written down.
+- Note 785: the interrupting animals joke has been told in many variations; this entry records variation 785, its setup, its punchline and where it was first written down.
+- Note 786: the boo joke has been told in many variations; this entry records variation 786, its setup, its punchline and where it was first written down.
+- Note 787: the lettuce joke has been told in many variations; this entry records variation 787, its setup, its punchline and where it was first written down.
+- Note 788: the orange joke has been told in many variations; this entry records variation 788, its setup, its punchline and where it was first written down.
+- Note 789: the atch joke has been told in many variations; this entry records variation 789, its setup, its punchline and where it was first written down.
+- Note 790: the tank joke has been told in many variations; this entry records variation 790, its setup, its punchline and where it was first written down.
+- Note 791: the owls joke has been told in many variations; this entry records variation 791, its setup, its punchline and where it was first written down.
+- Note 792: the doors joke has been told in many variations; this entry records variation 792, its setup, its punchline and where it was first written down.
+- Note 793: the bananas joke has been told in many variations; this entry records variation 793, its setup, its punchline and where it was first written down.
+- Note 794: the cows joke has been told in many variations; this entry records variation 794, its setup, its punchline and where it was first written down.
+- Note 795: the interrupting animals joke has been told in many variations; this entry records variation 795, its setup, its punchline and where it was first written down.
+- Note 796: the boo joke has been told in many variations; this entry records variation 796, its setup, its punchline and where it was first written down.
+- Note 797: the lettuce joke has been told in many variations; this entry records variation 797, its setup, its punchline and where it was first written down.
+- Note 798: the orange joke has been told in many variations; this entry records variation 798, its setup, its punchline and where it was first written down.
+- Note 799: the atch joke has been told in many variations; this entry records variation 799, its setup, its punchline and where it was first written down.
+- Note 800: the tank joke has been told in many variations; this entry records variation 800, its setup, its punchline and where it was first written down.
+- Note 801: the owls joke has been told in many variations; this entry records variation 801, its setup, its punchline and where it was first written down.
+- Note 802: the doors joke has been told in many variations; this entry records variation 802, its setup, its punchline and where it was first written down.
+- Note 803: the bananas joke has been told in many variations; this entry records variation 803, its setup, its punchline and where it was first written down.
+- Note 804: the cows joke has been told in many variations; this entry records variation 804, its setup, its punchline and where it was first written down.
+- Note 805: the interrupting animals joke has been told in many variations; this entry records variation 805, its setup, its punchline and where it was first written down.
+- Note 806: the boo joke has been told in many variations; this entry records variation 806, its setup, its punchline and where it was first written down.
+- Note 807: the lettuce joke has been told in many variations; this entry records variation 807, its setup, its punchline and where it was first written down.
+- Note 808: the orange joke has been told in many variations; this entry records variation 808, its setup, its punchline and where it was first written down.
+- Note 809: the atch joke has been told in many variations; this entry records variation 809, its setup, its punchline and where it was first written down.
+- Note 810: the tank joke has been told in many variations; this entry records variation 810, its setup, its punchline and where it was first written down.
+- Note 811: the owls joke has been told in many variations; this entry records variation 811, its setup, its punchline and where it was first written down.
+- Note 812: the doors joke has been told in many variations; this entry records variation 812, its setup, its punchline and where it was first written down.
+- Note 813: the bananas joke has been told in many variations; this entry records variation 813, its setup, its punchline and where it was first written down.
+- Note 814: the cows joke has been told in many variations; this entry records variation 814, its setup, its punchline and where it was first written down.
+- Note 815: the interrupting animals joke has been told in many variations; this entry records variation 815, its setup, its punchline and where it was first written down.
+- Note 816: the boo joke has been told in many variations; this entry records variation 816, its setup, its punchline and where it was first written down.
+- Note 817: the lettuce joke has been told in many variations; this entry records variation 817, its setup, its punchline and where it was first written down.
+- Note 818: the orange joke has been told in many variations; this entry records variation 818, its setup, its punchline and where it was first written down.
+- Note 819: the atch joke has been told in many variations; this entry records variation 819, its setup, its punchline and where it was first written down.
+- Note 820: the tank joke has been told in many variations; this entry records variation 820, its setup, its punchline and where it was first written down.
+- Note 821: the owls joke has been told in many variations; this entry records variation 821, its setup, its punchline and where it was first written down.
+- Note 822: the doors joke has been told in many variations; this entry records variation 822, its setup, its punchline and where it was first written down.
+- Note 823: the bananas joke has been told in many variations; this entry records variation 823, its setup, its punchline and where it was first written down.
+- Note 824: the cows joke has been told in many variations; this entry records variation 824, its setup, its punchline and where it was first written down.
+- Note 825: the interrupting animals joke has been told in many variations; this entry records variation 825, its setup, its punchline and where it was first written down.
+- Note 826: the boo joke has been told in many variations; this entry records variation 826, its setup, its punchline and where it was first written down.
+- Note 827: the lettuce joke has been told in many variations; this entry records variation 827, its setup, its punchline and where it was first written down.
+- Note 828: the orange joke has been told in many variations; this entry records variation 828, its setup, its punchline and where it was first written down.
+- Note 829: the atch joke has been told in many variations; this entry records variation 829, its setup, its punchline and where it was first written down.
+- Note 830: the tank joke has been told in many variations; this entry records variation 830, its setup, its punchline and where it was first written down.
+- Note 831: the owls joke has been told in many variations; this entry records variation 831, its setup, its punchline and where it was first written down.
+- Note 832: the doors joke has been told in many variations; this entry records variation 832, its setup, its punchline and where it was first written down.
+- Note 833: the bananas joke has been told in many variations; this entry records variation 833, its setup, its punchline and where it was first written down.
+- Note 834: the cows joke has been told in many variations; this entry records variation 834, its setup, its punchline and where it was first written down.
+- Note 835: the interrupting animals joke has been told in many variations; this entry records variation 835, its setup, its punchline and where it was first written down.
+- Note 836: the boo joke has been told in many variations; this entry records variation 836, its setup, its punchline and where it was first written down.
+- Note 837: the lettuce joke has been told in many variations; this entry records variation 837, its setup, its punchline and where it was first written down.
+- Note 838: the orange joke has been told in many variations; this entry records variation 838, its setup, its punchline and where it was first written down.
+- Note 839: the atch joke has been told in many variations; this entry records variation 839, its setup, its punchline and where it was first written down.
+- Note 840: the tank joke has been told in many variations; this entry records variation 840, its setup, its punchline and where it was first written down.
+- Note 841: the owls joke has been told in many variations; this entry records variation 841, its setup, its punchline and where it was first written down.
+- Note 842: the doors joke has been told in many variations; this entry records variation 842, its setup, its punchline and where it was first written down.
+- Note 843: the bananas joke has been told in many variations; this entry records variation 843, its setup, its punchline and where it was first written down.
+- Note 844: the cows joke has been told in many variations; this entry records variation 844, its setup, its punchline and where it was first written down.
+- Note 845: the interrupting animals joke has been told in many variations; this entry records variation 845, its setup, its punchline and where it was first written down.
+- Note 846: the boo joke has been told in many variations; this entry records variation 846, its setup, its punchline and where it was first written down.
+- Note 847: the lettuce joke has been told in many variations; this entry records variation 847, its setup, its punchline and where it was first written down.
+- Note 848: the orange joke has been told in many variations; this entry records variation 848, its setup, its punchline and where it was first written down.
+- Note 849: the atch joke has been told in many variations; this entry records variation 849, its setup, its punchline and where it was first written down.
+- Note 850: the tank joke has been told in many variations; this entry records variation 850, its setup, its punchline and where it was first written down.
+- Note 851: the owls joke has been told in many variations; this entry records variation 851, its setup, its punchline and where it was first written down.
+- Note 852: the doors joke has been told in many variations; this entry records variation 852, its setup, its punchline and where it was first written down.
+- Note 853: the bananas joke has been told in many variations; this entry records variation 853, its setup, its punchline and where it was first written down.
+- Note 854: the cows joke has been told in many variations; this entry records variation 854, its setup, its punchline and where it was first written down.
+- Note 855: the interrupting animals joke has been told in many variations; this entry records variation 855, its setup, its punchline and where it was first written down.
+- Note 856: the boo joke has been told in many variations; this entry records variation 856, its setup, its punchline and where it was first written down.
+- Note 857: the lettuce joke has been told in many variations; this entry records variation 857, its setup, its punchline and where it was first written down.
+- Note 858: the orange joke has been told in many variations; this entry records variation 858, its setup, its punchline and where it was first written down.
+- Note 859: the atch joke has been told in many variations; this entry records variation 859, its setup, its punchline and where it was first written down.
+- Note 860: the tank joke has been told in many variations; this entry records variation 860, its setup, its punchline and where it was first written down.
+- Note 861: the owls joke has been told in many variations; this entry records variation 861, its setup, its punchline and where it was first written down.
+- Note 862: the doors joke has been told in many variations; this entry records variation 862, its setup, its punchline and where it was first written down.
+- Note 863: the bananas joke has been told in many variations; this entry records variation 863, its setup, its punchline and where it was first written down.
+- Note 864: the cows joke has been told in many variations; this entry records variation 864, its setup, its punchline and where it was first written down.
+- Note 865: the interrupting animals joke has been told in many variations; this entry records variation 865, its setup, its punchline and where it was first written down.
+- Note 866: the boo joke has been told in many variations; this entry records variation 866, its setup, its punchline and where it was first written down.
+- Note 867: the lettuce joke has been told in many variations; this entry records variation 867, its setup, its punchline and where it was first written down.
+- Note 868: the orange joke has been told in many variations; this entry records variation 868, its setup, its punchline and where it was first written down.
+- Note 869: the atch joke has been told in many variations; this entry records variation 869, its setup, its punchline and where it was first written down.
+- Note 870: the tank joke has been told in many variations; this entry records variation 870, its setup, its punchline and where it was first written down.
+- Note 871: the owls joke has been told in many variations; this entry records variation 871, its setup, its punchline and where it was first written down.
+- Note 872: the doors joke has been told in many variations; this entry records variation 872, its setup, its punchline and where it was first written down.
+- Note 873: the bananas joke has been told in many variations; this entry records variation 873, its setup, its punchline and where it was first written down.
+- Note 874: the cows joke has been told in many variations; this entry records variation 874, its setup, its punchline and where it was first written down.
+- Note 875: the interrupting animals joke has been told in many variations; this entry records variation 875, its setup, its punchline and where it was first written down.
+- Note 876: the boo joke has been told in many variations; this entry records variation 876, its setup, its punchline and where it was first written down.
+- Note 877: the lettuce joke has been told in many variations; this entry records variation 877, its setup, its punchline and where it was first written down.
+- Note 878: the orange joke has been told in many variations; this entry records variation 878, its setup, its punchline and where it was first written down.
+- Note 879: the atch joke has been told in many variations; this entry records variation 879, its setup, its punchline and where it was first written down.
+- Note 880: the tank joke has been told in many variations; this entry records variation 880, its setup, its punchline and where it was first written down.
+- Note 881: the owls joke has been told in many variations; this entry records variation 881, its setup, its punchline and where it was first written down.
+- Note 882: the doors joke has been told in many variations; this entry records variation 882, its setup, its punchline and where it was first written down.
+- Note 883: the bananas joke has been told in many variations; this entry records variation 883, its setup, its punchline and where it was first written down.
+- Note 884: the cows joke has been told in many variations; this entry records variation 884, its setup, its punchline and where it was first written down.
+- Note 885: the interrupting animals joke has been told in many variations; this entry records variation 885, its setup, its punchline and where it was first written down.
+- Note 886: the boo joke has been told in many variations; this entry records variation 886, its setup, its punchline and where it was first written down.
+- Note 887: the lettuce joke has been told in many variations; this entry records variation 887, its setup, its punchline and where it was first written down.
+- Note 888: the orange joke has been told in many variations; this entry records variation 888, its setup, its punchline and where it was first written down.
+- Note 889: the atch joke has been told in many variations; this entry records variation 889, its setup, its punchline and where it was first written down.
+- Note 890: the tank joke has been told in many variations; this entry records variation 890, its setup, its punchline and where it was first written down.
+- Note 891: the owls joke has been told in many variations; this entry records variation 891, its setup, its punchline and where it was first written down.
+- Note 892: the doors joke has been told in many variations; this entry records variation 892, its setup, its punchline and where it was first written down.
+- Note 893: the bananas joke has been told in many variations; this entry records variation 893, its setup, its punchline and where it was first written down.
+- Note 894: the cows joke has been told in many variations; this entry records variation 894, its setup, its punchline and where it was first written down.
+- Note 895: the interrupting animals joke has been told in many variations; this entry records variation 895, its setup, its punchline and where it was first written down.
+- Note 896: the boo joke has been told in many variations; this entry records variation 896, its setup, its punchline and where it was first written down.
+- Note 897: the lettuce joke has been told in many variations; this entry records variation 897, its setup, its punchline and where it was first written down.
+- Note 898: the orange joke has been told in many variations; this entry records variation 898, its setup, its punchline and where it was first written down.
+- Note 899: the atch joke has been told in many variations; this entry records variation 899, its setup, its punchline and where it was first written down.
+- Note 900: the tank joke has been told in many variations; this entry records variation 900, its setup, its punchline and where it was first written down.
+- Note 901: the owls joke has been told in many variations; this entry records variation 901, its setup, its punchline and where it was first written down.
+- Note 902: the doors joke has been told in many variations; this entry records variation 902, its setup, its punchline and where it was first written down.
+- Note 903: the bananas joke has been told in many variations; this entry records variation 903, its setup, its punchline and where it was first written down.
+- Note 904: the cows joke has been told in many variations; this entry records variation 904, its setup, its punchline and where it was first written down.
+- Note 905: the interrupting animals joke has been told in many variations; this entry records variation 905, its setup, its punchline and where it was first written down.
+- Note 906: the boo joke has been told in many variations; this entry records variation 906, its setup, its punchline and where it was first written down.
+- Note 907: the lettuce joke has been told in many variations; this entry records variation 907, its setup, its punchline and where it was first written down.
+- Note 908: the orange joke has been told in many variations; this entry records variation 908, its setup, its punchline and where it was first written down.
+- Note 909: the atch joke has been told in many variations; this entry records variation 909, its setup, its punchline and where it was first written down.
+- Note 910: the tank joke has been told in many variations; this entry records variation 910, its setup, its punchline and where it was first written down.
+- Note 911: the owls joke has been told in many variations; this entry records variation 911, its setup, its punchline and where it was first written down.
+- Note 912: the doors joke has been told in many variations; this entry records variation 912, its setup, its punchline and where it was first written down.
+- Note 913: the bananas joke has been told in many variations; this entry records variation 913, its setup, its punchline and where it was first written down.
+- Note 914: the cows joke has been told in many variations; this entry records variation 914, its setup, its punchline and where it was first written down.
+- Note 915: the interrupting animals joke has been told in many variations; this entry records variation 915, its setup, its punchline and where it was first written down.
+- Note 916: the boo joke has been told in many variations; this entry records variation 916, its setup, its punchline and where it was first written down.
+- Note 917: the lettuce joke has been told in many variations; this entry records variation 917, its setup, its punchline and where it was first written down.
+- Note 918: the orange joke has been told in many variations; this entry records variation 918, its setup, its punchline and where it was first written down.
+- Note 919: the atch joke has been told in many variations; this entry records variation 919, its setup, its punchline and where it was first written down.
+- Note 920: the tank joke has been told in many variations; this entry records variation 920, its setup, its punchline and where it was first written down.
+- Note 921: the owls joke has been told in many variations; this entry records variation 921, its setup, its punchline and where it was first written down.
+- Note 922: the doors joke has been told in many variations; this entry records variation 922, its setup, its punchline and where it was first written down.
+- Note 923: the bananas joke has been told in many variations; this entry records variation 923, its setup, its punchline and where it was first written down.
+- Note 924: the cows joke has been told in many variations; this entry records variation 924, its setup, its punchline and where it was first written down.
+- Note 925: the interrupting animals joke has been told in many variations; this entry records variation 925, its setup, its punchline and where it was first written down.
+- Note 926: the boo joke has been told in many variations; this entry records variation 926, its setup, its punchline and where it was first written down.
+- Note 927: the lettuce joke has been told in many variations; this entry records variation 927, its setup, its punchline and where it was first written down.
+- Note 928: the orange joke has been told in many variations; this entry records variation 928, its setup, its punchline and where it was first written down.
+- Note 929: the atch joke has been told in many variations; this entry records variation 929, its setup, its punchline and where it was first written down.
+- Note 930: the tank joke has been told in many variations; this entry records variation 930, its setup, its punchline and where it was first written down.
+- Note 931: the owls joke has been told in many variations; this entry records variation 931, its setup, its punchline and where it was first written down.
+- Note 932: the doors joke has been told in many variations; this entry records variation 932, its setup, its punchline and where it was first written down.
+- Note 933: the bananas joke has been told in many variations; this entry records variation 933, its setup, its punchline and where it was first written down.
+- Note 934: the cows joke has been told in many variations; this entry records variation 934, its setup, its punchline and where it was first written down.
+- Note 935: the interrupting animals joke has been told in many variations; this entry records variation 935, its setup, its punchline and where it was first written down.
+- Note 936: the boo joke has been told in many variations; this entry records variation 936, its setup, its punchline and where it was first written down.
+- Note 937: the lettuce joke has been told in many variations; this entry records variation 937, its setup, its punchline and where it was first written down.
+- Note 938: the orange joke has been told in many variations; this entry records variation 938, its setup, its punchline and where it was first written down.
+- Note 939: the atch joke has been told in many variations; this entry records variation 939, its setup, its punchline and where it was first written down.
+- Note 940: the tank joke has been told in many variations; this entry records variation 940, its setup, its punchline and where it was first written down.
+- Note 941: the owls joke has been told in many variations; this entry records variation 941, its setup, its punchline and where it was first written down.
+- Note 942: the doors joke has been told in many variations; this entry records variation 942, its setup, its punchline and where it was first written down.
+- Note 943: the bananas joke has been told in many variations; this entry records variation 943, its setup, its punchline and where it was first written down.
+- Note 944: the cows joke has been told in many variations; this entry records variation 944, its setup, its punchline and where it was first written down.
+- Note 945: the interrupting animals joke has been told in many variations; this entry records variation 945, its setup, its punchline and where it was first written down.
+- Note 946: the boo joke has been told in many variations; this entry records variation 946, its setup, its punchline and where it was first written down.
+- Note 947: the lettuce joke has been told in many variations; this entry records variation 947, its setup, its punchline and where it was first written down.
+- Note 948: the orange joke has been told in many variations; this entry records variation 948, its setup, its punchline and where it was first written down.
+- Note 949: the atch joke has been told in many variations; this entry records variation 949, its setup, its punchline and where it was first written down.
+- Note 950: the tank joke has been told in many variations; this entry records variation 950, its setup, its punchline and where it was first written down.
+- Note 951: the owls joke has been told in many variations; this entry records variation 951, its setup, its punchline and where it was first written down.
+- Note 952: the doors joke has been told in many variations; this entry records variation 952, its setup, its punchline and where it was first written down.
+- Note 953: the bananas joke has been told in many variations; this entry records variation 953, its setup, its punchline and where it was first written down.
+- Note 954: the cows joke has been told in many variations; this entry records variation 954, its setup, its punchline and where it was first written down.
+- Note 955: the interrupting animals joke has been told in many variations; this entry records variation 955, its setup, its punchline and where it was first written down.
+- Note 956: the boo joke has been told in many variations; this entry records variation 956, its setup, its punchline and where it was first written down.
+- Note 957: the lettuce joke has been told in many variations; this entry records variation 957, its setup, its punchline and where it was first written down.
+- Note 958: the orange joke has been told in many variations; this entry records variation 958, its setup, its punchline and where it was first written down.
+- Note 959: the atch joke has been told in many variations; this entry records variation 959, its setup, its punchline and where it was first written down.
+- Note 960: the tank joke has been told in many variations; this entry records variation 960, its setup, its punchline and where it was first written down.
+- Note 961: the owls joke has been told in many variations; this entry records variation 961, its setup, its punchline and where it was first written down.
+- Note 962: the doors joke has been told in many variations; this entry records variation 962, its setup, its punchline and where it was first written down.
+- Note 963: the bananas joke has been told in many variations; this entry records variation 963, its setup, its punchline and where it was first written down.
+- Note 964: the cows joke has been told in many variations; this entry records variation 964, its setup, its punchline and where it was first written down.
+- Note 965: the interrupting animals joke has been told in many variations; this entry records variation 965, its setup, its punchline and where it was first written down.
+- Note 966: the boo joke has been told in many variations; this entry records variation 966, its setup, its punchline and where it was first written down.
+- Note 967: the lettuce joke has been told in many variations; this entry records variation 967, its setup, its punchline and where it was first written down.
+- Note 968: the orange joke has been told in many variations; this entry records variation 968, its setup, its punchline and where it was first written down.
+- Note 969: the atch joke has been told in many variations; this entry records variation 969, its setup, its punchline and where it was first written down.
+- Note 970: the tank joke has been told in many variations; this entry records variation 970, its setup, its punchline and where it was first written down.
+- Note 971: the owls joke has been told in many variations; this entry records variation 971, its setup, its punchline and where it was first written down.
+- Note 972: the doors joke has been told in many variations; this entry records variation 972, its setup, its punchline and where it was first written down.
+- Note 973: the bananas joke has been told in many variations; this entry records variation 973, its setup, its punchline and where it was first written down.
+- Note 974: the cows joke has been told in many variations; this entry records variation 974, its setup, its punchline and where it was first written down.
+- Note 975: the interrupting animals joke has been told in many variations; this entry records variation 975, its setup, its punchline and where it was first written down.
+- Note 976: the boo joke has been told in many variations; this entry records variation 976, its setup, its punchline and where it was first written down.
+- Note 977: the lettuce joke has been told in many variations; this entry records variation 977, its setup, its punchline and where it was first written down.
+- Note 978: the orange joke has been told in many variations; this entry records variation 978, its setup, its punchline and where it was first written down.
+- Note 979: the atch joke has been told in many variations; this entry records variation 979, its setup, its punchline and where it was first written down.
+- Note 980: the tank joke has been told in many variations; this entry records variation 980, its setup, its punchline and where it was first written down.
+- Note 981: the owls joke has been told in many variations; this entry records variation 981, its setup, its punchline and where it was first written down.
+- Note 982: the doors joke has been told in many variations; this entry records variation 982, its setup, its punchline and where it was first written down.
+- Note 983: the bananas joke has been told in many variations; this entry records variation 983, its setup, its punchline and where it was first written down.
+- Note 984: the cows joke has been told in many variations; this entry records variation 984, its setup, its punchline and where it was first written down.
+- Note 985: the interrupting animals joke has been told in many variations; this entry records variation 985, its setup, its punchline and where it was first written down.
+- Note 986: the boo joke has been told in many variations; this entry records variation 986, its setup, its punchline and where it was first written down.
+- Note 987: the lettuce joke has been told in many variations; this entry records variation 987, its setup, its punchline and where it was first written down.
+- Note 988: the orange joke has been told in many variations; this entry records variation 988, its setup, its punchline and where it was first written down.
+- Note 989: the atch joke has been told in many variations; this entry records variation 989, its setup, its punchline and where it was first written down.
+- Note 990: the tank joke has been told in many variations; this entry records variation 990, its setup, its punchline and where it was first written down.
+- Note 991: the owls joke has been told in many variations; this entry records variation 991, its setup, its punchline and where it was first written down.
+- Note 992: the doors joke has been told in many variations; this entry records variation 992, its setup, its punchline and where it was first written down.
+- Note 993: the bananas joke has been told in many variations; this entry records variation 993, its setup, its punchline and where it was first written down.
+- Note 994: the cows joke has been told in many variations; this entry records variation 994, its setup, its punchline and where it was first written down.
+- Note 995: the interrupting animals joke has been told in many variations; this entry records variation 995, its setup, its punchline and where it was first written down.
+- Note 996: the boo joke has been told in many variations; this entry records variation 996, its setup, its punchline and where it was first written down.
+- Note 997: the lettuce joke has been told in many variations; this entry records variation 997, its setup, its punchline and where it was first written down.
+- Note 998: the orange joke has been told in many variations; this entry records variation 998, its setup, its punchline and where it was first written down.
+- Note 999: the atch joke has been told in many variations; this entry records variation 999, its setup, its punchline and where it was first written down.
+- Note 1000: the tank joke has been told in many variations; this entry records variation 1000, its setup, its punchline and where it was first written down.
+- Note 1001: the owls joke has been told in many variations; this entry records variation 1001, its setup, its punchline and where it was first written down.
+- Note 1002: the doors joke has been told in many variations; this entry records variation 1002, its setup, its punchline and where it was first written down.
+- Note 1003: the bananas joke has been told in many variations; this entry records variation 1003, its setup, its punchline and where it was first written down.
+- Note 1004: the cows joke has been told in many variations; this entry records variation 1004, its setup, its punchline and where it was first written down.
+- Note 1005: the interrupting animals joke has been told in many variations; this entry records variation 1005, its setup, its punchline and where it was first written down.
+- Note 1006: the boo joke has been told in many variations; this entry records variation 1006, its setup, its punchline and where it was first written down.
+- Note 1007: the lettuce joke has been told in many variations; this entry records variation 1007, its setup, its punchline and where it was first written down.
+- Note 1008: the orange joke has been told in many variations; this entry records variation 1008, its setup, its punchline and where it was first written down.
+- Note 1009: the atch joke has been told in many variations; this entry records variation 1009, its setup, its punchline and where it was first written down.
+- Note 1010: the tank joke has been told in many variations; this entry records variation 1010, its setup, its punchline and where it was first written down.
+- Note 1011: the owls joke has been told in many variations; this entry records variation 1011, its setup, its punchline and where it was first written down.
+- Note 1012: the doors joke has been told in many variations; this entry records variation 1012, its setup, its punchline and where it was first written down.
+- Note 1013: the bananas joke has been told in many variations; this entry records variation 1013, its setup, its punchline and where it was first written down.
+- Note 1014: the cows joke has been told in many variations; this entry records variation 1014, its setup, its punchline and where it was first written down.
+- Note 1015: the interrupting animals joke has been told in many variations; this entry records variation 1015, its setup, its punchline and where it was first written down.
+- Note 1016: the boo joke has been told in many variations; this entry records variation 1016, its setup, its punchline and where it was first written down.
+- Note 1017: the lettuce joke has been told in many variations; this entry records variation 1017, its setup, its punchline and where it was first written down.
+- Note 1018: the orange joke has been told in many variations; this entry records variation 1018, its setup, its punchline and where it was first written down.
+- Note 1019: the atch joke has been told in many variations; this entry records variation 1019, its setup, its punchline and where it was first written down.
+- Note 1020: the tank joke has been told in many variations; this entry records variation 1020, its setup, its punchline and where it was first written down.
+- Note 1021: the owls joke has been told in many variations; this entry records variation 1021, its setup, its punchline and where it was first written down.
+- Note 1022: the doors joke has been told in many variations; this entry records variation 1022, its setup, its punchline and where it was first written down.
+- Note 1023: the bananas joke has been told in many variations; this entry records variation 1023, its setup, its punchline and where it was first written down.
+- Note 1024: the cows joke has been told in many variations; this entry records variation 1024, its setup, its punchline and where it was first written down.
+- Note 1025: the interrupting animals joke has been told in many variations; this entry records variation 1025, its setup, its punchline and where it was first written down.
+- Note 1026: the boo joke has been told in many variations; this entry records variation 1026, its setup, its punchline and where it was first written down.
+- Note 1027: the lettuce joke has been told in many variations; this entry records variation 1027, its setup, its punchline and where it was first written down.
+- Note 1028: the orange joke has been told in many variations; this entry records variation 1028, its setup, its punchline and where it was first written down.
+- Note 1029: the atch joke has been told in many variations; this entry records variation 1029, its setup, its punchline and where it was first written down.
+- Note 1030: the tank joke has been told in many variations; this entry records variation 1030, its setup, its punchline and where it was first written down.
+- Note 1031: the owls joke has been told in many variations; this entry records variation 1031, its setup, its punchline and where it was first written down.
+- Note 1032: the doors joke has been told in many variations; this entry records variation 1032, its setup, its punchline and where it was first written down.
+- Note 1033: the bananas joke has been told in many variations; this entry records variation 1033, its setup, its punchline and where it was first written down.
+- Note 1034: the cows joke has been told in many variations; this entry records variation 1034, its setup, its punchline and where it was first written down.
+- Note 1035: the interrupting animals joke has been told in many variations; this entry records variation 1035, its setup, its punchline and where it was first written down.
+- Note 1036: the boo joke has been told in many variations; this entry records variation 1036, its setup, its punchline and where it was first written down.
+- Note 1037: the lettuce joke has been told in many variations; this entry records variation 1037, its setup, its punchline and where it was first written down.
+- Note 1038: the orange joke has been told in many variations; this entry records variation 1038, its setup, its punchline and where it was first written down.
+- Note 1039: the atch joke has been told in many variations; this entry records variation 1039, its setup, its punchline and where it was first written down.
+- Note 1040: the tank joke has been told in many variations; this entry records variation 1040, its setup, its punchline and where it was first written down.
+- Note 1041: the owls joke has been told in many variations; this entry records variation 1041, its setup, its punchline and where it was first written down.
+- Note 1042: the doors joke has been told in many variations; this entry records variation 1042, its setup, its punchline and where it was first written down.
+- Note 1043: the bananas joke has been told in many variations; this entry records variation 1043, its setup, its punchline and where it was first written down.
+- Note 1044: the cows joke has been told in many variations; this entry records variation 1044, its setup, its punchline and where it was first written down.
+- Note 1045: the interrupting animals joke has been told in many variations; this entry records variation 1045, its setup, its punchline and where it was first written down.
+- Note 1046: the boo joke has been told in many variations; this entry records variation 1046, its setup, its punchline and where it was first written down.
+- Note 1047: the lettuce joke has been told in many variations; this entry records variation 1047, its setup, its punchline and where it was first written down.
+- Note 1048: the orange joke has been told in many variations; this entry records variation 1048, its setup, its punchline and where it was first written down.
+- Note 1049: the atch joke has been told in many variations; this entry records variation 1049, its setup, its punchline and where it was first written down.
+- Note 1050: the tank joke has been told in many variations; this entry records variation 1050, its setup, its punchline and where it was first written down.
+- Note 1051: the owls joke has been told in many variations; this entry records variation 1051, its setup, its punchline and where it was first written down.
+- Note 1052: the doors joke has been told in many variations; this entry records variation 1052, its setup, its punchline and where it was first written down.
+- Note 1053: the bananas joke has been told in many variations; this entry records variation 1053, its setup, its punchline and where it was first written down.
+- Note 1054: the cows joke has been told in many variations; this entry records variation 1054, its setup, its punchline and where it was first written down.
+- Note 1055: the interrupting animals joke has been told in many variations; this entry records variation 1055, its setup, its punchline and where it was first written down.
+- Note 1056: the boo joke has been told in many variations; this entry records variation 1056, its setup, its punchline and where it was first written down.
+- Note 1057: the lettuce joke has been told in many variations; this entry records variation 1057, its setup, its punchline and where it was first written down.
+- Note 1058: the orange joke has been told in many variations; this entry records variation 1058, its setup, its punchline and where it was first written down.
+- Note 1059: the atch joke has been told in many variations; this entry records variation 1059, its setup, its punchline and where it was first written down.
+- Note 1060: the tank joke has been told in many variations; this entry records variation 1060, its setup, its punchline and where it was first written down.
+- Note 1061: the owls joke has been told in many variations; this entry records variation 1061, its setup, its punchline and where it was first written down.
+- Note 1062: the doors joke has been told in many variations; this entry records variation 1062, its setup, its punchline and where it was first written down.
+- Note 1063: the bananas joke has been told in many variations; this entry records variation 1063, its setup, its punchline and where it was first written down.
+- Note 1064: the cows joke has been told in many variations; this entry records variation 1064, its setup, its punchline and where it was first written down.
+- Note 1065: the interrupting animals joke has been told in many variations; this entry records variation 1065, its setup, its punchline and where it was first written down.
+- Note 1066: the boo joke has been told in many variations; this entry records variation 1066, its setup, its punchline and where it was first written down.
+- Note 1067: the lettuce joke has been told in many variations; this entry records variation 1067, its setup, its punchline and where it was first written down.
+- Note 1068: the orange joke has been told in many variations; this entry records variation 1068, its setup, its punchline and where it was first written down.
+- Note 1069: the atch joke has been told in many variations; this entry records variation 1069, its setup, its punchline and where it was first written down.
+- Note 1070: the tank joke has been told in many variations; this entry records variation 1070, its setup, its punchline and where it was first written down.
+- Note 1071: the owls joke has been told in many variations; this entry records variation 1071, its setup, its punchline and where it was first written down.
+- Note 1072: the doors joke has been told in many variations; this entry records variation 1072, its setup, its punchline and where it was first written down.
+- Note 1073: the bananas joke has been told in many variations; this entry records variation 1073, its setup, its punchline and where it was first written down.
+- Note 1074: the cows joke has been told in many variations; this entry records variation 1074, its setup, its punchline and where it was first written down.
+- Note 1075: the interrupting animals joke has been told in many variations; this entry records variation 1075, its setup, its punchline and where it was first written down.
+- Note 1076: the boo joke has been told in many variations; this entry records variation 1076, its setup, its punchline and where it was first written down.
+- Note 1077: the lettuce joke has been told in many variations; this entry records variation 1077, its setup, its punchline and where it was first written down.
+- Note 1078: the orange joke has been told in many variations; this entry records variation 1078, its setup, its punchline and where it was first written down.
+- Note 1079: the atch joke has been told in many variations; this entry records variation 1079, its setup, its punchline and where it was first written down.
+- Note 1080: the tank joke has been told in many variations; this entry records variation 1080, its setup, its punchline and where it was first written down.
+- Note 1081: the owls joke has been told in many variations; this entry records variation 1081, its setup, its punchline and where it was first written down.
+- Note 1082: the doors joke has been told in many variations; this entry records variation 1082, its setup, its punchline and where it was first written down.
+- Note 1083: the bananas joke has been told in many variations; this entry records variation 1083, its setup, its punchline and where it was first written down.
+- Note 1084: the cows joke has been told in many variations; this entry records variation 1084, its setup, its punchline and where it was first written down.
+- Note 1085: the interrupting animals joke has been told in many variations; this entry records variation 1085, its setup, its punchline and where it was first written down.
+- Note 1086: the boo joke has been told in many variations; this entry records variation 1086, its setup, its punchline and where it was first written down.
+- Note 1087: the lettuce joke has been told in many variations; this entry records variation 1087, its setup, its punchline and where it was first written down.
+- Note 1088: the orange joke has been told in many variations; this entry records variation 1088, its setup, its punchline and where it was first written down.
+- Note 1089: the atch joke has been told in many variations; this entry records variation 1089, its setup, its punchline and where it was first written down.
+- Note 1090: the tank joke has been told in many variations; this entry records variation 1090, its setup, its punchline and where it was first written down.
+- Note 1091: the owls joke has been told in many variations; this entry records variation 1091, its setup, its punchline and where it was first written down.
+- Note 1092: the doors joke has been told in many variations; this entry records variation 1092, its setup, its punchline and where it was first written down.

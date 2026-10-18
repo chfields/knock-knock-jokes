@@ -62,3 +62,9 @@ def test_get_joke_includes_new_jokes(name, punchline, joke_id):
 def test_get_joke_rejects_unknown_selector(selector):
     with pytest.raises((IndexError, KeyError)):
         get_joke(selector)
+
+
+def test_get_joke_accepts_negative_index():
+    from knockknock.jokes import Joke, get_joke
+
+    assert isinstance(get_joke(-2), Joke)
