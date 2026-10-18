@@ -82,6 +82,13 @@ def test_cli_tells_otter_joke():
     assert "Otter be home by now!" in result.stdout
 
 
+def test_cli_tells_walrus_joke():
+    result = run_cli("--joke", "Walrus")
+
+    assert result.returncode == 0
+    assert "Walrus expecting me?" in result.stdout
+
+
 def test_cli_defaults_to_a_joke():
     result = run_cli()
 
