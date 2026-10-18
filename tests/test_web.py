@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 38, "count_label": "38"}
+    assert response.get_json() == {"count": 39, "count_label": "39"}
 
 
 @pytest.mark.parametrize(
@@ -391,8 +391,8 @@ def test_postgres_joke_store_persists_created_jokes():
 
 def test_postgres_joke_store_adds_new_builtins_to_existing_catalogue():
     database_url = os.environ["DATABASE_URL"]
-    migration_id = "2026-10-03-add-justin-harry-ice-cream"
-    new_joke_ids = ("justin", "harry", "ice-cream")
+    migration_id = "2026-10-18-add-penguin"
+    new_joke_ids = ("penguin",)
     store = PostgresJokeStore(database_url, JOKES)
     try:
         with store._connect() as connection, connection.cursor() as cursor:

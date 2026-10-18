@@ -3,8 +3,8 @@ import pytest
 from knockknock.jokes import JOKES, Joke, get_joke
 
 
-def test_joke_bank_has_38_unique_well_formed_jokes():
-    assert len(JOKES) == 38
+def test_joke_bank_has_39_unique_well_formed_jokes():
+    assert len(JOKES) == 39
     assert all(isinstance(joke, Joke) for joke in JOKES)
     assert all(joke.name.strip() and joke.punchline.strip() for joke in JOKES)
     assert len({joke.name.casefold() for joke in JOKES}) == len(JOKES)
@@ -43,6 +43,12 @@ def test_get_joke_includes_little_old_lady_joke():
         "A little old lady",
         "I didn't know you could yodel!",
         "a-little-old-lady",
+    )
+
+
+def test_get_joke_includes_penguin_joke():
+    assert get_joke("penguin") == Joke(
+        "Penguin", "Penguin the door, it's freezing out here!", "penguin"
     )
 
 
