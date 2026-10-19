@@ -14,6 +14,7 @@ okf_version: 0.2
 * [Catalogue mutations have no authorization boundary](catalogue-mutations-are-unauthenticated.md) - API callers can add or delete jokes without an access check
 * [A first direct vote switches from IP to cookie identity](first-vote-switches-from-ip-to-cookie-identity.md) - a direct initial rating can bypass the later cookie's duplicate-vote check
 * [Deleting a joke leaves ratings that can attach to a replacement](deleting-jokes-leaves-ratings.md) - recreating the same setup can expose its prior scores and vote history
+* [React catalogue deletion is immediate](react-catalogue-deletion-is-immediate.md) - one click removes a joke with no confirmation or undo path
 
 # Invariants
 
