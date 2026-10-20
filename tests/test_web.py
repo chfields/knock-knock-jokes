@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 39, "count_label": "39"}
+    assert response.get_json() == {"count": 40, "count_label": "40"}
 
 
 @pytest.mark.parametrize(
@@ -424,6 +424,26 @@ def test_postgres_joke_store_applies_otter_builtin_migration():
     migrated_store = PostgresJokeStore(database_url, JOKES)
     try:
         assert migrated_store.get("otter").id == "otter"
+    finally:
+        migrated_store.close()
+
+
+def test_postgres_joke_store_applies_narwhal_builtin_migration():
+    database_url = os.environ["DATABASE_URL"]
+    migration_id = "2026-10-20-add-narwhal"
+    assert (migration_id, ("narwhal",)) in BUILTIN_JOKE_MIGRATIONS
+
+    store = PostgresJokeStore(database_url, JOKES)
+    try:
+        with store._connect() as connection, connection.cursor() as cursor:
+            cursor.execute("DELETE FROM jokes WHERE id = %s", ("narwhal",))
+            cursor.execute("DELETE FROM builtin_joke_migrations WHERE id = %s", (migration_id,))
+    finally:
+        store.close()
+
+    migrated_store = PostgresJokeStore(database_url, JOKES)
+    try:
+        assert migrated_store.get("narwhal").id == "narwhal"
     finally:
         migrated_store.close()
 
