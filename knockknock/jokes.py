@@ -69,6 +69,7 @@ JOKES: tuple[Joke, ...] = (
     Joke("Ice cream", "Ice cream every time I see a ghost!", "ice-cream"),
     Joke("Otter", "Otter be home by now!", "otter"),
     Joke("Narwhal", "Narwhal I can say, you're looking fintastic!", "narwhal"),
+    Joke("Sea unicorn", "See? You knew I was a narwhal!", "sea-unicorn"),
 )
 
 

@@ -10,6 +10,7 @@ BUILTIN_JOKE_MIGRATIONS = (
     ("2026-10-03-add-justin-harry-ice-cream", ("justin", "harry", "ice-cream")),
     ("2026-10-18-add-otter", ("otter",)),
     ("2026-10-20-add-narwhal", ("narwhal",)),
+    ("2026-10-20-add-sea-unicorn", ("sea-unicorn",)),
 )
 
 
