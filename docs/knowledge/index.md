@@ -17,5 +17,6 @@ okf_version: 0.2
 
 # Invariants
 
+* [Joke IDs are single URL path segments](joke-ids-are-url-path-segments.md) - an ID with a slash cannot be addressed by the web detail routes
 * [Shared store behavior lands in both backends](store-parity.md) - memory/JSONL and PostgreSQL implementations stay in step, tested both ways
 * [Per-voter data uses verified cookie IDs or IP hashes](voter-identity.md) - stores get a verified ID or address hash, never a signed cookie string or raw address
