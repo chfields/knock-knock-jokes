@@ -146,7 +146,7 @@ def test_catalogue_contains_each_joke_once_and_links_by_id(client):
 
     assert response.status_code == 200
     for joke in JOKES:
-        assert body.count(joke.name) == 1
+        assert body.count(f'>{joke.name}</a>') == 1
         assert f'/jokes/{joke.id}"' in body
 
 
@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 39, "count_label": "39"}
+    assert response.get_json() == {"count": len(JOKES), "count_label": str(len(JOKES))}
 
 
 @pytest.mark.parametrize(
@@ -424,6 +424,26 @@ def test_postgres_joke_store_applies_otter_builtin_migration():
     migrated_store = PostgresJokeStore(database_url, JOKES)
     try:
         assert migrated_store.get("otter").id == "otter"
+    finally:
+        migrated_store.close()
+
+
+def test_postgres_joke_store_applies_alpaca_builtin_migration():
+    database_url = os.environ["DATABASE_URL"]
+    migration_id = "2026-10-27-add-alpaca"
+    assert (migration_id, ("alpaca",)) in BUILTIN_JOKE_MIGRATIONS
+
+    store = PostgresJokeStore(database_url, JOKES)
+    try:
+        with store._connect() as connection, connection.cursor() as cursor:
+            cursor.execute("DELETE FROM jokes WHERE id = %s", ("alpaca",))
+            cursor.execute("DELETE FROM builtin_joke_migrations WHERE id = %s", (migration_id,))
+    finally:
+        store.close()
+
+    migrated_store = PostgresJokeStore(database_url, JOKES)
+    try:
+        assert migrated_store.get("alpaca").id == "alpaca"
     finally:
         migrated_store.close()
 
