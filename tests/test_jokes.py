@@ -1,10 +1,11 @@
 import pytest
 
+from knockknock.joke_store import BUILTIN_JOKE_MIGRATIONS
 from knockknock.jokes import JOKES, Joke, get_joke
 
 
-def test_joke_bank_has_39_unique_well_formed_jokes():
-    assert len(JOKES) == 39
+def test_joke_bank_has_40_unique_well_formed_jokes():
+    assert len(JOKES) == 40
     assert all(isinstance(joke, Joke) for joke in JOKES)
     assert all(joke.name.strip() and joke.punchline.strip() for joke in JOKES)
     assert len({joke.name.casefold() for joke in JOKES}) == len(JOKES)
@@ -51,6 +52,16 @@ def test_get_joke_includes_little_old_lady_joke():
         "I didn't know you could yodel!",
         "a-little-old-lady",
     )
+
+
+def test_get_joke_includes_woo_joke():
+    assert get_joke("woo") == Joke(
+        "Woo", "No need to get so excited, it's just a joke!", "woo"
+    )
+
+
+def test_woo_joke_has_builtin_catalogue_migration():
+    assert any("woo" in joke_ids for _, joke_ids in BUILTIN_JOKE_MIGRATIONS)
 
 
 @pytest.mark.parametrize(
