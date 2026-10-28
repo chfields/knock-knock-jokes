@@ -1,5 +1,6 @@
 import pytest
 
+from knockknock.joke_store import BUILTIN_JOKE_MIGRATIONS
 from knockknock.jokes import JOKES, Joke, get_joke
 
 
@@ -57,6 +58,10 @@ def test_get_joke_includes_woo_joke():
     assert get_joke("woo") == Joke(
         "Woo", "No need to get so excited, it's just a joke!", "woo"
     )
+
+
+def test_woo_joke_has_builtin_catalogue_migration():
+    assert any("woo" in joke_ids for _, joke_ids in BUILTIN_JOKE_MIGRATIONS)
 
 
 @pytest.mark.parametrize(
