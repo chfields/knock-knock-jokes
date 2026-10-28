@@ -146,7 +146,7 @@ def test_catalogue_contains_each_joke_once_and_links_by_id(client):
 
     assert response.status_code == 200
     for joke in JOKES:
-        assert body.count(joke.name) == 1
+        assert body.count(f">{joke.name}<") == 1
         assert f'/jokes/{joke.id}"' in body
 
 
