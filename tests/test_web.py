@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 39, "count_label": "39"}
+    assert response.get_json() == {"count": 40, "count_label": "40"}
 
 
 @pytest.mark.parametrize(
@@ -426,6 +426,8 @@ def test_postgres_joke_store_applies_otter_builtin_migration():
         assert migrated_store.get("otter").id == "otter"
     finally:
         migrated_store.close()
+
+
 
 
 @pytest.mark.parametrize("value", [None, "", True, 0, 6, 1.0])
