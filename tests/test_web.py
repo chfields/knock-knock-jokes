@@ -428,6 +428,8 @@ def test_postgres_joke_store_applies_otter_builtin_migration():
         migrated_store.close()
 
 
+
+
 @pytest.mark.parametrize("value", [None, "", True, 0, 6, 1.0])
 def test_api_invalid_rating_is_not_saved(client, store, value):
     payload = {} if value is None else {"rating": value}
