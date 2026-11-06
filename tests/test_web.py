@@ -287,7 +287,7 @@ def test_api_joke_count_matches_catalogue(client):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
-    assert response.get_json() == {"count": 39, "count_label": "39"}
+    assert response.get_json() == {"count": 40, "count_label": "40"}
 
 
 @pytest.mark.parametrize(
