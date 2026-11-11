@@ -34,6 +34,9 @@ have a one-time entry in `BUILTIN_JOKE_MIGRATIONS`, which records its applicatio
 built-ins: that would resurrect deleted jokes. Editing a previously deployed
 built-in's text still requires a dedicated migration.
 
+For example, the `2026-11-11-add-doris` migration adds the `doris` catalogue
+entry to existing deployments.
+
 [^seed]: knockknock/joke_store.py, PostgresJokeStore._seed
 [^migration]: knockknock/joke_store.py, PostgresJokeStore._apply_builtin_joke_migrations
 [^select]: knockknock/web.py, create_app store selection
