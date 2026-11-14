@@ -1,6 +1,6 @@
 # Knock-knock jokes
 
-A small Python package and command-line program for telling classic knock-knock jokes.
+A small Python package and command-line program for telling classic knock-knock jokes, now with extra puns.
 
 ## Install
 
