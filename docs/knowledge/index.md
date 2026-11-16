@@ -17,5 +17,6 @@ okf_version: 0.2
 
 # Invariants
 
+* [Built-in migration IDs must remain in JOKES](builtin-migration-ids-must-exist.md) - removing or renaming a migrated ID makes PostgreSQL catalogue initialization fail
 * [Shared store behavior lands in both backends](store-parity.md) - memory/JSONL and PostgreSQL implementations stay in step, tested both ways
 * [Per-voter data uses verified cookie IDs or IP hashes](voter-identity.md) - stores get a verified ID or address hash, never a signed cookie string or raw address
