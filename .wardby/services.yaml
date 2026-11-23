@@ -1,3 +1,5 @@
 services:
   postgres: "16"
-  redis: "7"
+setup:
+  app-migrations: "1"
+  verify-seed: "1"
