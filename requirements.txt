@@ -1,5 +1,7 @@
 # Runtime dependencies for the deployed web app (Vercel). Keep in step with
 # the `web` and `postgres` extras in pyproject.toml.
 flask>=3.0,<4
-psycopg[binary]>=3.2,<4
-psycopg-pool>=3.2,<4
+psycopg[binary]>=3.2,<3.3 ; python_version < '3.10'
+psycopg[binary]>=3.2,<4 ; python_version >= '3.10'
+psycopg-pool>=3.2,<3.3 ; python_version < '3.10'
+psycopg-pool>=3.2,<4 ; python_version >= '3.10'
